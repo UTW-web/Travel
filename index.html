@@ -2,114 +2,456 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-   <link rel="stylesheet" href="style.css">
-   <script src="script.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Romantic Travel Blog</title>
+  <title>Travel Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Parisienne&family=Raleway:wght@100;300;400&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
+
   <header>
-    <h1>Wander With Love</h1>
-    <p>A romantic journey across the globe</p>
+    <h1>My Travel Journey</h1>
+    <p>Heartfelt stories from the road – the world through my eyes</p>
   </header>
 
   <nav>
-    <a onclick="showSection('home')">Home</a>
-    <a onclick="showSection('asia')">Asia</a>
-    <a onclick="showSection('europe')">Europe</a>
-    <a onclick="showSection('africa')">Africa</a>
-    <a onclick="showSection('america')">America</a>
-    <a onclick="showSection('oceania')">Oceania</a>
-    <a onclick="showSection('work')">Work with me</a>
-
+    <a href="#" class="nav-link active" data-section="home">Home</a>
+    <a href="#" class="nav-link" data-section="europe">Europe</a>
+    <a href="#" class="nav-link" data-section="asia">Asia</a>
+    <a href="#" class="nav-link" data-section="america">America</a>
+    <a href="#" class="nav-link" data-section="africa">Africa</a>
+    <a href="#" class="nav-link" data-section="oceania">Oceania</a>
+    <a href="#" class="nav-link" data-section="food">World Cuisine</a>
+    <a href="#" class="nav-link" data-section="stories">Travel Stories</a>
+    <a href="#" class="nav-link" data-section="contact">Contact</a>
   </nav>
 
-  <section class="hero">
-    <h2>Explore the World in Pastel</h2>
-    <p>Discover hidden gems, romantic escapes, and dreamy destinations inspired by nature’s softest hues.</p>
-  </section>
-
-  <section class="continents active" id="home">
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c" alt="Asia">
-      <h3>Asia</h3>
-      <p>From cherry blossoms in Japan to the beaches of Thailand – find your love in the East.</p>
+  <!-- HOME PAGE -->
+  <section id="home" class="active">
+    <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21" alt="Travel" class="hero-image">
+    
+    <h2>Welcome to My Travel Blog</h2>
+    
+    <div class="grid">
+      <div class="card">
+        <h3>About Me</h3>
+        <p>I'm a passionate traveler who loves sharing experiences and insights from my journeys around the world.</p>
+      </div>
+      <div class="card">
+        <h3>Why I Travel</h3>
+        <p>Travel allows me to discover new cultures, meet wonderful people, and experience our planet's beauty.</p>
+      </div>
+      <div class="card">
+        <h3>My Philosophy</h3>
+        <p>Travel isn't just about destinations, but about the personal growth we experience along the way.</p>
+      </div>
     </div>
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Europe">
-      <h3>Europe</h3>
-      <p>Romantic cities, cobbled streets, and wine under the stars. Europe is a timeless escape.</p>
+    
+    <h3 class="section-subtitle">Featured Destinations</h3>
+    <div class="grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Europe" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+        <h3>Europe</h3>
+        <p>Roman Colosseum, Parisian streets and Alpine valleys – my European adventures.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c" alt="Asia" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+        <h3>Asia</h3>
+        <p>From Japanese cherry blossoms to Indian bazaars – every step tells a story.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1528490060256-c345efae444f" alt="America" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+        <h3>America</h3>
+        <p>Wild West, New York streets and Latin America – freedom on the road.</p>
+      </div>
     </div>
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b" alt="Africa">
-      <h3>Africa</h3>
-      <p>Sunsets over the savannah and the colors of Morocco – where culture and romance meet.</p>
+    
+    <h3 class="section-subtitle">World Cuisine</h3>
+    <div class="grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c" alt="Western Food" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+        <h3>Western Cuisine</h3>
+        <p>Italian pasta, French pastries and Mediterranean flavors.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d" alt="Eastern Food" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+        <h3>Eastern Cuisine</h3>
+        <p>Japanese sushi, Thai curries and Vietnamese street food.</p>
+      </div>
     </div>
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1528490060256-c345efae444f" alt="America">
-      <h3>America</h3>
-      <p>Explore vibrant cities, tropical paradises and majestic nature all in one continent.</p>
-    </div>
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0" alt="Oceania">
-      <h3>Oceania</h3>
-      <p>Crystal clear waters, hidden islands and the ultimate escape for lovers of the ocean.</p>
-    </div>
-  </section>
-
-  <section class="continents" id="asia">
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c" alt="Asia">
-      <h3>Asia</h3>
-      <p>From cherry blossoms in Japan to the beaches of Thailand – find your love in the East.</p>
-    </div>
-  </section>
-
-  <section class="continents" id="europe">
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Europe">
-      <h3>Europe</h3>
-      <p>Romantic cities, cobbled streets, and wine under the stars. Europe is a timeless escape.</p>
-    </div>
-  </section>
-
-  <section class="continents" id="africa">
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b" alt="Africa">
-      <h3>Africa</h3>
-      <p>Sunsets over the savannah and the colors of Morocco – where culture and romance meet.</p>
-    </div>
-  </section>
-
-  <section class="continents" id="america">
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1528490060256-c345efae444f" alt="America">
-      <h3>America</h3>
-      <p>Explore vibrant cities, tropical paradises and majestic nature all in one continent.</p>
-    </div>
-  </section>
-
-  <section class="continents" id="oceania">
-    <div class="continent">
-      <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0" alt="Oceania">
-      <h3>Oceania</h3>
-      <p>Crystal clear waters, hidden islands and the ultimate escape for lovers of the ocean.</p>
+    
+    <h3 class="section-subtitle">Recent Travel Stories</h3>
+    <div class="grid">
+      <div class="card">
+        <h3>Falling in Love with Amsterdam</h3>
+        <p>Bikes, canals and art at every turn – a magical experience.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: March 15, 2023</p>
+      </div>
+      <div class="card">
+        <h3>Train Through Sri Lanka</h3>
+        <p>The most beautiful railway journey through green tea hills.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: February 2, 2023</p>
+      </div>
     </div>
   </section>
 
-<section class="continents" id="work">
-  <div class="continent">
-    <img src="https://images.unsplash.com/photo-1551836022-4c4c79ecde72" alt="Work With Me">
-    <h3>Work with me</h3>
-    <p>Let's collaborate on travel content, romantic destinations, or creative storytelling. I'm open to partnerships, photography projects, and more.</p>
-  </div>
-</section>
+  <!-- EUROPE -->
+  <section id="europe">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Europe" class="hero-image">
+    <h2>Europe</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Roman Colosseum</h3>
+        <p>Historic monument testifying to the power of ancient Rome.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Interesting Facts:</h4>
+          <ul>
+            <li>Built in 80 AD</li>
+            <li>Location: Rome, Italy</li>
+            <li>Could hold up to 50,000 spectators</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Parisian Streets</h3>
+        <p>Magical atmosphere of the city of love with iconic landmarks.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Must-See:</h4>
+          <ul>
+            <li>Eiffel Tower</li>
+            <li>Notre-Dame</li>
+            <li>Montmartre</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Alpine Valleys</h3>
+        <p>Natural beauty that takes every visitor's breath away.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Highlights:</h4>
+          <ul>
+            <li>Accessible from Switzerland, Austria, France</li>
+            <li>Perfect for hiking and skiing</li>
+            <li>Picturesque villages</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ASIA -->
+  <section id="asia">
+    <img src="https://images.unsplash.com/photo-1549692520-acc6669e2f0c" alt="Asia" class="hero-image">
+    <h2>Asia</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Japanese Cherry Blossoms</h3>
+        <p>Magical sakura festivals in spring.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Best Time to Visit:</h4>
+          <ul>
+            <li>Late March - early April</li>
+            <li>Best locations: Kyoto, Tokyo</li>
+            <li>Hanami tradition</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Indian Bazaars</h3>
+        <p>Colorful mix of scents, colors and sounds.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Famous Markets:</h4>
+          <ul>
+            <li>Chandni Chowk, Delhi</li>
+            <li>Johari Bazaar, Jaipur</li>
+            <li>Colaba Causeway, Mumbai</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Vietnamese Rice Fields</h3>
+        <p>Green terraced landscapes of northern Vietnam.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Best Locations:</h4>
+          <ul>
+            <li>Sapa</li>
+            <li>Mu Cang Chai</li>
+            <li>Hoang Su Phi</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+  <!-- AMERICA -->
+  <section id="america">
+    <img src="https://images.unsplash.com/photo-1528490060256-c345efae444f" alt="America" class="hero-image">
+    <h2>America</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Wild West</h3>
+        <p>Open plains and iconic landscapes of Arizona and Utah.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Landmarks:</h4>
+          <ul>
+            <li>Grand Canyon</li>
+            <li>Monument Valley</li>
+            <li>Zion National Park</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>New York</h3>
+        <p>The city that never sleeps, full of iconic landmarks.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Must-Visit:</h4>
+          <ul>
+            <li>Times Square</li>
+            <li>Central Park</li>
+            <li>Statue of Liberty</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Latin America</h3>
+        <p>Welcoming people, hot music and festive atmospheres.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Top Destinations:</h4>
+          <ul>
+            <li>Machu Picchu, Peru</li>
+            <li>Rio de Janeiro, Brazil</li>
+            <li>Cartagena, Colombia</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AFRICA -->
+  <section id="africa">
+    <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b" alt="Africa" class="hero-image">
+    <h2>Africa</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Kenyan Wilderness</h3>
+        <p>Natural habitat of numerous African animals.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Animals You Can See:</h4>
+          <ul>
+            <li>Lions</li>
+            <li>Elephants</li>
+            <li>Giraffes</li>
+            <li>Rhinos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Moroccan Markets</h3>
+        <p>Colorful souks with traditional products.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Best Markets:</h4>
+          <ul>
+            <li>Jemaa el-Fnaa, Marrakech</li>
+            <li>Souk Semmarine, Marrakech</li>
+            <li>Medina, Fez</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Egyptian Deserts</h3>
+        <p>Mysterious beauty of the Sahara and pyramids.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Landmarks:</h4>
+          <ul>
+            <li>Great Pyramid of Giza</li>
+            <li>Siwa Oasis</li>
+            <li>White Desert</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OCEANIA -->
+  <section id="oceania">
+    <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0" alt="Oceania" class="hero-image">
+    <h2>Oceania</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Australian Kangaroos</h3>
+        <p>Iconic native animals of Australia.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Where to See Them:</h4>
+          <ul>
+            <li>Kangaroo Island</li>
+            <li>Lone Pine Koala Sanctuary</li>
+            <li>National parks</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Great Barrier Reef</h3>
+        <p>The world's largest coral reef system.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Activities:</h4>
+          <ul>
+            <li>Diving</li>
+            <li>Snorkeling</li>
+            <li>Scenic flights</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Paradise Islands</h3>
+        <p>White sand beaches and crystal clear water.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Best Islands:</h4>
+          <ul>
+            <li>Bora Bora, French Polynesia</li>
+            <li>Fiji</li>
+            <li>Palau</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section id="food">
+    <h2>World Cuisine</h2>
+    
+    <h3 class="section-subtitle">Western Cuisine</h3>
+    <div class="grid">
+      <div class="card">
+        <h3>Italian Cuisine</h3>
+        <p>Pasta, pizza and gelato - flavors of Italy.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Signature Dishes:</h4>
+          <ul>
+            <li>Spaghetti Carbonara</li>
+            <li>Pizza Margherita</li>
+            <li>Tiramisu</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>French Cuisine</h3>
+        <p>Art of fine dining and bakery specialties.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Signature Dishes:</h4>
+          <ul>
+            <li>Croissant</li>
+            <li>Bouillabaisse</li>
+            <li>Crème Brûlée</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <h3 class="section-subtitle">Eastern Cuisine</h3>
+    <div class="grid">
+      <div class="card">
+        <h3>Japanese Cuisine</h3>
+        <p>Sushi, ramen and tempura - traditional Japanese flavors.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Signature Dishes:</h4>
+          <ul>
+            <li>Sushi</li>
+            <li>Ramen</li>
+            <li>Tempura</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Thai Cuisine</h3>
+        <p>Harmony of sweet, sour, salty and spicy.</p>
+        <div style="margin-top: 1rem;">
+          <h4>Signature Dishes:</h4>
+          <ul>
+            <li>Pad Thai</li>
+            <li>Tom Yum Goong</li>
+            <li>Green Curry</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAVEL STORIES -->
+  <section id="stories">
+    <h2>Travel Stories</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Falling in Love with Amsterdam</h3>
+        <p>Bikes, canals and art at every turn – a magical experience.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: March 15, 2023</p>
+      </div>
+      <div class="card">
+        <h3>Train Through Sri Lanka</h3>
+        <p>The most beautiful railway journey through green tea hills.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: February 2, 2023</p>
+      </div>
+      <div class="card">
+        <h3>Mornings in Mexico</h3>
+        <p>Scent of tortillas, sounds of mariachi music and warmth of people.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: January 10, 2023</p>
+      </div>
+      <div class="card">
+        <h3>Alone in Iceland</h3>
+        <p>Glacial lagoons, geysers and nights full of northern lights.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: December 5, 2022</p>
+      </div>
+      <div class="card">
+        <h3>Vietnam by Bicycle</h3>
+        <p>From Hanoi to Ho Chi Minh - journey through lively streets and rice fields.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: November 20, 2022</p>
+      </div>
+      <div class="card">
+        <h3>Magical Marrakech</h3>
+        <p>Colorful souks, scent of spices and warm Arabic hospitality.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: October 15, 2022</p>
+      </div>
+      <div class="card">
+        <h3>Winter Fairytale in Salzburg</h3>
+        <p>Christmas markets, Mozart's music and freshly snowed streets.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: December 5, 2021</p>
+      </div>
+      <div class="card">
+        <h3>Trans-Siberian Railway Journey</h3>
+        <p>Endless landscapes, interesting encounters and an amazing adventure.</p>
+        <p style="margin-top: 0.5rem; font-style: italic;">Published: August 20, 2021</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Contact Details</h3>
+        <p>Email: info@mytravelblog.com</p>
+        <p>Phone: +1 123 456 7890</p>
+      </div>
+      <div class="card">
+        <h3>Collaboration</h3>
+        <p>If you'd like to collaborate or have any questions, please email me.</p>
+      </div>
+      <div class="card">
+        <h3>Follow Me</h3>
+        <p>Instagram: @mytraveljourney</p>
+        <p>Facebook: My Travel Journey</p>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <p>© 2025 Wander With Love – Travel Blog by [Your Name]</p>
+    <p>© 2025 My Travel Journey | All Rights Reserved</p>
+    <p>Contact: info@mytravelblog.com</p>
   </footer>
+
+  <!-- Home Button -->
+  <button class="home-btn" title="Back to Top">↑</button>
 </body>
 </html>
