@@ -16,6 +16,12 @@
           
           // Show selected section
           document.getElementById(sectionId).classList.add('active');
+
+          //Hide dropdown menu(if open)
+          const dropdownMenu=documentElementById('mobileMenu');
+          if (dropdownMenu) {
+            dropdownMenu.classList.remove('opem');
+          }
           
           // Update active nav link
           navLinks.forEach(link => link.classList.remove('active'));
