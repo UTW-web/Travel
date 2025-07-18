@@ -11,21 +11,27 @@
 <body>
 
   <header>
-    <img src="Slike/logo-modified (1).png" alt="Travel" style="height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
+    <img src="Slike/logo.png" alt="Travel" style="height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
     <p>Slow travel.<br> Steps of the soul.<br> Journal of presence.</p>
   </header>
 
   <nav>
     <a href="#" class="nav-link active" data-section="home">Home</a>
-    <a href="#" class="nav-link" data-section="europe">Europe</a>
-    <a href="#" class="nav-link" data-section="asia">Asia</a>
-    <a href="#" class="nav-link" data-section="america">America</a>
-    <a href="#" class="nav-link" data-section="africa">Africa</a>
-    <a href="#" class="nav-link" data-section="oceania">Oceania</a>
+    <div class="dropdown">
+      <button class="dropbtn">Destinations</button>
+      <div class="dropdown-content">
+        <a href="#" class="nav-link" data-section="europe">Europe</a>
+        <a href="#" class="nav-link" data-section="asia">Asia</a>
+        <a href="#" class="nav-link" data-section="america">America</a>
+        <a href="#" class="nav-link" data-section="africa">Africa</a>
+        <a href="#" class="nav-link" data-section="oceania">Oceania</a>
+      </div>
+    </div>
     <a href="#" class="nav-link" data-section="food">World Cuisine</a>
     <a href="#" class="nav-link" data-section="stories">Travel Stories</a>
-    <a href="#" class="nav-link" data-section="sunset">Sunset</a>
-    <a href="#" class="nav-link" data-section="sunrise">Sunrise</a>
+    <a href="#" class="nav-link" data-section="sunset & sunrise">Sunset & Sunrise</a>
+    <a href="#" class="nav-link" data-section="overnight stays along the way">Overnight Stays Along The Way</a>
+    <a href="#" class="nav-link" data-section="travel with us">Travel with us</a>
     <a href="#" class="nav-link" data-section="contact">Contact</a>
   </nav>
 
@@ -482,8 +488,9 @@
     </div>
   </section>
 
- <!-- Sunset -->
-<section id="sunset">
+ <!-- Sunset and Sunrise -->
+<section id="sunset & sunrise">
+  <h2>Sunset & Sunrise</h2>
   <img src="Slike/IMG-0ca3891d5e4020bc86d948a4a065961b-V.jpg" alt="Sunset" class="hero-image">
   <h2>Sunset</h2>
   <p class="section-description">Capturing the magical moments when day turns to night around the world</p>
@@ -526,11 +533,8 @@
       <p>Share your favorite sunset moments with us.</p>
     </div>
   </div>
-</section>
+  <img src="Slike/IMG-20250215-WA0206.jpg" alt="Sunrise" class="hero-image"  style=" object-fit:cover; width:100%; height:300px; border-radius:8px; margin-top:1rem;">
 
-<!-- Sunrise -->
-<section id="sunrise">
-  <img src="Slike/IMG-20250215-WA0206.jpg" alt="Sunrise" class="hero-image">
   <h2>Sunrise</h2>
   <p class="section-description">The beauty of new beginnings captured at dawn</p>
   
@@ -567,6 +571,71 @@
       </div>
   </div>
 </section>
+
+  <!-- OVERNIGHT STAYS ALONG THE WAY -->
+  <section id="overnight stays along the way">
+    <h2>Overnight Stays Along The Way</h2>
+    <p class="section-description">Discover unique accommodations for your travels</p>
+    
+    <div class="grid">
+      <div class="card">
+        <h3>Unique Stays</h3>
+        <p>From treehouses to yurts, find the perfect place to rest.</p>
+        <ul>
+          <li>Treehouse in Costa Rica</li>
+          <li>Yurt in Mongolia</li>
+          <li>Houseboat in Amsterdam</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Hotel Reviews</h3>
+        <p>Read our reviews of the best hotels around the world.</p>
+        <ul>
+          <li>Luxury hotels</li>
+          <li>Budget-friendly options</li>
+          <li>Unique boutique hotels</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Camping Adventures</h3>
+        <p>Explore the great outdoors with our camping guides.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAVEL WITH US -->
+  <section id="travel with us">
+    <h2>Travel With Us</h2>
+    <p class="section-description">Join our travel community and explore the world together</p>
+    
+    <div class="grid">
+      <div class="card">
+        <h3>Group Tours</h3>
+        <p>Join our organized tours to discover new destinations.</p>
+        <ul>
+          <li>Adventure trips</li>
+          <li>Cultural experiences</li>
+          <li>Relaxing getaways</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Travel Tips</h3>
+        <p>Get the best tips for traveling safely and comfortably.</p>
+        <ul>
+          <li>Packing essentials</li>
+          <li>Health and safety</li>
+          <li>Budgeting for travel</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Community Stories</h3>
+        <p>Share your travel stories and connect with fellow travelers.</p>
+      </div>
+    </div>
+  </section>
+  
+
+
 
   <!-- CONTACT -->
   <section id="contact">
