@@ -62,3 +62,41 @@
         }
       });
     });
+
+     // Image upload functionality
+  const sunriseUpload = document.getElementById('sunrise-upload');
+  const sunrisePreview = document.getElementById('sunrise-preview');
+  
+  if (sunriseUpload) {
+    sunriseUpload.addEventListener('change', function() {
+      sunrisePreview.innerHTML = '';
+      const files = this.files;
+      
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (!file.type.match('image.*')) continue;
+        
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.alt = 'Uploaded sunrise photo';
+          sunrisePreview.appendChild(img);
+        }
+        
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+  
+  // Make sure the nav links for sunset/sunrise work
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    if (link.dataset.section === 'Sunset') {
+      link.dataset.section = 'sunset';
+    }
+    if (link.dataset.section === 'Sunrise') {
+      link.dataset.section = 'sunrise';
+    }
+  });
