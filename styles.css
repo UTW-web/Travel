@@ -18,7 +18,7 @@
       font-weight: 300;
     }
     header {
-      background-color: rgb(254, 254, 254);
+      background-color:#fffff7;
       padding: 2rem 1rem;
       text-align: center;
     }
@@ -59,7 +59,7 @@
     }
     nav a:hover, nav a.active {
       color: #db8b75;
-      background-color: rgba(219, 139, 117, 0.1);
+      background-color: #fddabc;
     }
     section {
       padding: 2rem 1rem;
@@ -257,13 +257,13 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {background-color: #f4caa7;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color:   rgba(219, 139, 117, 0.1);}
+.dropdown:hover .dropbtn {background-color:  #f4caa7;}
 
     
     /* Responsive */
