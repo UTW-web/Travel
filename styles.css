@@ -59,7 +59,7 @@
     }
     nav a:hover, nav a.active {
       color: #db8b75;
-      background-color: #fddabc;
+      background-color: #fffff7;
     }
     section {
       padding: 2rem 1rem;
@@ -257,13 +257,13 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color:  #fddabc;}
+.dropdown-content a:hover {background-color:  #fffff7;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color:   #fddabc;}
+.dropdown:hover .dropbtn {background-color:   #fffff7;}
 
     
     /* Responsive */
