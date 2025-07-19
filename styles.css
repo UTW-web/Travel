@@ -1,6 +1,6 @@
     :root {
       --main-bg: #faf6f4;
-      --accent-bg: #f9f5f3;
+      --accent-bg:#eccaac;
       --text-dark: #5c524d;
       --highlight: #f7cfc9;
       --card-bg: #ffffff;
@@ -257,13 +257,13 @@
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f4caa7;}
+.dropdown-content a:hover {background-color:  #fddabc;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color:  #f4caa7;}
+.dropdown:hover .dropbtn {background-color:   #fddabc;}
 
     
     /* Responsive */
