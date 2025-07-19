@@ -59,7 +59,7 @@
       font-family: 'Raleway', sans-serif;
     }
     nav a:hover, nav a.active {
-      color: #db8b75;
+      color: #f2d0af;
       background-color: #fffff7;
     }
     section {
@@ -85,7 +85,7 @@
       gap: 1.5rem;
     }
     .card {
-      border: 1px solid #db8b75;
+      border: 1px solid #f2d0af;
       border-radius: 1rem;
       background-color: var(--card-bg);
       padding: 1.5rem;
@@ -164,19 +164,6 @@
       transform: scale(1.05);
     }
 
-    /* Upload Area Styles */
-    .upload-area {
-      padding: 1rem;
-      border: 2px dashed #ccc;
-      border-radius: 8px;
-      text-align: center;
-      margin: 1rem 0;
-    }
-
-    .upload-area:hover {
-      border-color: #888;
-    }
-
     .image-preview {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -225,12 +212,12 @@
       font-size: clamp(0.8rem, 3vw, 1rem);
       transition: all 0.3s;
       padding: 0.7rem 1rem;
-      border-radius: 1rem;
+      border-radius: 0.5rem;
       white-space: nowrap;
       font-family: 'Raleway', sans-serif;
     }
     .dropbtn:hover, .dropbtn.active {
-      color: #db8b75;
+      color: #f2d0af;
       background-color: rgba(219, 139, 117, 0.1);
     }
 
