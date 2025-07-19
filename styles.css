@@ -1,6 +1,6 @@
     :root {
       --main-bg: #fdefe4;
-      --accent-bg:#fae9db;
+      --accent-bg:#fdefe4;
       --text-dark: #5c524d;
       --highlight: #f7cfc9;
       --card-bg: #ffffff;
@@ -47,13 +47,6 @@
       z-index: 100;
     }
 
-    .border {
-      border-style: dashed;
-      border-radius: 1rem;
-      border-width: 1px;
-      border-color: #db8b75;
-    }
-
     nav a {
       text-decoration: none;
       color: #4c403b;
@@ -92,6 +85,8 @@
       gap: 1.5rem;
     }
     .card {
+      border: 1px solid #db8b75;
+      border-radius: 1rem;
       background-color: var(--card-bg);
       padding: 1.5rem;
       border-radius: 1rem;
@@ -222,10 +217,7 @@
     }
     
     .dropbtn {
-      border-style: dashed;
-      border-radius: 1rem;
-      border-width: 1px;
-      border-color: #db8b75;
+      border: none;
       background-color: transparent;
       text-decoration: none;
       color: #4c403b;
