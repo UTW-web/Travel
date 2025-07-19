@@ -1,5 +1,5 @@
     :root {
-      --main-bg: #faf6f4;
+      --main-bg: #fdefe4;
       --accent-bg:#fae9db;
       --text-dark: #5c524d;
       --highlight: #f7cfc9;
@@ -46,6 +46,14 @@
       top: 0;
       z-index: 100;
     }
+
+    .border {
+      border-style: dashed;
+      border-radius: 1rem;
+      border-width: 1px;
+      border-color: #db8b75;
+    }
+
     nav a {
       text-decoration: none;
       color: #4c403b;
@@ -214,15 +222,18 @@
     }
     
     .dropbtn {
-      border: none;
+      border-style: dashed;
+      border-radius: 1rem;
+      border-width: 1px;
+      border-color: #db8b75;
       background-color: transparent;
       text-decoration: none;
       color: #4c403b;
       font-weight: 400;
       font-size: clamp(0.8rem, 3vw, 1rem);
       transition: all 0.3s;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
+      padding: 0.7rem 1rem;
+      border-radius: 1rem;
       white-space: nowrap;
       font-family: 'Raleway', sans-serif;
     }
