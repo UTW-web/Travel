@@ -11,7 +11,7 @@ collections:
     files:
       - label: "Domov"
         name: "home"
-        file: "index.html"
+        file: "home.md"
         fields:
           - { label: "Naslov", name: "title", widget: "string" }
           - { label: "Vsebina", name: "body", widget: "markdown" }
@@ -24,3 +24,4 @@ collections:
     fields:
       - { label: "Slika", name: "image", widget: "image" }
       - { label: "Opis slike", name: "description", widget: "string" }
+
