@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "Slike"
+public_folder: "/Slike"
+
+collections:
+  - name: "pages"
+    label: "Strani"
+    files:
+      - label: "Domov"
+        name: "home"
+        file: "index.html"
+        fields:
+          - { label: "Naslov", name: "title", widget: "string" }
+          - { label: "Vsebina", name: "body", widget: "markdown" }
+
+  - name: "galerija"
+    label: "Galerija"
+    folder: "Slike"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Slika", name: "image", widget: "image" }
+      - { label: "Opis slike", name: "description", widget: "string" }
