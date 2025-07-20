@@ -121,3 +121,63 @@ function showSlides() {
   dots[slideIndex-1].className += " active";
   setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
+//Clickable image
+  document.addEventListener('click', function(e) {
+    if (e.target.tagName.toLowerCase() === 'img') {
+      const src = e.target.src;
+      const overlay = document.createElement('div');
+      overlay.classList.add('image-overlay');
+
+      const zoomContainer = document.createElement('div');
+      zoomContainer.className = 'zoom-container';
+
+      const overlayImg = document.createElement('img');
+      overlayImg.src = src;
+
+      let scale = 1;
+      let originX = 0;
+      let originY = 0;
+      let startX, startY, currentX = 0, currentY = 0;
+      let isDragging = false;
+
+      // Zoom on scroll
+      zoomContainer.addEventListener('wheel', (ev) => {
+        ev.preventDefault();
+        const delta = ev.deltaY > 0 ? -0.1 : 0.1;
+        scale = Math.min(Math.max(0.5, scale + delta), 5);
+        overlayImg.style.transform = `scale(${scale}) translate(${currentX}px, ${currentY}px)`;
+      });
+
+      document.addEventListener('mousemove', (ev) => {
+        if (!isDragging) return;
+        currentX += (ev.clientX - startX) / scale;
+        currentY += (ev.clientY - startY) / scale;
+        startX = ev.clientX;
+        startY = ev.clientY;
+        overlayImg.style.transform = `scale(${scale}) translate(${currentX}px, ${currentY}px)`;
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+        zoomContainer.style.cursor = 'grab';
+      });
+
+      // Close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'close-button';
+      closeBtn.innerHTML = '✕';
+      closeBtn.onclick = () => document.body.removeChild(overlay);
+
+      // Close on background click
+      overlay.addEventListener('click', (ev) => {
+        if (ev.target === overlay) {
+          document.body.removeChild(overlay);
+        }
+      });
+
+      zoomContainer.appendChild(overlayImg);
+      overlay.appendChild(zoomContainer);
+      overlay.appendChild(closeBtn);
+      document.body.appendChild(overlay);
+    }
+  });
