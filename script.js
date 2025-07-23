@@ -223,24 +223,11 @@ setInterval(switchSlide, 3000); // Change every 3 seconds
     submenu.classList.toggle('show');
   }
 
-class Closemenu {
-  closeMenu() {
+  // Close menu when clicking a link (except submenu toggle)
+  function closeMenu() {
     menu.classList.remove('active');
     hamburger.style.display = 'flex';
     submenu.classList.remove('show');
     menu.setAttribute('aria-hidden', 'true');
   }
-}
-
-const closeMenuInstance = new Closemenu();
-
-// ✅ This finds all elements with class="closeMenu" and adds click listener
-document.addEventListener('DOMContentLoaded', function () {
-  const closeBtns = document.querySelectorAll('.closeMenu');
-  closeBtns.forEach(btn => {
-    btn.addEventListener('click', function () {
-      closeMenuInstance.closeMenu();
-    });
-  });
-});
 

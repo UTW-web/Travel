@@ -25,25 +25,25 @@
 
 <!-- Fullscreen Overlay Menu -->
 <nav id="mobileMenu" class="overlay-menu" aria-hidden="true">
-  <button class="close-btn" aria-label="Close menu">×</button>
+  <button class="close-btn" aria-label="Close menu" onclick="toggleMenu()">×</button>
   <ul class="menu-links">
-    <li><a href="#" data-section="home" class="nav-link closeMenu">Home</a></li>
+    <li><a href="#" data-section="home" class="nav-link" onclick="closeMenu()">Home</a></li>
     <li>
-      <button class="submenu-toggle" onclick="toggleSubmenu()">Destinations ▼</button>
+      <button class="submenu-toggle" class="nav-link" onclick="toggleSubmenu()">Destinations ▼</button>
       <ul id="submenu" class="submenu">
-        <li><a href="#" data-section="europe" class="nav-link closeMenu">Europe</a></li>
-        <li><a href="#" data-section="asia" class="nav-link closeMenu">Asia</a></li>
-        <li><a href="#" data-section="america"  class="nav-link closeMenu">America</a></li>
-        <li><a href="#" data-section="africa" class="nav-link closeMenu">Africa</a></li>
-        <li><a href="#" data-section="oceania"  class="nav-link closeMenu">Oceania</a></li>
-        <li><a href="#" data-section="middle east"  class="nav-link closeMenu">Middle East</a></li>
-        <li><a href="#" data-section="maria at home"  class="nav-link closeMenu">Maria At Home</a></li>
+        <li><a href="#" data-section="europe" class="nav-link" onclick="closeMenu()">Europe</a></li>
+        <li><a href="#" data-section="asia" class="nav-link" onclick="closeMenu()">Asia</a></li>
+        <li><a href="#" data-section="america" class="nav-link" onclick="closeMenu()">America</a></li>
+        <li><a href="#" data-section="africa" class="nav-link" onclick="closeMenu()">Africa</a></li>
+        <li><a href="#" data-section="oceania" class="nav-link" onclick="closeMenu()">Oceania</a></li>
+        <li><a href="#" data-section="middle east" class="nav-link" onclick="closeMenu()">Middle East</a></li>
+        <li><a href="#" data-section="maria at home" class="nav-link" onclick="closeMenu()">Maria At Home</a></li>
       </ul>
     </li>
-    <li><a href="#" data-section="stories" class="nav-link closeMenu">Travel Stories</a></li>
-    <li><a href="#" data-section="sunset & sunrise" class="nav-link closeMenu">My Sunrises & Sunsets</a></li>
-    <li><a href="#" data-section="overnight stays along the way" class="nav-link closeMenu">Overnight Stays Along The Way</a></li>
-    <li><a href="#" data-section="contact" class="nav-link closeMenu">Contact</a></li>
+    <li><a href="#" data-section="stories" class="nav-link" onclick="closeMenu()">Travel Stories</a></li>
+    <li><a href="#" data-section="sunset & sunrise" class="nav-link" onclick="closeMenu()">My Sunrises & Sunsets</a></li>
+    <li><a href="#" data-section="overnight stays along the way" class="nav-link" onclick="closeMenu()">Overnight Stays Along The Way</a></li>
+    <li><a href="#" data-section="contact" class="nav-link" onclick="closeMenu()">Contact</a></li>
   </ul>
 </nav>
 

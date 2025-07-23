@@ -258,7 +258,8 @@
   /* Container for hamburger to center it responsively */
   .hamburger-container {
     display: none; /* hidden by default */
-    margin-bottom:1rem;
+    padding: 0.5rem 0 0;
+    padding-bottom: 1rem;
     width: 100%;
     box-sizing: border-box;
     justify-content: center;
@@ -374,7 +375,7 @@
   }
 
   /* Hide hamburger and overlay on desktop */
-  @media (max-width: 769px) {
+  @media (min-width: 769px) {
     .overlay-menu {
       display: none !important;
     }
