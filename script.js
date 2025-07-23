@@ -201,3 +201,46 @@ setInterval(switchSlide, 3000); // Change every 3 seconds
       document.body.appendChild(overlay);
     }
   });
+  
+  const hamburger = document.querySelector('.hamburger');
+  const menu = document.getElementById('mobileMenu');
+  const submenu = document.getElementById('submenu');
+
+  function toggleMenu() {
+    menu.classList.toggle('active');
+
+    if (menu.classList.contains('active')) {
+      hamburger.style.display = 'none'; // hide hamburger when menu open
+      menu.setAttribute('aria-hidden', 'false');
+    } else {
+      hamburger.style.display = 'flex'; // show hamburger when menu closed
+      submenu.classList.remove('show'); // close submenu on menu close
+      menu.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function toggleSubmenu() {
+    submenu.classList.toggle('show');
+  }
+
+class Closemenu {
+  closeMenu() {
+    menu.classList.remove('active');
+    hamburger.style.display = 'flex';
+    submenu.classList.remove('show');
+    menu.setAttribute('aria-hidden', 'true');
+  }
+}
+
+const closeMenuInstance = new Closemenu();
+
+// ✅ This finds all elements with class="closeMenu" and adds click listener
+document.addEventListener('DOMContentLoaded', function () {
+  const closeBtns = document.querySelectorAll('.closeMenu');
+  closeBtns.forEach(btn => {
+    btn.addEventListener('click', function () {
+      closeMenuInstance.closeMenu();
+    });
+  });
+});
+

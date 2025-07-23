@@ -11,11 +11,46 @@
 </head>
 <body>
 
-  <header>
+<header>
     <img src="Slike/output-onlinepngtools (1).png" alt="Travel" style="height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
-    <p style="font-size:12px;">SLOW TRAVEL.<br>STEPS OF THE SOUL.<br> JOURNAL OF PRESENCE.</p>
-  </header>
 
+<!-- Hamburger container for responsive centering -->
+<div class="hamburger-container">
+  <button class="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+</div>
+
+<!-- Fullscreen Overlay Menu -->
+<nav id="mobileMenu" class="overlay-menu" aria-hidden="true">
+  <button class="close-btn" aria-label="Close menu closeMenu">×</button>
+  <ul class="menu-links">
+    <li><a href="#" data-section="home" class="nav-link closeMenu">Home</a></li>
+    <li>
+      <button class="submenu-toggle" onclick="toggleSubmenu()">Destinations ▼</button>
+      <ul id="submenu" class="submenu">
+        <li><a href="#" data-section="europe" class="nav-link closeMenu">Europe</a></li>
+        <li><a href="#" data-section="asia" class="nav-link closeMenu">Asia</a></li>
+        <li><a href="#" data-section="america"  class="nav-link closeMenu">America</a></li>
+        <li><a href="#" data-section="africa" class="nav-link closeMenu">Africa</a></li>
+        <li><a href="#" data-section="oceania"  class="nav-link closeMenu">Oceania</a></li>
+        <li><a href="#" data-section="middle east"  class="nav-link closeMenu">Middle East</a></li>
+        <li><a href="#" data-section="maria at home"  class="nav-link closeMenu">Maria At Home</a></li>
+      </ul>
+    </li>
+    <li><a href="#" data-section="stories" class="nav-link closeMenu">Travel Stories</a></li>
+    <li><a href="#" data-section="sunset & sunrise" class="nav-link closeMenu">My Sunrises & Sunsets</a></li>
+    <li><a href="#" data-section="overnight stays along the way" class="nav-link closeMenu">Overnight Stays Along The Way</a></li>
+    <li><a href="#" data-section="contact" class="nav-link closeMenu">Contact</a></li>
+  </ul>
+</nav>
+
+    <p style="font-size:12px;">SLOW TRAVEL.<br>STEPS OF THE SOUL.<br> JOURNAL OF PRESENCE.</p>
+</header>
+
+<div class="overlay-menu">
   <nav>
     <a href="#" class="nav-link active" data-section="home">Home</a>
     <div class="dropdown">
@@ -30,13 +65,12 @@
         <a href="#" class="nav-link" data-section="maria at home">Maria At Home</a>
       </div>
     </div>
-    <a href="#" class="nav-link" data-section="food">Gourmet Delights</a>
     <a href="#" class="nav-link" data-section="stories">Travel Stories</a>
     <a href="#" class="nav-link" data-section="sunset & sunrise">My Sunrises & Sunsets</a>
     <a href="#" class="nav-link" data-section="overnight stays along the way">Overnight Stays Along The Way</a>
-    <a href="#" class="nav-link" data-section="travel with us">Travel with us</a>
     <a href="#" class="nav-link" data-section="contact">Contact</a>
   </nav>
+</div>
 
   <!-- HOME PAGE -->
   <section id="home" class="active">
@@ -454,68 +488,6 @@
     </div>
   </section>
 
-  <!-- FOOD -->
-  <section id="food">
-    <h2>Gourmet Delights</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Italian Cuisine</h3>
-        <p>Pasta, pizza and gelato - flavors of Italy.</p>
-         <img src="Slike/Margherita-Pizza-deck-oven.jpg.webp" alt="Europe" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
-        <div style="margin-top: 1rem;">
-          <h4>Signature Dishes:</h4>
-          <ul>
-            <li>Spaghetti Carbonara</li>
-            <li>Pizza Margherita</li>
-            <li>Tiramisu</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <h3>French Cuisine</h3>
-        <p>Art of fine dining and bakery specialties.</p>
-        <img src="Slike/main-header.jpg" alt="Europe" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
-        <div style="margin-top: 1rem;">
-          <h4>Signature Dishes:</h4>
-          <ul>
-            <li>Croissant</li>
-            <li>Bouillabaisse</li>
-            <li>Crème Brûlée</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <h3 class="section-subtitle">Eastern Cuisine</h3>
-    <div class="grid">
-      <div class="card">
-        <h3>Japanese Cuisine</h3>
-        <p>Sushi, ramen and tempura - traditional Japanese flavors.</p>
-         <img src="Slike/Kobe-Jones-Exploring-the-History-of-‘East-Meets-West’-in-Food-Influences.jpg" alt="Europe" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
-        <div style="margin-top: 1rem;">
-          <h4>Signature Dishes:</h4>
-          <ul>
-            <li>Sushi</li>
-            <li>Ramen</li>
-            <li>Tempura</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Thai Cuisine</h3>
-        <img src="Slike/easy-vegan-pad-thai-noodle-dish-with-bean-sprouts-thumb.jpg" alt="Europe" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
-        <p>Harmony of sweet, sour, salty and spicy.</p>
-        <div style="margin-top: 1rem;">
-          <h4>Signature Dishes:</h4>
-          <ul>
-            <li>Pad Thai</li>
-            <li>Tom Yum Goong</li>
-            <li>Green Curry</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- TRAVEL STORIES -->
   <section id="stories">
     <h2>Travel Stories</h2>
@@ -570,99 +542,10 @@
  <!-- Sunset and Sunrise -->
 <section id="sunset & sunrise">
   <h2>My Sunrises & Sunsets</h2>
-<div class="slider-container" style="height:20rem; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
-  <div class="slide current">
-    <img src="Slike/IMG-e4c13740cd18bdaa3c5e64a6ea25f806-V.jpg" class="slide-image">
-  </div>
-  <div class="slide">
-    <img src="Slike/20230103_182141.jpg" class="slide-image">
-  </div>
-  <div class="slide">
-    <img src="Slike/20230114_061016.jpg" class="slide-image">
-  </div>
-  <div class="slide">
-    <img src="Slike/20230115_064135.jpg" class="slide-image">
-  </div>
-  <div class="slide">
-    <img src="Slike/20231117_163540.jpg" class="slide-image">
-  </div>
-  <div class="slide">
-    <img src="Slike/20231223_165309.jpg" class="slide-image">
-  </div>
-  <div class="slide">
-    <img src="Slike/IMG-2cfb75d57d967a0e5f9d79fe69d92825-V.jpg" class="slide-image">
-  </div>
-  <div class="slide">
-    <img src="Slike/20221118_164423.jpg" class="slide-image">
-  </div>
-</div>
-
+  <img src="Slike/IMG-20250215-WA0206.jpg" alt="Sunrise" class="hero-image"  style=" object-fit:cover; width:100%; height:300px; border-radius:8px; margin-top:1rem;">
   <h2>Sunrise</h2>
-  <p class="section-description">The beauty of new beginnings captured at dawn</p>
-  
-  <div class="grid">
-    <div class="card">
-      <h3>Best Sunrise Experiences</h3>
-      <p>Worth waking up early for these magical moments.</p>
-      <div style="margin-top: 1rem;">
-        <h4>Must-See:</h4>
-        <ul>
-          <li>Angkor Wat, Cambodia</li>
-          <li>Mount Sinai, Egypt</li>
-          <li>Haleakalā, Hawaii</li>
-          <li>Taj Mahal, India</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Sunrise vs Sunset</h3>
-      <p>Understanding the differences and unique qualities of each.</p>
-      <div style="margin-top: 1rem;">
-        <h4>Key Differences:</h4>
-        <ul>
-          <li>Atmosphere is often clearer at sunrise</li>
-          <li>Fewer people at sunrise locations</li>
-          <li>Different color palettes</li>
-          <li>Unique wildlife activity</li>
-        </ul>
-      </div>
-    </div>
-          <div class="image-gallery">
-        <img src="Slike/20230313_195246.jpg" alt="Sunset photo 1">
-        <img src="Slike/20230117_064521-01.jpeg" alt="Sunset photo 2">
-      </div>
   </div>
   <h2>Sunset</h2>
-  <p class="section-description">Capturing the magical moments when day turns to night around the world</p>
-  <div class="grid">
-    <div class="card">
-      <h3>Best Sunset Spots</h3>
-      <p>Discover the most breathtaking places to watch the sunset.</p>
-      <img src="Slike/20230110_081225.jpg" alt="Sunset photo 1" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
-      <div style="margin-top: 1rem;">
-        <h4>Top Locations:</h4>
-        <ul>
-          <li>Santorini, Greece</li>
-          <li>Grand Canyon, USA</li>
-          <li>Maldives</li>
-          <li>Uluru, Australia</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Sunset Photography Tips</h3>
-      <p>Learn how to capture the perfect sunset photo.</p>
-      <img src="Slike/IMG-cad7b1cb658c2d14dc7c058718dcc033-V.jpg" alt="Sunset photo 1" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:1rem;">
-      <div style="margin-top: 1rem;">
-        <h4>Tips:</h4>
-        <ul>
-          <li>Use a tripod</li>
-          <li>Arrive early</li>
-          <li>Experiment with exposure</li>
-          <li>Include silhouettes</li>
-        </ul>
-      </div>
-    </div>
     <div class="card">
       <h3>Your Sunset Photos</h3>
       <div class="image-gallery">
@@ -672,7 +555,7 @@
       <p>Share your favorite sunset moments with us.</p>
     </div>
   </div>
-  <img src="Slike/IMG-20250215-WA0206.jpg" alt="Sunrise" class="hero-image"  style=" object-fit:cover; width:100%; height:300px; border-radius:8px; margin-top:1rem;">
+
 </section>
 
   <!-- OVERNIGHT STAYS ALONG THE WAY -->
@@ -702,37 +585,6 @@
       <div class="card">
         <h3>Camping Adventures</h3>
         <p>Explore the great outdoors with our camping guides.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRAVEL WITH US -->
-  <section id="travel with us">
-    <h2>Travel With Us</h2>
-    <p class="section-description">Join our travel community and explore the world together</p>
-    
-    <div class="grid">
-      <div class="card">
-        <h3>Group Tours</h3>
-        <p>Join our organized tours to discover new destinations.</p>
-        <ul>
-          <li>Adventure trips</li>
-          <li>Cultural experiences</li>
-          <li>Relaxing getaways</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Travel Tips</h3>
-        <p>Get the best tips for traveling safely and comfortably.</p>
-        <ul>
-          <li>Packing essentials</li>
-          <li>Health and safety</li>
-          <li>Budgeting for travel</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Community Stories</h3>
-        <p>Share your travel stories and connect with fellow travelers.</p>
       </div>
     </div>
   </section>
