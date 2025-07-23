@@ -395,6 +395,12 @@
   }
 }
 
+@media (min-width: 768px) {
+  .mobile {
+    display: none;
+  }
+}
+
     
     /* Responsive */
     @media (max-width: 768px) {
