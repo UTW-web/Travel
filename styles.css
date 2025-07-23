@@ -382,7 +382,12 @@
   }
 .pc-nav {
   display: block;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--accent-bg);
 }
+
 
 @media (max-width: 768px) {
   .pc-nav {
