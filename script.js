@@ -1,4 +1,27 @@
-    document.addEventListener('DOMContentLoaded', function() {
+// firebase-init.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDrSwaMpg2TqhaJASg1mf14TQqeVo-DwTs",
+  authDomain: "traveladmin-4931c.firebaseapp.com",
+  databaseURL: "https://traveladmin-4931c-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "traveladmin-4931c",
+  storageBucket: "traveladmin-4931c.firebasestorage.app",
+  messagingSenderId: "55525482776",
+  appId: "1:55525482776:web:ab27c3f0b3745bf16bfe6d",
+  measurementId: "G-GWJGB8SNSM"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+
+
+
+
+   document.addEventListener('DOMContentLoaded', function() {
       const navLinks = document.querySelectorAll('.nav-link');
       const sections = document.querySelectorAll('section');
       const homeBtn = document.querySelector('.home-btn');
