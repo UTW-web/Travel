@@ -374,12 +374,20 @@
   }
 
   /* Hide hamburger and overlay on desktop */
-  @media (min-width: 769px) {
+  @media (max-width: 769px) {
     .overlay-menu {
       display: none !important;
     }
   }
+.pc-nav {
+  display: block;
+}
 
+@media (max-width: 768px) {
+  .pc-nav {
+    display: none;
+  }
+}
 
     
     /* Responsive */
