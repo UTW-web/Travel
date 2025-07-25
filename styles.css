@@ -395,8 +395,13 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .mobile {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .pc {
     display: none;
   }
 }
