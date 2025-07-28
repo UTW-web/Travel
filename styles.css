@@ -126,6 +126,15 @@
       color: #6e5e57;
       font-weight: 400;
     }
+    h4 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: clamp(0.9rem, 5vw, 2.5rem);
+      color: #4a3f39;
+      font-family: 'Dancing Script', cursive;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
     footer {
       background-color: var(--highlight);
       text-align: center;
@@ -225,7 +234,7 @@
   position: relative;
   display: inline-block;
 }
-.h23 {
+.cursive-font {
   font-family: 'Dancing Script', cursive;
 }
 /* Dropdown Content (Hidden by Default) */
