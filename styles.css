@@ -225,7 +225,9 @@
   position: relative;
   display: inline-block;
 }
-
+.h23 {
+  font-family: 'Dancing Script', cursive;
+}
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
