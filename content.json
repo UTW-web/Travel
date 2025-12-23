@@ -1,0 +1,280 @@
+{
+  "home": {
+    "heroImage": "https://images.unsplash.com/photo-1506929562872-bb421503ef21",
+    "mainTitle": "Welcome to My Travel Blog",
+    "aboutMe": [
+      "This is my path. A path through lands, flavors, experiences, and feelings…\nAt heart, I'm a nomad, and my soul's journey is one of exploration, tasting, creating, sensing, and connecting.\n\nIf you're looking for classic travel blogs,\nyou won't find them here.\nBut you will find many sincere reflections and feelings from my journey.\n\nMy name is Maria.\nFor a long time, I believed that the meaning of life was in work, parenting, and everyday survival—but deep inside, I felt there was something more calling me.\nAnd that's how love for myself was born—\nalongside the exploration of my own depths.",
+      "Today I live a simple, slow life in the countryside—\nalongside the love of my life, two curious geese, and two gentle cats.\nI feel connected to myself, to nature, and to the universe.\nMy motto? To be here and now. Fully present in this moment.\n\nI start my mornings with a glass of warm water with lemon,\nwatching nature unfold.\nThese are the moments when life feels enough.\nWhen I feel peace and freedom.\nFrom this silence and presence, this website was born.",
+      "If something in my words resonates with your own journey,\nI am grateful.\nGrateful that I can offer a small piece of my path\nto a world longing for more authenticity.\n\nEach of us carries something unique.\nI simply offer a glimpse into mine."
+    ],
+    "signatureImage": "Slike/podpis (1).png",
+    "featuredDestinations": [
+      {
+        "title": "Europe",
+        "image": "Slike/image_processing20220630-4-1di4kln.jpg",
+        "description": "Roman Colosseum, Parisian streets and Alpine valleys – my European adventures."
+      },
+      {
+        "title": "Asia",
+        "image": "Slike/IMG-20250213-WA0151 (1).jpg",
+        "description": "From Japanese cherry blossoms to Indian bazaars – every step tells a story."
+      },
+      {
+        "title": "America",
+        "image": "Slike/licensed-image.jpeg",
+        "description": "Wild West, New York streets and Latin America – freedom on the road."
+      }
+    ],
+    "cuisine": [
+      {
+        "title": "Western Cuisine",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+        "description": "Italian pasta, French pastries and Mediterranean flavors."
+      },
+      {
+        "title": "Eastern Cuisine",
+        "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d",
+        "description": "Japanese sushi, Thai curries and Vietnamese street food."
+      }
+    ],
+    "recentStories": [
+      {
+        "title": "Falling in Love with Amsterdam",
+        "description": "Bikes, canals and art at every turn – a magical experience.",
+        "date": "Published: March 15, 2023"
+      },
+      {
+        "title": "Train Through Sri Lanka",
+        "description": "The most beautiful railway journey through green tea hills.",
+        "date": "Published: February 2, 2023"
+      }
+    ]
+  },
+  "destinations": {
+    "europe": {
+      "heroImage": "Slike/IMG-20241110-WA0031.jpg",
+      "cards": [
+        {
+          "title": "Roman Colosseum",
+          "description": "Historic monument testifying to the power of ancient Rome.",
+          "facts": [
+            "Built in 80 AD",
+            "Location: Rome, Italy",
+            "Could hold up to 50,000 spectators"
+          ]
+        },
+        {
+          "title": "Parisian Streets",
+          "description": "Magical atmosphere of the city of love with iconic landmarks.",
+          "facts": [
+            "Eiffel Tower",
+            "Notre-Dame",
+            "Montmartre"
+          ]
+        },
+        {
+          "title": "Alpine Valleys",
+          "description": "Natural beauty that takes every visitor's breath away.",
+          "facts": [
+            "Accessible from Switzerland, Austria, France",
+            "Perfect for hiking and skiing",
+            "Picturesque villages"
+          ]
+        }
+      ]
+    },
+    "asia": {
+      "heroImage": "Slike/IMG-20250123-WA0086.jpg",
+      "cards": [
+        {
+          "title": "Japanese Cherry Blossoms",
+          "description": "Magical sakura festivals in spring.",
+          "facts": [
+            "Late March - early April",
+            "Best locations: Kyoto, Tokyo",
+            "Hanami tradition"
+          ]
+        },
+        {
+          "title": "Indian Bazaars",
+          "description": "Colorful mix of scents, colors and sounds.",
+          "facts": [
+            "Chandni Chowk, Delhi",
+            "Johari Bazaar, Jaipur",
+            "Colaba Causeway, Mumbai"
+          ]
+        },
+        {
+          "title": "Vietnamese Rice Fields",
+          "description": "Green terraced landscapes of northern Vietnam.",
+          "facts": [
+            "Sapa",
+            "Mu Cang Chai",
+            "Hoang Su Phi"
+          ]
+        }
+      ]
+    },
+    "america": {
+      "heroImage": "Slike/0xO9DE.jpg",
+      "cards": [
+        {
+          "title": "Wild West",
+          "description": "Open plains and iconic landscapes of Arizona and Utah.",
+          "facts": [
+            "Grand Canyon",
+            "Monument Valley",
+            "Zion National Park"
+          ]
+        },
+        {
+          "title": "New York",
+          "description": "The city that never sleeps, full of iconic landmarks.",
+          "facts": [
+            "Times Square",
+            "Central Park",
+            "Statue of Liberty"
+          ]
+        },
+        {
+          "title": "Latin America",
+          "description": "Welcoming people, hot music and festive atmospheres.",
+          "facts": [
+            "Machu Picchu, Peru",
+            "Rio de Janeiro, Brazil",
+            "Cartagena, Colombia"
+          ]
+        }
+      ]
+    }
+  },
+  "stories": [
+    {
+      "title": "Falling in Love with Amsterdam",
+      "description": "Bikes, canals and art at every turn – a magical experience.",
+      "date": "Published: March 15, 2023",
+      "image": "Slike/image_processing20220630-4-1di4kln.jpg"
+    },
+    {
+      "title": "Train Through Sri Lanka",
+      "description": "The most beautiful railway journey through green tea hills.",
+      "date": "Published: February 2, 2023",
+      "image": "Slike/jokulsarlon_glacier_lagoon_iceland_northern_lights_Depositphotos_6_jpg_7f5d470ff1.webp"
+    },
+    {
+      "title": "Mornings in Mexico",
+      "description": "Scent of tortillas, sounds of mariachi music and warmth of people.",
+      "date": "Published: January 10, 2023",
+      "image": ""
+    },
+    {
+      "title": "Alone in Iceland",
+      "description": "Glacial lagoons, geysers and nights full of northern lights.",
+      "date": "Published: December 5, 2022",
+      "image": ""
+    },
+    {
+      "title": "Vietnam by Bicycle",
+      "description": "From Hanoi to Ho Chi Minh - journey through lively streets and rice fields.",
+      "date": "Published: November 20, 2022",
+      "image": ""
+    },
+    {
+      "title": "Magical Marrakech",
+      "description": "Colorful souks, scent of spices and warm Arabic hospitality.",
+      "date": "Published: October 15, 2022",
+      "image": ""
+    },
+    {
+      "title": "Winter Fairytale in Salzburg",
+      "description": "Christmas markets, Mozart's music and freshly snowed streets.",
+      "date": "Published: December 5, 2021",
+      "image": ""
+    },
+    {
+      "title": "Trans-Siberian Railway Journey",
+      "description": "Endless landscapes, interesting encounters and an amazing adventure.",
+      "date": "Published: August 20, 2021",
+      "image": ""
+    }
+  ],
+  "sunriseSunset": {
+    "sunriseText": "Each sunrise is a new beginning.\nNot just of the day, but of me.\n\nWhen the sky gently glows, I don't just watch it—I breathe it in.\nWith every inhale, I fill my body with light. I awaken my cells, greet my organs, and whisper:\n\"Good morning. I am here. I am alive.\"\n\nI collect these moments as reminders\nthat everything can start anew.\nThat each day is a chance to shine—from within.\n\nThese are my sunrises.\nMay they touch yours too.",
+    "sunsetText": "I've seen many of them. Those fiery ones over the desert, softly pink over the ocean, dramatic in the mountains and quiet above city rooftops.\nEach one caught me for a moment \nand reminded me how beautiful it is when the day respectfully bows into the night.But the most beautiful sunset?\nIt's on the terrace of my little house.\nThere, where I know every corner of the light. Where the wind brings familiar scents. Where the sky paints a different farewell each evening, but the feeling remains the same: this is me, I belong here.\nNothing is more calming, nothing more real.\nMaybe because nothing disturbs me. Because there's nothing to catch, prove, or capture.\nI just sit. I just am. And the world goes to sleep.",
+    "sunriseMainImage": "Slike/20230114_061016.jpg",
+    "sunsetMainImage": "Slike/najlepsizahod.jpg",
+    "sunriseImages": [
+      {
+        "title": "LANZAROTE BEACH (CANARY ISLANDS; SPAIN)",
+        "image": "Slike/20211002_080209 (1).jpg",
+        "description": "On a quiet beach with volcanic rocks,the sun slowly rises.Warm hues light up the sand and the calm sea,creating a beautiful and peaceful morning scene."
+      },
+      {
+        "title": "ISTANBUL (TURKEY)",
+        "image": "Slike/20230110_081225 (1).jpg",
+        "description": "The sky in shades of gray,blue and orange gently embraces the sea.People are already rushing to work,while the city awakens on soft light."
+      },
+      {
+        "title": "CAPPADOCIA (TURKEY)",
+        "image": "Slike/IMG-1ec69c9e0903766eb2ea9aec9011621f-V (1).jpg",
+        "description": "Golden white morning in Cappadocia.The sky fills wish hundreds of balloons,slowly rising like gentle breaths of color caught in soft light.\nStone chimneys stand tall,wrapped in morning mist that melts beneaththe warm embrace of the first sun.Silence floats in the air,full of promises-freedom breathing through every pulse and hue,until the sky becomes an endless canvas of dreams."
+      },
+      {
+        "title": "DAWN-SOMEWHERE ABOVE THE CLOUDS",
+        "image": "Slike/20230313_195246 (1).jpg",
+        "description": "While all sleeps and night quietly lingers,somewhere in the distance,among mist and clouds,a sliver of light begins to appear.It gently heralds the arrival of the sun-the birth of a new day and with it,the promise of new hope."
+      }
+    ],
+    "sunsetImages": [
+      {
+        "title": "NILE IN LUXOR (EGYPT)",
+        "image": "Slike/20200506_180727.jpg",
+        "description": "The Nile and the palm trees around it glow with the warm colors of the sunset.A moment of quiet and peace that fills you with energy."
+      },
+      {
+        "title": "LAKE GARDA (ITALY)",
+        "image": "Slike/20221026_180608 (1).jpg",
+        "description": "The sky turns warm shades of orange,seagulls circle above the lake and the water gently laps the shore.A pieceful and magical evening."
+      },
+      {
+        "title": "WADI RUM (JORDAN)",
+        "image": "Slike/IMG-20250215-WA0187.jpg",
+        "description": "The sun slowly sets behind the sandy dunes of Wady Rum,painting the desert in warm orange and yellow tones.The silence and vast sky create a feeling of freedom and peace.Every moment invites a deep breath and admiration of the raw nature."
+      },
+      {
+        "title": "THULUSDHOO (MALDIVES)",
+        "image": "Slike/20230103_182141 (1).jpg",
+        "description": "The sea is calm,gentle waves touch the sandy shore.The sky turns soft shades of grey and pink as the day fades into evening.A moment of tenderness and perfect peace."
+      },
+      {
+        "title": "OIA,SANTORINI (GREECE)",
+        "image": "Slike/DSC_0074.JPG",
+        "description": "A cross in the silence of sunset.Santorini glows in golden hues,the sky breathes with the sea and the heart pauses in the sacredness of the moment."
+      },
+      {
+        "title": "KAMNIK (SLOVENIA)",
+        "image": "Slike/20231223_165309 (1).jpg",
+        "description": "The sky burns with fiery hues.\nThe color spreads gently.\nWarmth flows through the air.\nSilence holds the space.\nEverything is at peace."
+      }
+    ]
+  },
+  "contact": {
+    "email": "info@mytravelblog.com",
+    "phone": "",
+    "instagram": "@mytraveljourney",
+    "facebook": "My Travel Journey",
+    "collaboration": "If you'd like to collaborate or have any questions, please email me."
+  },
+  "footer": {
+    "copyright": "© 2025 My Travel Journey | All Rights Reserved",
+    "madeBy": "-Made by UTW_Websites-"
+  },
+  "navigation": {
+    "home": "Home",
+    "destinations": "Destinations",
+    "stories": "Travel Stories",
+    "sunrise": "My Sunrises & Sunsets",
+    "stays": "Overnight Stays Along The Way",
+    "contact": "Contact"
+  }
+}
