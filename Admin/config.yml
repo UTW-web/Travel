@@ -2,7 +2,7 @@ backend:
   name: github
   repo: UTW-web/Travel
   branch: main
-  client_id: TUKAJ_BO_CLIENT_ID
+  client_id: Ov23lisS9eDPOxjdJHug
 
 publish_mode: simple
 
