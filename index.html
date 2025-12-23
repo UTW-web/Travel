@@ -723,8 +723,30 @@
 
   <!-- Home Button -->
   <button class="home-btn" title="Back to Top">↑</button>
+
+
+
+
+
+<!-- Simple Edit Mode -->
+<script src="simple-edit.js" defer></script>
+<script src="content-map.js" defer></script>
+
+<!-- Hidden admin link (Ctrl+Shift+E to show) -->
+<script>
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+        const adminLink = document.createElement('a');
+        adminLink.href = 'edit-content.html';
+        adminLink.textContent = '✏️ Edit Content';
+        adminLink.style.cssText = 'position:fixed; top:10px; right:10px; background:#f1cdaf; color:#5c524d; padding:10px; border-radius:5px; text-decoration:none; z-index:10000;';
+        document.body.appendChild(adminLink);
+    }
+});
+</script>
 </body>
 </html>
+
 
 
 
