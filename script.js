@@ -192,3 +192,56 @@
     menu.setAttribute('aria-hidden', 'true');
   }
 
+// Initialize content loader after page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Your existing code...
+    
+    // Add admin link functionality
+    const adminKey = 'travel_admin';
+    
+    // Add secret key combination to enable admin mode
+    let keySequence = [];
+    const secretCode = '3839'; // Code: 'EDIT'
+    
+    document.addEventListener('keydown', function(e) {
+        keySequence.push(e.keyCode);
+        if (keySequence.length > 4) keySequence.shift();
+        
+        if (keySequence.join('') === secretCode) {
+            localStorage.setItem(adminKey, 'enabled');
+            alert('Admin mode enabled! Edit link added to footer.');
+            location.reload();
+        }
+    });
+    
+    // Check if admin mode is enabled
+    if (localStorage.getItem(adminKey) === 'enabled' || window.location.search.includes('admin')) {
+        const adminLink = document.createElement('a');
+        adminLink.href = 'admin-panel.html';
+        adminLink.innerHTML = '✏️ Edit Website Content';
+        adminLink.style.cssText = `
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #f1cdaf;
+            color: #5c524d;
+            padding: 10px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            font-size: 14px;
+        `;
+        document.body.appendChild(adminLink);
+        
+        // Add disable option
+        adminLink.oncontextmenu = function(e) {
+            e.preventDefault();
+            if (confirm('Disable admin mode?')) {
+                localStorage.removeItem(adminKey);
+                location.reload();
+            }
+        };
+    }
+});
