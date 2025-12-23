@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Content - Travel Blog</title>
+    <title>Edit All Content - Travel Blog</title>
     <style>
         :root {
             --main-bg: #f4e3cb;
@@ -91,12 +91,6 @@
             border: 1px solid #ddd;
         }
         
-        .btn-danger {
-            background: #ffebee;
-            color: #c62828;
-            border: 1px solid #ffcdd2;
-        }
-        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -175,20 +169,6 @@
             line-height: 1.5;
         }
         
-        .image-preview {
-            margin-top: 10px;
-            max-width: 200px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid #f1cdaf;
-        }
-        
-        .image-preview img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
         .cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -210,49 +190,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        
-        .tab-container {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            border-bottom: 2px solid #f1cdaf;
-            padding-bottom: 10px;
-        }
-        
-        .tab-btn {
-            padding: 12px 25px;
-            background: #f9f3eb;
-            border: none;
-            border-radius: 8px 8px 0 0;
-            cursor: pointer;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        
-        .tab-btn:hover {
-            background: #f1cdaf;
-        }
-        
-        .tab-btn.active {
-            background: var(--accent);
-            font-weight: bold;
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         .auto-save-notice {
@@ -287,6 +224,18 @@
             color: var(--text-dark);
         }
         
+        .search-box {
+            margin-bottom: 30px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #f1cdaf;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -312,14 +261,14 @@
 </head>
 <body>
     <div class="admin-header">
-        <div class="logo">✈️ Travel Blog Editor</div>
+        <div class="logo">✈️ Travel Blog - Edit All Content</div>
         <div class="admin-controls">
             <div class="status-indicator" id="statusIndicator">
                 <i class="fas fa-check-circle"></i>
                 <span>All changes saved</span>
             </div>
             <button class="btn btn-primary" onclick="viewLiveSite()">
-                <i class="fas fa-eye"></i> View Live Site
+                <i class="fas fa-eye"></i> View Site
             </button>
             <button class="btn btn-secondary" onclick="logout()">
                 <i class="fas fa-sign-out-alt"></i> Logout
@@ -328,264 +277,793 @@
     </div>
     
     <div class="container">
-        <div class="tab-container">
-            <button class="tab-btn active" onclick="showTab('home')">
-                <i class="fas fa-home"></i> Home Page
-            </button>
-            <button class="tab-btn" onclick="showTab('destinations')">
-                <i class="fas fa-globe-europe"></i> Destinations
-            </button>
-            <button class="tab-btn" onclick="showTab('stories')">
-                <i class="fas fa-book-open"></i> Travel Stories
-            </button>
-            <button class="tab-btn" onclick="showTab('sunrise')">
-                <i class="fas fa-sun"></i> Sunrise/Sunset
-            </button>
-            <button class="tab-btn" onclick="showTab('contact')">
-                <i class="fas fa-envelope"></i> Contact & Footer
-            </button>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search for text to edit..." onkeyup="filterSections()">
         </div>
         
-        <!-- HOME TAB -->
-        <div id="home" class="tab-content active">
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-star"></i> Hero Section</h2>
-                
-                <div class="form-group">
-                    <label>Main Title:</label>
-                    <input type="text" id="mainTitle" placeholder="Welcome to My Travel Blog">
-                    <div class="hint">Appears at the top of the home page</div>
-                </div>
+        <!-- HOME PAGE - VSE NA ENEM MESTU -->
+        <div class="edit-section">
+            <h2 class="section-title"><i class="fas fa-home"></i> HOME PAGE - All Content</h2>
+            
+            <div class="form-group">
+                <label>Main Title (Welcome Heading):</label>
+                <input type="text" id="home-title" placeholder="Welcome to My Travel Blog">
             </div>
             
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-user"></i> About Me Section</h2>
-                
-                <div class="form-group">
-                    <label>About Me - Part 1:</label>
-                    <textarea id="aboutPart1" placeholder="This is my path. A path through lands..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label>About Me - Part 2:</label>
-                    <textarea id="aboutPart2" placeholder="Today I live a simple, slow life..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label>About Me - Part 3:</label>
-                    <textarea id="aboutPart3" placeholder="If something in my words resonates..."></textarea>
-                </div>
+            <div class="form-group">
+                <label>About Me - First Paragraph:</label>
+                <textarea id="home-about1" rows="6">This is my path. A path through lands, flavors, experiences, and feelings…</textarea>
             </div>
             
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Featured Destinations</h2>
-                
-                <div class="cards-container">
-                    <div class="card-edit">
-                        <div class="card-title">Europe Card</div>
-                        <div class="form-group">
-                            <label>Title:</label>
-                            <input type="text" id="cardEuropeTitle" placeholder="Europe">
-                        </div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="cardEuropeDesc" rows="3">Roman Colosseum, Parisian streets and Alpine valleys – my European adventures.</textarea>
-                        </div>
+            <div class="form-group">
+                <label>About Me - Second Paragraph:</label>
+                <textarea id="home-about2" rows="6">Today I live a simple, slow life in the countryside—alongside the love of my life...</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>About Me - Third Paragraph:</label>
+                <textarea id="home-about3" rows="6">If something in my words resonates with your own journey, I am grateful...</textarea>
+            </div>
+            
+            <h3 style="margin: 30px 0 15px; color: #5c524d; border-left: 4px solid #f1cdaf; padding-left: 10px;">Featured Destinations Cards</h3>
+            
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Europe Card</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="card-europe-title" placeholder="Europe">
                     </div>
-                    
-                    <div class="card-edit">
-                        <div class="card-title">Asia Card</div>
-                        <div class="form-group">
-                            <label>Title:</label>
-                            <input type="text" id="cardAsiaTitle" placeholder="Asia">
-                        </div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="cardAsiaDesc" rows="3">From Japanese cherry blossoms to Indian bazaars – every step tells a story.</textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="card-edit">
-                        <div class="card-title">America Card</div>
-                        <div class="form-group">
-                            <label>Title:</label>
-                            <input type="text" id="cardAmericaTitle" placeholder="America">
-                        </div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="cardAmericaDesc" rows="3">Wild West, New York streets and Latin America – freedom on the road.</textarea>
-                        </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="card-europe-desc" rows="3">Roman Colosseum, Parisian streets and Alpine valleys – my European adventures.</textarea>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- DESTINATIONS TAB -->
-        <div id="destinations" class="tab-content">
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-flag"></i> Europe Section</h2>
                 
-                <div class="cards-container">
-                    <div class="card-edit">
-                        <div class="card-title">Roman Colosseum</div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="europeColosseumDesc" rows="3">Historic monument testifying to the power of ancient Rome.</textarea>
-                        </div>
+                <div class="card-edit">
+                    <div class="card-title">Asia Card</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="card-asia-title" placeholder="Asia">
                     </div>
-                    
-                    <div class="card-edit">
-                        <div class="card-title">Parisian Streets</div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="europeParisDesc" rows="3">Magical atmosphere of the city of love with iconic landmarks.</textarea>
-                        </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="card-asia-desc" rows="3">From Japanese cherry blossoms to Indian bazaars – every step tells a story.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">America Card</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="card-america-title" placeholder="America">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="card-america-desc" rows="3">Wild West, New York streets and Latin America – freedom on the road.</textarea>
                     </div>
                 </div>
             </div>
             
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-torii-gate"></i> Asia Section</h2>
-                
-                <div class="cards-container">
-                    <div class="card-edit">
-                        <div class="card-title">Japanese Cherry Blossoms</div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="asiaCherryDesc" rows="3">Magical sakura festivals in spring.</textarea>
-                        </div>
+            <h3 style="margin: 30px 0 15px; color: #5c524d; border-left: 4px solid #f1cdaf; padding-left: 10px;">World Cuisine Cards</h3>
+            
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Western Cuisine Card</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="cuisine-west-title" placeholder="Western Cuisine">
                     </div>
-                    
-                    <div class="card-edit">
-                        <div class="card-title">Indian Bazaars</div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="asiaBazaarDesc" rows="3">Colorful mix of scents, colors and sounds.</textarea>
-                        </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="cuisine-west-desc" rows="3">Italian pasta, French pastries and Mediterranean flavors.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Eastern Cuisine Card</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="cuisine-east-title" placeholder="Eastern Cuisine">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="cuisine-east-desc" rows="3">Japanese sushi, Thai curries and Vietnamese street food.</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 30px 0 15px; color: #5c524d; border-left: 4px solid #f1cdaf; padding-left: 10px;">Recent Travel Stories</h3>
+            
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Amsterdam Story</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story-home1-title" placeholder="Falling in Love with Amsterdam">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="story-home1-desc" rows="3">Bikes, canals and art at every turn – a magical experience.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story-home1-date" placeholder="Published: March 15, 2023">
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Sri Lanka Story</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story-home2-title" placeholder="Train Through Sri Lanka">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="story-home2-desc" rows="3">The most beautiful railway journey through green tea hills.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story-home2-date" placeholder="Published: February 2, 2023">
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- STORIES TAB -->
-        <div id="stories" class="tab-content">
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-book"></i> Travel Stories</h2>
-                
-                <div class="cards-container">
-                    <div class="card-edit">
-                        <div class="card-title">Amsterdam Story</div>
-                        <div class="form-group">
-                            <label>Title:</label>
-                            <input type="text" id="story1Title" placeholder="Falling in Love with Amsterdam">
-                        </div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="story1Desc" rows="3">Bikes, canals and art at every turn – a magical experience.</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Date:</label>
-                            <input type="text" id="story1Date" placeholder="Published: March 15, 2023">
-                        </div>
+        <!-- DESTINATIONS - VSE DESTINACIJE -->
+        <div class="edit-section">
+            <h2 class="section-title"><i class="fas fa-globe-europe"></i> DESTINATIONS - All Regions</h2>
+            
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">Europe Section</h3>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Roman Colosseum Card</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-europe-colosseum-title" placeholder="Roman Colosseum">
                     </div>
-                    
-                    <div class="card-edit">
-                        <div class="card-title">Sri Lanka Story</div>
-                        <div class="form-group">
-                            <label>Title:</label>
-                            <input type="text" id="story2Title" placeholder="Train Through Sri Lanka">
-                        </div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="story2Desc" rows="3">The most beautiful railway journey through green tea hills.</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Date:</label>
-                            <input type="text" id="story2Date" placeholder="Published: February 2, 2023">
-                        </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-europe-colosseum-desc" rows="3">Historic monument testifying to the power of ancient Rome.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Parisian Streets Card</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-europe-paris-title" placeholder="Parisian Streets">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-europe-paris-desc" rows="3">Magical atmosphere of the city of love with iconic landmarks.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Alpine Valleys Card</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-europe-alps-title" placeholder="Alpine Valleys">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-europe-alps-desc" rows="3">Natural beauty that takes every visitor's breath away.</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">Asia Section</h3>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Japanese Cherry Blossoms</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-asia-cherry-title" placeholder="Japanese Cherry Blossoms">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-asia-cherry-desc" rows="3">Magical sakura festivals in spring.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Indian Bazaars</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-asia-bazaar-title" placeholder="Indian Bazaars">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-asia-bazaar-desc" rows="3">Colorful mix of scents, colors and sounds.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Vietnamese Rice Fields</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-asia-vietnam-title" placeholder="Vietnamese Rice Fields">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-asia-vietnam-desc" rows="3">Green terraced landscapes of northern Vietnam.</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">America Section</h3>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Wild West</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-america-west-title" placeholder="Wild West">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-america-west-desc" rows="3">Open plains and iconic landscapes of Arizona and Utah.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">New York</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-america-ny-title" placeholder="New York">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-america-ny-desc" rows="3">The city that never sleeps, full of iconic landmarks.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Latin America</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-america-latin-title" placeholder="Latin America">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-america-latin-desc" rows="3">Welcoming people, hot music and festive atmospheres.</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">Africa Section</h3>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Kenyan Wilderness</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-africa-kenya-title" placeholder="Kenyan Wilderness">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-africa-kenya-desc" rows="3">Natural habitat of numerous African animals.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Moroccan Markets</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-africa-morocco-title" placeholder="Moroccan Markets">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-africa-morocco-desc" rows="3">Colorful souks with traditional products.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Egyptian Deserts</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-africa-egypt-title" placeholder="Egyptian Deserts">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-africa-egypt-desc" rows="3">Mysterious beauty of the Sahara and pyramids.</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">Oceania Section</h3>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Australian Kangaroos</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-oceania-kangaroo-title" placeholder="Australian Kangaroos">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-oceania-kangaroo-desc" rows="3">Iconic native animals of Australia.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Great Barrier Reef</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-oceania-reef-title" placeholder="Great Barrier Reef">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-oceania-reef-desc" rows="3">The world's largest coral reef system.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Paradise Islands</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-oceania-islands-title" placeholder="Paradise Islands">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-oceania-islands-desc" rows="3">White sand beaches and crystal clear water.</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">Middle East Section</h3>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Dubai's Modern Architecture</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-mideast-dubai-title" placeholder="Dubai's Modern Architecture">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-mideast-dubai-desc" rows="3">Futuristic skyscrapers and luxury lifestyle.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Petra's Ancient City</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-mideast-petra-title" placeholder="Petra's Ancient City">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-mideast-petra-desc" rows="3">Historical site carved into rose-red rock.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Egyptian Pyramids</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-mideast-pyramids-title" placeholder="Egyptian Pyramids">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-mideast-pyramids-desc" rows="3">Mystical monuments of ancient civilization.</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">Maria At Home Section</h3>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">My Garden</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-maria-garden-title" placeholder="My Garden">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-maria-garden-desc" rows="3">Growing vegetables, herbs and flowers in my backyard.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Cooking at Home</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-maria-cooking-title" placeholder="Cooking at Home">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-maria-cooking-desc" rows="3">Sharing my favorite recipes and cooking tips.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Cozy Evenings</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="dest-maria-cozy-title" placeholder="Cozy Evenings">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="dest-maria-cozy-desc" rows="3">Enjoying quiet evenings with a good book and a cup of tea.</textarea>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- SUNRISE TAB -->
-        <div id="sunrise" class="tab-content">
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-sunrise"></i> Sunrise Text</h2>
-                <div class="form-group">
-                    <textarea id="sunriseText" rows="6">Each sunrise is a new beginning. Not just of the day, but of me...</textarea>
-                </div>
-            </div>
+        <!-- TRAVEL STORIES - VSE ZGODBE -->
+        <div class="edit-section">
+            <h2 class="section-title"><i class="fas fa-book-open"></i> TRAVEL STORIES - All Stories</h2>
             
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-sunset"></i> Sunset Text</h2>
-                <div class="form-group">
-                    <textarea id="sunsetText" rows="6">I've seen many of them. Those fiery ones over the desert...</textarea>
-                </div>
-            </div>
-            
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-images"></i> Sunrise Gallery</h2>
-                
-                <div class="cards-container">
-                    <div class="card-edit">
-                        <div class="card-title">Lanzarote Beach</div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="sunriseLanzaroteDesc" rows="3">On a quiet beach with volcanic rocks, the sun slowly rises...</textarea>
-                        </div>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Story 1 - Amsterdam</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story1-title" placeholder="Falling in Love with Amsterdam">
                     </div>
-                    
-                    <div class="card-edit">
-                        <div class="card-title">Istanbul</div>
-                        <div class="form-group">
-                            <label>Description:</label>
-                            <textarea id="sunriseIstanbulDesc" rows="3">The sky in shades of gray, blue and orange gently embraces the sea...</textarea>
-                        </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="story1-desc" rows="3">Bikes, canals and art at every turn – a magical experience.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story1-date" placeholder="Published: March 15, 2023">
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Story 2 - Sri Lanka</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story2-title" placeholder="Train Through Sri Lanka">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="story2-desc" rows="3">The most beautiful railway journey through green tea hills.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story2-date" placeholder="Published: February 2, 2023">
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Story 3 - Mexico</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story3-title" placeholder="Mornings in Mexico">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="story3-desc" rows="3">Scent of tortillas, sounds of mariachi music and warmth of people.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story3-date" placeholder="Published: January 10, 2023">
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Story 4 - Iceland</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story4-title" placeholder="Alone in Iceland">
+                    </div>
+                    <div="form-group">
+                        <label>Description:</label>
+                        <textarea id="story4-desc" rows="3">Glacial lagoons, geysers and nights full of northern lights.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story4-date" placeholder="Published: December 5, 2022">
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Story 5 - Vietnam</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story5-title" placeholder="Vietnam by Bicycle">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="story5-desc" rows="3">From Hanoi to Ho Chi Minh - journey through lively streets and rice fields.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story5-date" placeholder="Published: November 20, 2022">
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Story 6 - Marrakech</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story6-title" placeholder="Magical Marrakech">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="story6-desc" rows="3">Colorful souks, scent of spices and warm Arabic hospitality.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story6-date" placeholder="Published: October 15, 2022">
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Story 7 - Salzburg</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story7-title" placeholder="Winter Fairytale in Salzburg">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="story7-desc" rows="3">Christmas markets, Mozart's music and freshly snowed streets.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story7-date" placeholder="Published: December 5, 2021">
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Story 8 - Trans-Siberian</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="story8-title" placeholder="Trans-Siberian Railway Journey">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="story8-desc" rows="3">Endless landscapes, interesting encounters and an amazing adventure.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Date:</label>
+                        <input type="text" id="story8-date" placeholder="Published: August 20, 2021">
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- CONTACT TAB -->
-        <div id="contact" class="tab-content">
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-address-card"></i> Contact Information</h2>
-                
-                <div class="form-group">
-                    <label>Email Address:</label>
-                    <input type="text" id="contactEmail" placeholder="info@mytravelblog.com">
+        <!-- SUNRISE & SUNSET - VSE FOTOGRAFIJE -->
+        <div class="edit-section">
+            <h2 class="section-title"><i class="fas fa-sun"></i> MY SUNRISES & SUNSETS - All Photos</h2>
+            
+            <div class="form-group">
+                <label>Main Sunrise Text (long paragraph):</label>
+                <textarea id="sunrise-main-text" rows="8">Each sunrise is a new beginning. Not just of the day, but of me...</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Main Sunset Text (long paragraph):</label>
+                <textarea id="sunset-main-text" rows="8">I've seen many of them. Those fiery ones over the desert...</textarea>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">Sunrise Photos & Descriptions</h3>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Lanzarote Beach Sunrise</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunrise1-title" placeholder="LANZAROTE BEACH (CANARY ISLANDS; SPAIN)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunrise1-desc" rows="3">On a quiet beach with volcanic rocks, the sun slowly rises...</textarea>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label>Instagram:</label>
-                    <input type="text" id="contactInstagram" placeholder="@mytraveljourney">
+                <div class="card-edit">
+                    <div class="card-title">Istanbul Sunrise</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunrise2-title" placeholder="ISTANBUL (TURKEY)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunrise2-desc" rows="3">The sky in shades of gray, blue and orange gently embraces the sea...</textarea>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label>Facebook:</label>
-                    <input type="text" id="contactFacebook" placeholder="My Travel Journey">
+                <div class="card-edit">
+                    <div class="card-title">Cappadocia Sunrise</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunrise3-title" placeholder="CAPPADOCIA (TURKEY)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunrise3-desc" rows="3">Golden white morning in Cappadocia. The sky fills with hundreds of balloons...</textarea>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label>Collaboration Text:</label>
-                    <textarea id="contactCollab" rows="3">If you'd like to collaborate or have any questions, please email me.</textarea>
+                <div class="card-edit">
+                    <div class="card-title">Dawn Above Clouds</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunrise4-title" placeholder="DAWN-SOMEWHERE ABOVE THE CLOUDS">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunrise4-desc" rows="3">While all sleeps and night quietly lingers, somewhere in the distance...</textarea>
+                    </div>
                 </div>
             </div>
             
-            <div class="edit-section">
-                <h2 class="section-title"><i class="fas fa-file-alt"></i> Footer</h2>
-                
-                <div class="form-group">
-                    <label>Copyright Text:</label>
-                    <input type="text" id="footerCopyright" placeholder="© 2025 My Travel Journey | All Rights Reserved">
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">Sunset Photos & Descriptions</h3>
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Nile in Luxor Sunset</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunset1-title" placeholder="NILE IN LUXOR (EGYPT)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunset1-desc" rows="3">The Nile and the palm trees around it glow with the warm colors of the sunset...</textarea>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label>"Made By" Text:</label>
-                    <input type="text" id="footerMadeBy" placeholder="-Made by UTW_Websites-">
+                <div class="card-edit">
+                    <div class="card-title">Lake Garda Sunset</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunset2-title" placeholder="LAKE GARDA (ITALY)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunset2-desc" rows="3">The sky turns warm shades of orange, seagulls circle above the lake...</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Wadi Rum Sunset</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunset3-title" placeholder="WADI RUM (JORDAN)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunset3-desc" rows="3">The sun slowly sets behind the sandy dunes of Wadi Rum...</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Thulusdhoo Sunset</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunset4-title" placeholder="THULUSDHOO (MALDIVES)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunset4-desc" rows="3">The sea is calm, gentle waves touch the sandy shore...</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Santorini Sunset</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunset5-title" placeholder="OIA, SANTORINI (GREECE)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunset5-desc" rows="3">A cross in the silence of sunset. Santorini glows in golden hues...</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Kamnik Sunset</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="sunset6-title" placeholder="KAMNIK (SLOVENIA)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="sunset6-desc" rows="3">The sky burns with fiery hues. The color spreads gently...</textarea>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- OVERNIGHT STAYS -->
+        <div class="edit-section">
+            <h2 class="section-title"><i class="fas fa-bed"></i> OVERNIGHT STAYS ALONG THE WAY</h2>
+            
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Unique Stays</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="stays-unique-title" placeholder="Unique Stays">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="stays-unique-desc" rows="3">From treehouses to yurts, find the perfect place to rest.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Hotel Reviews</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="stays-reviews-title" placeholder="Hotel Reviews">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="stays-reviews-desc" rows="3">Read our reviews of the best hotels around the world.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Camping Adventures</div>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" id="stays-camping-title" placeholder="Camping Adventures">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="stays-camping-desc" rows="3">Explore the great outdoors with our camping guides.</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CONTACT & FOOTER -->
+        <div class="edit-section">
+            <h2 class="section-title"><i class="fas fa-envelope"></i> CONTACT & FOOTER</h2>
+            
+            <div class="cards-container">
+                <div class="card-edit">
+                    <div class="card-title">Contact Details</div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" id="contact-email" placeholder="info@mytravelblog.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone (optional):</label>
+                        <input type="text" id="contact-phone" placeholder="">
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Collaboration</div>
+                    <div class="form-group">
+                        <label>Collaboration Text:</label>
+                        <textarea id="contact-collab" rows="3">If you'd like to collaborate or have any questions, please email me.</textarea>
+                    </div>
+                </div>
+                
+                <div class="card-edit">
+                    <div class="card-title">Follow Me</div>
+                    <div class="form-group">
+                        <label>Instagram:</label>
+                        <input type="text" id="contact-instagram" placeholder="@mytraveljourney">
+                    </div>
+                    <div class="form-group">
+                        <label>Facebook:</label>
+                        <input type="text" id="contact-facebook" placeholder="My Travel Journey">
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin: 25px 0 15px; color: #6e5e57;">Footer</h3>
+            <div class="form-group">
+                <label>Copyright Text:</label>
+                <input type="text" id="footer-copyright" placeholder="© 2025 My Travel Journey | All Rights Reserved">
+            </div>
+            
+            <div class="form-group">
+                <label>"Made By" Text:</label>
+                <input type="text" id="footer-madeby" placeholder="-Made by UTW_Websites-">
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 40px 0;">
+            <button class="btn btn-primary" style="padding: 15px 30px; font-size: 16px;" onclick="saveContent()">
+                <i class="fas fa-save"></i> Save All Changes Now
+            </button>
+            <p style="margin-top: 15px; color: var(--text-light); font-size: 0.9rem;">
+                Changes are auto-saved as you type. This button forces immediate save.
+            </p>
         </div>
     </div>
     
@@ -593,6 +1071,6 @@
         <i class="fas fa-check-circle"></i> Changes saved successfully!
     </div>
     
-    <script src="admin-editor.js"></script>
+    <script src="admin-editor-full.js"></script>
 </body>
 </html>
