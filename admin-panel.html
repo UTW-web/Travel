@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Blog - Content Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        body {
+            background-color: #f4e3cb;
+            color: #5c524d;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            font-family: 'WindSong', cursive;
+            color: #4c403b;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: #5c524d;
+            margin: 20px 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #f1cdaf;
+        }
+        
+        .section {
+            background: #f9f3eb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid #f5b6ac;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="url"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .save-btn {
+            background: #f1cdaf;
+            color: #5c524d;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: block;
+            margin: 20px auto;
+            transition: background 0.3s;
+        }
+        
+        .save-btn:hover {
+            background: #e4b99a;
+        }
+        
+        .status {
+            text-align: center;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: #f1cdaf;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #5c524d;
+        }
+        
+        .tab-btn.active {
+            background: #e4b99a;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .auth-section {
+            background: #fff8f0;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        #authBtn {
+            background: #5c524d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .card-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        
+        .add-btn {
+            background: #f1cdaf;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>✈️ Travel Blog Content Editor</h1>
+        
+        <div class="auth-section">
+            <p>Please authenticate with GitHub to save changes</p>
+            <button id="authBtn">🔑 Login with GitHub</button>
+            <div id="authStatus"></div>
+        </div>
+        
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="showTab('home')">🏠 Home</button>
+            <button class="tab-btn" onclick="showTab('destinations')">🌍 Destinations</button>
+            <button class="tab-btn" onclick="showTab('stories')">📖 Stories</button>
+            <button class="tab-btn" onclick="showTab('sunrise')">🌅 Sunrise/Sunset</button>
+            <button class="tab-btn" onclick="showTab('contact')">📞 Contact</button>
+            <button class="tab-btn" onclick="showTab('other')">✨ Other</button>
+        </div>
+        
+        <!-- HOME TAB -->
+        <div id="home" class="tab-content active">
+            <div class="section">
+                <h2>Hero Section</h2>
+                <label>Hero Image URL:</label>
+                <input type="url" id="heroImage" placeholder="https://images.unsplash.com/photo-...">
+                
+                <label>Main Title:</label>
+                <input type="text" id="mainTitle" placeholder="Welcome to My Travel Blog">
+            </div>
+            
+            <div class="section">
+                <h2>About Me Section</h2>
+                <label>About Me Text (Part 1):</label>
+                <textarea id="aboutMe1" rows="6"></textarea>
+                
+                <label>About Me Text (Part 2):</label>
+                <textarea id="aboutMe2" rows="6"></textarea>
+                
+                <label>About Me Text (Part 3):</label>
+                <textarea id="aboutMe3" rows="6"></textarea>
+                
+                <label>Signature Image URL:</label>
+                <input type="url" id="signatureImage" placeholder="Slike/podpis.png">
+            </div>
+            
+            <div class="section">
+                <h2>Featured Destinations (3 cards)</h2>
+                <div id="featuredCards">
+                    <!-- Generated by JavaScript -->
+                </div>
+                <button class="add-btn" onclick="addFeaturedCard()">➕ Add Card</button>
+            </div>
+            
+            <div class="section">
+                <h2>World Cuisine (2 cards)</h2>
+                <div id="cuisineCards">
+                    <!-- Generated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Recent Travel Stories (2 cards)</h2>
+                <div id="recentStories">
+                    <!-- Generated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- DESTINATIONS TAB -->
+        <div id="destinations" class="tab-content">
+            <div class="section">
+                <h2>Destination Sections</h2>
+                <p>Select destination to edit:</p>
+                <select id="destinationSelect" onchange="loadDestination()">
+                    <option value="europe">Europe</option>
+                    <option value="asia">Asia</option>
+                    <option value="america">America</option>
+                    <option value="africa">Africa</option>
+                    <option value="oceania">Oceania</option>
+                    <option value="middle-east">Middle East</option>
+                    <option value="maria-at-home">Maria At Home</option>
+                </select>
+                
+                <div id="destinationContent">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- STORIES TAB -->
+        <div id="stories" class="tab-content">
+            <div class="section">
+                <h2>Travel Stories</h2>
+                <div id="storyCards">
+                    <!-- Generated by JavaScript -->
+                </div>
+                <button class="add-btn" onclick="addStory()">➕ Add New Story</button>
+            </div>
+        </div>
+        
+        <!-- SUNRISE TAB -->
+        <div id="sunrise" class="tab-content">
+            <div class="section">
+                <h2>Sunrise Section</h2>
+                <label>Main Sunrise Text:</label>
+                <textarea id="sunriseText" rows="8"></textarea>
+                
+                <label>Main Sunrise Image URL:</label>
+                <input type="url" id="sunriseMainImage">
+                
+                <h3>Sunrise Gallery (4 cards)</h3>
+                <div id="sunriseGallery">
+                    <!-- Generated by JavaScript -->
+                </div>
+                <button class="add-btn" onclick="addSunriseCard()">➕ Add Sunrise Photo</button>
+            </div>
+            
+            <div class="section">
+                <h2>Sunset Section</h2>
+                <label>Main Sunset Text:</label>
+                <textarea id="sunsetText" rows="8"></textarea>
+                
+                <label>Main Sunset Image URL:</label>
+                <input type="url" id="sunsetMainImage">
+                
+                <h3>Sunset Gallery (6 cards)</h3>
+                <div id="sunsetGallery">
+                    <!-- Generated by JavaScript -->
+                </div>
+                <button class="add-btn" onclick="addSunsetCard()">➕ Add Sunset Photo</button>
+            </div>
+        </div>
+        
+        <!-- CONTACT TAB -->
+        <div id="contact" class="tab-content">
+            <div class="section">
+                <h2>Contact Information</h2>
+                <label>Email:</label>
+                <input type="email" id="contactEmail" placeholder="info@mytravelblog.com">
+                
+                <label>Phone:</label>
+                <input type="text" id="contactPhone">
+                
+                <label>Instagram:</label>
+                <input type="text" id="contactInstagram" placeholder="@mytraveljourney">
+                
+                <label>Facebook:</label>
+                <input type="text" id="contactFacebook" placeholder="My Travel Journey">
+                
+                <label>Collaboration Text:</label>
+                <textarea id="collabText" rows="4"></textarea>
+            </div>
+        </div>
+        
+        <!-- OTHER TAB -->
+        <div id="other" class="tab-content">
+            <div class="section">
+                <h2>Footer</h2>
+                <label>Copyright Text:</label>
+                <input type="text" id="footerCopyright" placeholder="© 2025 My Travel Journey | All Rights Reserved">
+                
+                <label>Made By Text:</label>
+                <input type="text" id="footerMadeBy" placeholder="-Made by UTW_Websites-">
+            </div>
+            
+            <div class="section">
+                <h2>Navigation Labels</h2>
+                <label>Home:</label>
+                <input type="text" id="navHome" value="Home">
+                
+                <label>Destinations:</label>
+                <input type="text" id="navDestinations" value="Destinations">
+                
+                <label>Travel Stories:</label>
+                <input type="text" id="navStories" value="Travel Stories">
+                
+                <label>Sunrise/Sunset:</label>
+                <input type="text" id="navSunrise" value="My Sunrises & Sunsets">
+                
+                <label>Overnight Stays:</label>
+                <input type="text" id="navStays" value="Overnight Stays Along The Way">
+                
+                <label>Contact:</label>
+                <input type="text" id="navContact" value="Contact">
+            </div>
+        </div>
+        
+        <div class="status" id="statusMessage"></div>
+        
+        <button class="save-btn" onclick="saveAllContent()">💾 Save All Changes</button>
+    </div>
+    
+    <script src="admin-script.js"></script>
+</body>
+</html>
