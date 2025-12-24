@@ -121,50 +121,94 @@ class ContentUpdater {
     }
     
 updateHomePage() {
+    console.log('Updating Home Page...');
+    
     // Main title
     this.updateText('#home h2', this.contentData.home?.mainTitle);
     
-    // About me text - FIXED VERSION
+    // About me text - FIXED: DON'T clear the card!
     if (this.contentData.home?.about) {
+        console.log('Found About Me text to update');
         const aboutCard = document.querySelector('#home .card');
         if (aboutCard) {
-            // DON'T clear the entire card! Just update the paragraphs
+            console.log('Found About Me card');
+            
+            // Get existing paragraphs
             const paragraphs = aboutCard.querySelectorAll('p');
-            const aboutText = this.contentData.home.about;
-            const aboutParagraphs = aboutText.split('\n\n');
+            console.log('Found', paragraphs.length, 'paragraphs');
+            
+            // Split saved text into paragraphs
+            const aboutParagraphs = this.contentData.home.about.split('\n\n');
+            console.log('Split into', aboutParagraphs.length, 'paragraphs');
             
             // Update each existing paragraph
             paragraphs.forEach((p, index) => {
                 if (aboutParagraphs[index]) {
                     p.innerHTML = this.formatText(aboutParagraphs[index].trim());
+                    console.log('Updated paragraph', index);
                 }
             });
         }
     }
     
-    // Featured destination cards - FIXED SELECTORS
-    // We need to select the SECOND grid (Featured Destinations), not the first
-    const featuredGrid = document.querySelectorAll('#home .grid')[1];
-    if (featuredGrid) {
+    // Featured destination cards - FIXED: Select SECOND grid
+    console.log('Looking for Featured Destinations grid...');
+    const allGrids = document.querySelectorAll('#home .grid');
+    console.log('Found', allGrids.length, 'grids in home section');
+    
+    if (allGrids.length >= 2) {
+        const featuredGrid = allGrids[1]; // SECOND grid
+        console.log('Using second grid for Featured Destinations');
+        
         const featuredCards = featuredGrid.querySelectorAll('.card');
+        console.log('Found', featuredCards.length, 'cards in featured grid');
         
         // Europe Card
         if (featuredCards[0] && this.contentData.home?.featuredCards?.europe) {
-            this.updateElement(featuredCards[0].querySelector('h3'), this.contentData.home.featuredCards.europe.title);
-            this.updateElement(featuredCards[0].querySelector('p'), this.contentData.home.featuredCards.europe.description);
+            const titleElement = featuredCards[0].querySelector('h3');
+            const descElement = featuredCards[0].querySelector('p');
+            
+            if (titleElement) {
+                titleElement.textContent = this.contentData.home.featuredCards.europe.title || 'Europe';
+                console.log('Set Europe title');
+            }
+            if (descElement) {
+                descElement.textContent = this.contentData.home.featuredCards.europe.description || '';
+                console.log('Set Europe description');
+            }
         }
         
         // Asia Card
         if (featuredCards[1] && this.contentData.home?.featuredCards?.asia) {
-            this.updateElement(featuredCards[1].querySelector('h3'), this.contentData.home.featuredCards.asia.title);
-            this.updateElement(featuredCards[1].querySelector('p'), this.contentData.home.featuredCards.asia.description);
+            const titleElement = featuredCards[1].querySelector('h3');
+            const descElement = featuredCards[1].querySelector('p');
+            
+            if (titleElement) {
+                titleElement.textContent = this.contentData.home.featuredCards.asia.title || 'Asia';
+                console.log('Set Asia title');
+            }
+            if (descElement) {
+                descElement.textContent = this.contentData.home.featuredCards.asia.description || '';
+                console.log('Set Asia description');
+            }
         }
         
         // America Card
         if (featuredCards[2] && this.contentData.home?.featuredCards?.america) {
-            this.updateElement(featuredCards[2].querySelector('h3'), this.contentData.home.featuredCards.america.title);
-            this.updateElement(featuredCards[2].querySelector('p'), this.contentData.home.featuredCards.america.description);
+            const titleElement = featuredCards[2].querySelector('h3');
+            const descElement = featuredCards[2].querySelector('p');
+            
+            if (titleElement) {
+                titleElement.textContent = this.contentData.home.featuredCards.america.title || 'America';
+                console.log('Set America title');
+            }
+            if (descElement) {
+                descElement.textContent = this.contentData.home.featuredCards.america.description || '';
+                console.log('Set America description');
+            }
         }
+    } else {
+        console.error('Could not find Featured Destinations grid!');
     }
     
     // Cuisine cards
@@ -172,6 +216,8 @@ updateHomePage() {
     
     // Recent stories on home
     this.updateHomeStories();
+    
+    console.log('Home page update complete');
 }
     
     updateCuisineCards() {
@@ -460,20 +506,20 @@ updateHomePage() {
         }
     }
     
-    updateElement(selector, text) {
-        if (!text || text === 'undefined') return;
-        
-        let element;
-        if (typeof selector === 'string') {
-            element = document.querySelector(selector);
-        } else {
-            element = selector;
-        }
-        
-        if (element) {
-            element.textContent = text;
-        }
+updateElement(selector, text) {
+    if (!text || text === 'undefined' || text === 'null') return;
+    
+    let element;
+    if (typeof selector === 'string') {
+        element = document.querySelector(selector);
+    } else {
+        element = selector;
     }
+    
+    if (element && element.textContent !== text) {
+        element.textContent = text;
+    }
+}
     
     updateText(selector, text) {
         this.updateElement(selector, text);
