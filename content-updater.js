@@ -66,17 +66,22 @@ class ContentUpdater {
         };
     }
     
-    getAboutText() {
-        const aboutCard = document.querySelector('#home .card');
-        if (!aboutCard) return '';
-        
-        const paragraphs = aboutCard.querySelectorAll('p');
-        let aboutText = '';
-        paragraphs.forEach(p => {
-            aboutText += p.innerHTML + '\n\n';
-        });
-        return aboutText.trim();
-    }
+getAboutText() {
+    const aboutCard = document.querySelector('#home .card');
+    if (!aboutCard) return '';
+    
+    const paragraphs = aboutCard.querySelectorAll('p');
+    let aboutText = '';
+    
+    paragraphs.forEach((p, index) => {
+        aboutText += p.innerHTML.replace(/<br>/g, '\n').trim();
+        if (index < paragraphs.length - 1) {
+            aboutText += '\n\n'; // Add double line break between paragraphs
+        }
+    });
+    
+    return aboutText.trim();
+}
     
     getFeaturedCards() {
         const cards = document.querySelectorAll('#home .grid .card');
@@ -126,30 +131,43 @@ updateHomePage() {
     // Main title
     this.updateText('#home h2', this.contentData.home?.mainTitle);
     
-    // About me text - FIXED: DON'T clear the card!
-    if (this.contentData.home?.about) {
-        console.log('Found About Me text to update');
-        const aboutCard = document.querySelector('#home .card');
-        if (aboutCard) {
-            console.log('Found About Me card');
-            
-            // Get existing paragraphs
-            const paragraphs = aboutCard.querySelectorAll('p');
-            console.log('Found', paragraphs.length, 'paragraphs');
-            
-            // Split saved text into paragraphs
-            const aboutParagraphs = this.contentData.home.about.split('\n\n');
-            console.log('Split into', aboutParagraphs.length, 'paragraphs');
-            
-            // Update each existing paragraph
-            paragraphs.forEach((p, index) => {
-                if (aboutParagraphs[index]) {
-                    p.innerHTML = this.formatText(aboutParagraphs[index].trim());
-                    console.log('Updated paragraph', index);
-                }
-            });
+    // About me text - IMPROVED VERSION
+if (this.contentData.home?.about) {
+    const aboutCard = document.querySelector('#home .card');
+    if (aboutCard) {
+        // Get all paragraphs from the card
+        const paragraphs = aboutCard.querySelectorAll('p');
+        
+        // Clean the about text - remove extra spaces
+        let aboutText = this.contentData.home.about.trim();
+        
+        // Try different splitting methods
+        let aboutParagraphs;
+        
+        // Method 1: Split by double line breaks
+        aboutParagraphs = aboutText.split(/\n\s*\n/);
+        
+        // If that doesn't give enough paragraphs, try single line breaks
+        if (aboutParagraphs.length < paragraphs.length) {
+            aboutParagraphs = aboutText.split(/\n/);
         }
+        
+        console.log('Splitting About Me text into', aboutParagraphs.length, 'paragraphs');
+        console.log('Found', paragraphs.length, 'paragraph elements to update');
+        
+        // Update each paragraph element
+        paragraphs.forEach((p, index) => {
+            if (aboutParagraphs[index]) {
+                const cleanText = aboutParagraphs[index].trim()
+                    .replace(/^\s+/, '') // Remove leading spaces
+                    .replace(/\s+$/, ''); // Remove trailing spaces
+                
+                p.innerHTML = this.formatText(cleanText);
+                console.log('Updated paragraph', index, 'with:', cleanText.substring(0, 50) + '...');
+            }
+        });
     }
+}
     
     // Featured destination cards - FIXED: Select SECOND grid
     console.log('Looking for Featured Destinations grid...');
