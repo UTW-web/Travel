@@ -120,52 +120,59 @@ class ContentUpdater {
         console.log('All content updated successfully');
     }
     
-    updateHomePage() {
-        // Main title
-        this.updateText('#home h2', this.contentData.home?.mainTitle);
+updateHomePage() {
+    // Main title
+    this.updateText('#home h2', this.contentData.home?.mainTitle);
+    
+    // About me text - FIXED VERSION
+    if (this.contentData.home?.about) {
+        const aboutCard = document.querySelector('#home .card');
+        if (aboutCard) {
+            // DON'T clear the entire card! Just update the paragraphs
+            const paragraphs = aboutCard.querySelectorAll('p');
+            const aboutText = this.contentData.home.about;
+            const aboutParagraphs = aboutText.split('\n\n');
+            
+            // Update each existing paragraph
+            paragraphs.forEach((p, index) => {
+                if (aboutParagraphs[index]) {
+                    p.innerHTML = this.formatText(aboutParagraphs[index].trim());
+                }
+            });
+        }
+    }
+    
+    // Featured destination cards - FIXED SELECTORS
+    // We need to select the SECOND grid (Featured Destinations), not the first
+    const featuredGrid = document.querySelectorAll('#home .grid')[1];
+    if (featuredGrid) {
+        const featuredCards = featuredGrid.querySelectorAll('.card');
         
-        // About me text (ALL in one)
-        if (this.contentData.home?.about) {
-            const aboutCard = document.querySelector('#home .card');
-            if (aboutCard) {
-                // Clear existing content
-                aboutCard.innerHTML = '<center><h3>About Me</h3></center>';
-                
-                // Add the paragraphs
-                const paragraphs = this.contentData.home.about.split('\n\n');
-                paragraphs.forEach(para => {
-                    if (para.trim()) {
-                        const p = document.createElement('p');
-                        p.innerHTML = this.formatText(para.trim());
-                        aboutCard.appendChild(p);
-                    }
-                });
-                
-                // Add signature image back
-                const signature = document.createElement('img');
-                signature.src = 'Slike/podpis (1).png';
-                signature.alt = 'Signature';
-                signature.style.cssText = 'width: 5rem; height: 5rem; margin-top: 1rem; margin-left:60%; position: relative;';
-                aboutCard.appendChild(signature);
-            }
+        // Europe Card
+        if (featuredCards[0] && this.contentData.home?.featuredCards?.europe) {
+            this.updateElement(featuredCards[0].querySelector('h3'), this.contentData.home.featuredCards.europe.title);
+            this.updateElement(featuredCards[0].querySelector('p'), this.contentData.home.featuredCards.europe.description);
         }
         
-        // Featured destination cards
-        this.updateElement('#home .grid .card:nth-child(1) h3', this.contentData.home?.featuredCards?.europe?.title);
-        this.updateElement('#home .grid .card:nth-child(1) p', this.contentData.home?.featuredCards?.europe?.description);
+        // Asia Card
+        if (featuredCards[1] && this.contentData.home?.featuredCards?.asia) {
+            this.updateElement(featuredCards[1].querySelector('h3'), this.contentData.home.featuredCards.asia.title);
+            this.updateElement(featuredCards[1].querySelector('p'), this.contentData.home.featuredCards.asia.description);
+        }
         
-        this.updateElement('#home .grid .card:nth-child(2) h3', this.contentData.home?.featuredCards?.asia?.title);
-        this.updateElement('#home .grid .card:nth-child(2) p', this.contentData.home?.featuredCards?.asia?.description);
-        
-        this.updateElement('#home .grid .card:nth-child(3) h3', this.contentData.home?.featuredCards?.america?.title);
-        this.updateElement('#home .grid .card:nth-child(3) p', this.contentData.home?.featuredCards?.america?.description);
-        
-        // Cuisine cards
-        this.updateCuisineCards();
-        
-        // Recent stories on home
-        this.updateHomeStories();
+        // America Card
+        if (featuredCards[2] && this.contentData.home?.featuredCards?.america) {
+            this.updateElement(featuredCards[2].querySelector('h3'), this.contentData.home.featuredCards.america.title);
+            this.updateElement(featuredCards[2].querySelector('p'), this.contentData.home.featuredCards.america.description);
+        }
     }
+    
+    // Cuisine cards
+    this.updateCuisineCards();
+    
+    // Recent stories on home
+    this.updateHomeStories();
+}
     
     updateCuisineCards() {
         // Find cuisine section
