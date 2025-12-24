@@ -1,6 +1,5 @@
-// Admin Editor for ALL website content
+// Admin Editor for ALL website content - NO DOWNLOAD VERSION
 const ADMIN_PASSWORD = 'travel2025'; // CHANGE THIS PASSWORD!
-const CONTENT_FILE = 'content-data.json';
 
 let contentData = {};
 let saveTimeout = null;
@@ -11,8 +10,14 @@ function checkAuth() {
     const cookies = document.cookie.split(';');
     for (let cookie of cookies) {
         const [name, value] = cookie.trim().split('=');
-        if (name === 'admin_auth' && atob(value) === ADMIN_PASSWORD) {
-            return true;
+        if (name === 'admin_auth') {
+            try {
+                if (atob(value) === ADMIN_PASSWORD) {
+                    return true;
+                }
+            } catch (e) {
+                console.log('Auth error:', e);
+            }
         }
     }
     
@@ -31,17 +36,22 @@ async function initEditor() {
     console.log('Editor initialized with all content');
 }
 
-// Load content from JSON
+// Load content from localStorage or default
 async function loadContent() {
     try {
-        const response = await fetch(`${CONTENT_FILE}?t=${Date.now()}`);
+        // Try to load from localStorage first
+        const savedContent = localStorage.getItem('travel_blog_content');
         
-        if (response.ok) {
-            contentData = await response.json();
-            console.log('Content loaded successfully');
+        if (savedContent) {
+            contentData = JSON.parse(savedContent);
+            console.log('Content loaded from localStorage');
         } else {
+            // Load default content
             contentData = getDefaultContent();
             console.log('Using default content structure');
+            
+            // Save defaults to localStorage
+            localStorage.setItem('travel_blog_content', JSON.stringify(contentData));
         }
     } catch (error) {
         console.warn('Could not load content:', error);
@@ -792,7 +802,7 @@ function updateContentData() {
     contentData.lastUpdated = new Date().toISOString();
 }
 
-// Schedule save with debounce
+// Schedule save (NO DOWNLOAD!)
 function scheduleSave() {
     if (saveTimeout) {
         clearTimeout(saveTimeout);
@@ -802,13 +812,13 @@ function scheduleSave() {
     status.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> <span>Saving changes...</span>';
     status.className = 'status-indicator saving';
     
-    saveTimeout = setTimeout(async () => {
-        await saveContent();
-    }, 1500);
+    saveTimeout = setTimeout(() => {
+        saveContent();
+    }, 1000); // Save after 1 second of inactivity
 }
 
-// Save content
-async function saveContent() {
+// Save content (NO DOWNLOAD - JUST LOCALSTORAGE)
+function saveContent() {
     if (isSaving) return;
     
     isSaving = true;
@@ -816,32 +826,21 @@ async function saveContent() {
     try {
         updateContentData();
         
-        // Save to localStorage as backup
+        // 1. Save to localStorage for editor
         localStorage.setItem('travel_blog_content', JSON.stringify(contentData));
+        
+        // 2. Save to localStorage for LIVE SITE (different key)
+        localStorage.setItem('travel_blog_live_content', JSON.stringify(contentData));
         localStorage.setItem('travel_blog_last_update', Date.now().toString());
-        
-        // Create downloadable JSON file
-        const jsonStr = JSON.stringify(contentData, null, 2);
-        const blob = new Blob([jsonStr], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = CONTENT_FILE;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
         
         // Update status
         const status = document.getElementById('statusIndicator');
         status.innerHTML = '<i class="fas fa-check-circle"></i> <span>All changes saved</span>';
         status.className = 'status-indicator';
         
-        showNotification('All changes saved successfully!');
+        showNotification('Changes saved! Refresh live site to see updates.');
         
-        // Update live site
-        updateLiveSite();
+        console.log('Content saved to localStorage');
         
     } catch (error) {
         console.error('Error saving content:', error);
@@ -856,12 +855,10 @@ async function saveContent() {
     }
 }
 
-// Update live site
-function updateLiveSite() {
-    localStorage.setItem('travel_blog_live_content', JSON.stringify(contentData));
-    localStorage.setItem('travel_blog_last_update', Date.now().toString());
-    
-    console.log('Live site updated via localStorage');
+// Save button click handler
+function saveContentManual() {
+    saveContent();
+    showNotification('All changes saved manually!', false);
 }
 
 // Show notification
@@ -885,29 +882,25 @@ function showNotification(message, isError = false) {
     }, 3000);
 }
 
-// Filter sections by search
+// Filter sections by search (SAME AS BEFORE)
 function filterSections() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const sections = document.querySelectorAll('.edit-section');
     const cards = document.querySelectorAll('.card-edit');
     
     if (!searchTerm) {
-        // Show everything
         sections.forEach(section => section.style.display = 'block');
         cards.forEach(card => card.style.display = 'block');
         return;
     }
     
-    // Hide all sections first
     sections.forEach(section => section.style.display = 'none');
     
-    // Show sections that match search
     sections.forEach(section => {
         const text = section.textContent.toLowerCase();
         if (text.includes(searchTerm)) {
             section.style.display = 'block';
             
-            // Within visible sections, hide non-matching cards
             const sectionCards = section.querySelectorAll('.card-edit');
             sectionCards.forEach(card => {
                 const cardText = card.textContent.toLowerCase();
@@ -917,9 +910,14 @@ function filterSections() {
     });
 }
 
-// View live site
+// View live site with instruction to refresh
 function viewLiveSite() {
-    window.open('index.html?preview=true', '_blank');
+    const liveWindow = window.open('index.html?preview=true', '_blank');
+    
+    // Show instruction
+    setTimeout(() => {
+        showNotification('Live site opened. Press F5 to refresh and see changes.');
+    }, 500);
 }
 
 // Logout
@@ -928,5 +926,5 @@ function logout() {
     window.location.href = 'admin-login.html';
 }
 
-// Initialize on load
+// Initialize
 document.addEventListener('DOMContentLoaded', initEditor);
