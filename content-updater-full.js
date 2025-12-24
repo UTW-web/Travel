@@ -1,8 +1,7 @@
-// CONTENT UPDATER - Updates ALL text on the website automatically
+// CONTENT UPDATER - Uses localStorage ONLY (no file downloads)
 class ContentUpdater {
     constructor() {
         this.contentData = null;
-        this.autoUpdateInterval = null;
         this.init();
     }
     
@@ -15,66 +14,45 @@ class ContentUpdater {
             this.enablePreviewMode();
         }
         
-        // Load content
-        await this.loadContent();
+        // Load content from localStorage
+        this.loadContent();
         
         // Update ALL page content
         this.updateAllContent();
         
-        // Setup auto-update
-        this.setupAutoUpdate();
+        // Setup auto-refresh
+        this.setupAutoRefresh();
         
-        console.log('Content updater initialized - ALL content ready');
+        console.log('Content updater initialized');
     }
     
-    async loadContent() {
+    loadContent() {
         try {
-            // First check localStorage (immediate updates)
+            // Load from localStorage (set by admin editor)
             const savedContent = localStorage.getItem('travel_blog_live_content');
-            const lastUpdate = localStorage.getItem('travel_blog_last_update');
             
-            if (savedContent && lastUpdate) {
-                // Check if data is fresh (less than 1 hour)
-                const oneHourAgo = Date.now() - (60 * 60 * 1000);
-                
-                if (parseInt(lastUpdate) > oneHourAgo) {
-                    this.contentData = JSON.parse(savedContent);
-                    console.log('Loaded fresh content from localStorage');
-                    return;
-                }
-            }
-            
-            // If not in localStorage, load from GitHub
-            const response = await fetch('content-data.json?t=' + Date.now());
-            
-            if (response.ok) {
-                this.contentData = await response.json();
-                console.log('Loaded content from GitHub');
-                
-                // Save to localStorage for next time
-                localStorage.setItem('travel_blog_live_content', JSON.stringify(this.contentData));
-                localStorage.setItem('travel_blog_last_update', Date.now().toString());
+            if (savedContent) {
+                this.contentData = JSON.parse(savedContent);
+                console.log('Content loaded from localStorage');
             } else {
-                console.warn('Could not load content-data.json, using defaults');
-                this.useDefaultContent();
+                // No saved content, use page defaults
+                console.log('No saved content, using page defaults');
+                this.contentData = this.extractCurrentContent();
             }
-            
         } catch (error) {
             console.error('Error loading content:', error);
-            this.useDefaultContent();
+            this.contentData = this.extractCurrentContent();
         }
     }
     
-    useDefaultContent() {
-        // Extract current content from page
-        this.contentData = this.extractCurrentContent();
-    }
-    
     extractCurrentContent() {
-        // Basic extraction for fallback
+        // Extract current text from page as fallback
         return {
             home: {
-                title: document.querySelector('#home h2')?.textContent || 'Welcome to My Travel Blog'
+                title: document.querySelector('#home h2')?.textContent || 'Welcome to My Travel Blog',
+                about1: 'This is my travel blog where I share my adventures.',
+                about2: 'Join me as I explore the world one destination at a time.',
+                about3: 'From breathtaking landscapes to cultural experiences.'
             },
             lastUpdated: new Date().toISOString()
         };
@@ -101,7 +79,7 @@ class ContentUpdater {
         // Update CONTACT & FOOTER
         this.updateContactFooter();
         
-        console.log('ALL content updated successfully');
+        console.log('Page content updated');
     }
     
     updateHomePage() {
@@ -446,40 +424,55 @@ class ContentUpdater {
         return text.replace(/\n/g, '<br>');
     }
     
-    setupAutoUpdate() {
-        // Check for updates every 30 seconds
-        this.autoUpdateInterval = setInterval(() => {
+    setupAutoRefresh() {
+        // Refresh content every 10 seconds
+        setInterval(() => {
             this.checkForUpdates();
-        }, 30000);
+        }, 10000);
         
         // Listen for updates from admin editor
         window.addEventListener('storage', (event) => {
             if (event.key === 'travel_blog_last_update') {
-                this.handleContentUpdate();
+                console.log('Update detected from admin editor');
+                this.loadContent();
+                this.updateAllContent();
+                this.showUpdateNotification();
             }
         });
     }
     
-    async checkForUpdates() {
-        try {
-            const lastUpdate = localStorage.getItem('travel_blog_last_update');
-            const currentTime = Date.now();
-            const fiveMinutes = 5 * 60 * 1000;
-            
-            if (!lastUpdate || (currentTime - parseInt(lastUpdate)) > fiveMinutes) {
-                await this.loadContent();
-                this.updateAllContent();
-            }
-        } catch (error) {
-            console.warn('Error checking for updates:', error);
+    checkForUpdates() {
+        // Just reload from localStorage
+        const oldData = JSON.stringify(this.contentData);
+        this.loadContent();
+        const newData = JSON.stringify(this.contentData);
+        
+        if (oldData !== newData) {
+            this.updateAllContent();
+            console.log('Content updated on refresh');
         }
     }
     
-    handleContentUpdate() {
-        this.loadContent().then(() => {
-            this.updateAllContent();
-            console.log('Content updated immediately from admin editor');
-        });
+    showUpdateNotification() {
+        // Show subtle notification
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 10000;
+            animation: fadeInOut 3s ease;
+        `;
+        notification.innerHTML = '🔄 Content updated';
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
     }
     
     enablePreviewMode() {
@@ -497,7 +490,7 @@ class ContentUpdater {
             z-index: 10000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         `;
-        previewBanner.textContent = '👁️ PREVIEW MODE - Showing latest saved content';
+        previewBanner.textContent = '👁️ PREVIEW MODE - Auto-updates enabled';
         document.body.prepend(previewBanner);
         
         const closeBtn = document.createElement('button');
@@ -521,19 +514,7 @@ class ContentUpdater {
     }
 }
 
-// Initialize content updater
+// Initialize
 document.addEventListener('DOMContentLoaded', function() {
     window.contentUpdater = new ContentUpdater();
-    
-    // Add last update info to footer
-    setTimeout(() => {
-        const footer = document.querySelector('footer');
-        if (footer && window.contentUpdater.contentData?.lastUpdated) {
-            const updateTime = new Date(window.contentUpdater.contentData.lastUpdated);
-            const updateInfo = document.createElement('div');
-            updateInfo.style.cssText = 'font-size: 0.8rem; color: #7d716a; margin-top: 5px;';
-            updateInfo.innerHTML = `Content updated: ${updateTime.toLocaleDateString()} ${updateTime.toLocaleTimeString()}`;
-            footer.appendChild(updateInfo);
-        }
-    }, 1000);
 });
