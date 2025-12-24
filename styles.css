@@ -136,6 +136,7 @@
       letter-spacing: 1px;
     }
     footer {
+        position:relative;
       background-color: var(--highlight);
       text-align: center;
       padding: 1.5rem;
@@ -498,3 +499,4 @@
       to   { opacity: 1; }
 
     }
+
