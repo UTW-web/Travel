@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Travel Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f4e3cb 0%, #f1cdaf 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(92, 82, 77, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-family: 'WindSong', cursive;
+            font-size: 2.5rem;
+            color: #4c403b;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #6e5e57;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #5c524d;
+            font-weight: 500;
+        }
+        
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #f1cdaf;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #e4b99a;
+            box-shadow: 0 0 0 3px rgba(241, 205, 175, 0.3);
+        }
+        
+        .login-btn {
+            background: #f1cdaf;
+            color: #5c524d;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        .login-btn:hover {
+            background: #e4b99a;
+        }
+        
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            min-height: 20px;
+        }
+        
+        .hint {
+            margin-top: 20px;
+            color: #7d716a;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #7d716a;
+            font-size: 0.8rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">Travel Blog</div>
+        <div class="subtitle">Content Management System</div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="password">Enter Admin Password:</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+            
+            <div class="error" id="errorMessage"></div>
+            
+            <button type="submit" class="login-btn">🔑 Login to Edit Content</button>
+        </form>
+        
+        <div class="hint">
+            Contact the website administrator if you don't have the password.
+        </div>
+        
+        <div class="footer">
+            © 2025 My Travel Journey | Secure Admin Access
+        </div>
+    </div>
+    
+    <script>
+        // Password protection
+        const ADMIN_PASSWORD = 'travel2025'; // Change this to your desired password
+        
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('errorMessage');
+            
+            if (password === ADMIN_PASSWORD) {
+                // Set session cookie
+                document.cookie = `admin_auth=${btoa(password)}; path=/; max-age=86400`; // 24 hours
+                
+                // Redirect to editor
+                window.location.href = 'admin-editor.html';
+            } else {
+                errorElement.textContent = 'Incorrect password. Please try again.';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        });
+        
+        // Check if already logged in
+        function checkAuth() {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                if (name === 'admin_auth' && atob(value) === ADMIN_PASSWORD) {
+                    window.location.href = 'admin-editor.html';
+                }
+            }
+        }
+        
+        // Check on page load
+        window.onload = checkAuth;
+    </script>
+</body>
+</html>
