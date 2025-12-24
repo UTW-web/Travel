@@ -4,160 +4,311 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit ALL Content - Travel Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-        body { background: #f5f5f5; padding: 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', sans-serif;
+        }
         
-        .container { max-width: 1400px; margin: 0 auto; }
+        body {
+            background: linear-gradient(135deg, #f4e3cb 0%, #f1cdaf 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
         
-        .header { 
-            background: white; 
-            padding: 20px; 
-            border-radius: 10px; 
-            margin-bottom: 20px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(92, 82, 77, 0.2);
+            overflow: hidden;
+        }
+        
+        .admin-header {
+            background: #f1cdaf;
+            padding: 25px;
+            color: #5c524d;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 2px solid #e4b99a;
         }
         
-        h1 { color: #333; }
-        
-        .section { 
-            background: white; 
-            padding: 25px; 
-            margin-bottom: 20px; 
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .logo {
+            font-family: 'WindSong', cursive;
+            font-size: 2rem;
+            color: #4c403b;
         }
         
-        .section h2 { 
-            color: #444; 
-            margin-bottom: 20px; 
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f1cdaf;
+        .admin-controls {
             display: flex;
+            gap: 15px;
             align-items: center;
-            gap: 10px;
         }
         
-        .section h2 i { color: #f1cdaf; }
-        
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
-        input, textarea { 
-            width: 100%; 
-            padding: 12px; 
-            border: 2px solid #ddd; 
-            border-radius: 5px; 
-            font-size: 16px;
-        }
-        textarea { min-height: 100px; resize: vertical; }
-        
-        .card-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 20px; 
-            margin-top: 20px;
-        }
-        
-        .card-edit { 
-            background: #f9f9f9; 
-            padding: 20px; 
-            border-radius: 8px; 
-            border: 1px solid #eee;
-        }
-        
-        .card-edit h3 { 
-            color: #444; 
-            margin-bottom: 15px; 
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f1cdaf;
-        }
-        
-        .btn { 
-            background: #4CAF50; 
-            color: white; 
-            border: none; 
-            padding: 15px 30px; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-size: 16px; 
-            margin: 10px 5px;
+        .btn {
+            background: #5c524d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 10px;
         }
         
-        .btn:hover { background: #45a049; }
-        .btn-preview { background: #2196F3; }
-        .btn-preview:hover { background: #1976D2; }
-        .btn-logout { background: #f44336; }
-        .btn-logout:hover { background: #d32f2f; }
-        
-        .status { 
-            padding: 10px; 
-            margin: 10px 0; 
-            border-radius: 5px;
-            display: none;
+        .btn:hover {
+            background: #4c403b;
+            transform: translateY(-2px);
         }
-        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
         
-        .instructions {
-            background: #e3f2fd;
+        .btn-preview {
+            background: #4caf50;
+        }
+        
+        .btn-preview:hover {
+            background: #45a049;
+        }
+        
+        .btn-logout {
+            background: #f44336;
+        }
+        
+        .btn-logout:hover {
+            background: #d32f2f;
+        }
+        
+        .btn-save {
+            background: #2196F3;
+            font-size: 18px;
+            padding: 15px 40px;
+        }
+        
+        .btn-save:hover {
+            background: #1976D2;
+        }
+        
+        .status {
             padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-            border-left: 4px solid #2196F3;
+            margin: 20px;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
         
         .tab-container {
             display: flex;
-            gap: 5px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            background: #f9f3eb;
+            padding: 0 20px;
+            border-bottom: 2px solid #f1cdaf;
+            overflow-x: auto;
         }
         
         .tab-btn {
-            padding: 12px 20px;
-            background: #f1f1f1;
+            padding: 15px 25px;
+            background: none;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            color: #555;
+            color: #5c524d;
             font-weight: 500;
+            font-size: 16px;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .tab-btn:hover {
-            background: #e0e0e0;
+            background: rgba(241, 205, 175, 0.3);
         }
         
         .tab-btn.active {
-            background: #4CAF50;
-            color: white;
+            background: #f1cdaf;
+            color: #5c524d;
+            border-bottom: 3px solid #e4b99a;
+            font-weight: bold;
         }
         
         .tab-content {
             display: none;
+            padding: 30px;
         }
         
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section {
+            background: #fefcf9;
+            border: 2px solid #f1cdaf;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .section h2 {
+            color: #4a3f39;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f1cdaf;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section h3 {
+            color: #5c524d;
+            margin: 20px 0 15px;
+            padding-left: 10px;
+            border-left: 3px solid #f1cdaf;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #5c524d;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #f1cdaf;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Raleway', sans-serif;
+            background: #fefcf9;
+            transition: border 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #e4b99a;
+            box-shadow: 0 0 0 3px rgba(241, 205, 175, 0.3);
+            background: white;
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        
+        .hint {
+            font-size: 0.9rem;
+            color: #7d716a;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .card-edit {
+            background: white;
+            border: 2px solid #f1cdaf;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .card-edit h4 {
+            color: #4a3f39;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1cdaf;
+        }
+        
+        .list-items {
+            margin-top: 15px;
+        }
+        
+        .list-items label {
+            font-size: 0.9rem;
+        }
+        
+        .list-items textarea {
+            min-height: 80px;
+            font-size: 14px;
+        }
+        
+        .save-section {
+            text-align: center;
+            padding: 40px;
+            background: #f9f3eb;
+            border-top: 2px solid #f1cdaf;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .tab-container {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1><i class="fas fa-edit"></i> Edit ALL Blog Content</h1>
-            <div>
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="logo">✈️ Travel Blog Editor</div>
+            <div class="admin-controls">
                 <button class="btn btn-preview" onclick="openPreview()">
                     <i class="fas fa-eye"></i> Preview Site
-                </button>
-                <button class="btn" onclick="saveAllContent()">
-                    <i class="fas fa-save"></i> Save ALL Content
                 </button>
                 <button class="btn btn-logout" onclick="logout()">
                     <i class="fas fa-sign-out-alt"></i> Logout
@@ -167,27 +318,31 @@
         
         <div id="status" class="status"></div>
         
-        <div class="instructions">
-            <strong><i class="fas fa-info-circle"></i> How to use:</strong><br>
-            1. Edit content in the tabs below<br>
-            2. Click "Save ALL Content"<br>
-            3. Open your blog at: <code>https://utw-web.github.io/Travel/?preview=1</code><br>
-            4. Content will update automatically
-        </div>
-        
         <div class="tab-container">
-            <button class="tab-btn active" onclick="showTab('home')">🏠 Home</button>
-            <button class="tab-btn" onclick="showTab('destinations')">🌍 Destinations</button>
-            <button class="tab-btn" onclick="showTab('stories')">📚 Travel Stories</button>
-            <button class="tab-btn" onclick="showTab('sunrise')">🌅 Sunrise/Sunset</button>
-            <button class="tab-btn" onclick="showTab('overnight')">🏨 Overnight Stays</button>
-            <button class="tab-btn" onclick="showTab('contact')">📞 Contact</button>
+            <button class="tab-btn active" onclick="showTab('home')">
+                <i class="fas fa-home"></i> Home
+            </button>
+            <button class="tab-btn" onclick="showTab('destinations')">
+                <i class="fas fa-globe-europe"></i> Destinations
+            </button>
+            <button class="tab-btn" onclick="showTab('stories')">
+                <i class="fas fa-book-open"></i> Travel Stories
+            </button>
+            <button class="tab-btn" onclick="showTab('sunrise')">
+                <i class="fas fa-sun"></i> Sunrise/Sunset
+            </button>
+            <button class="tab-btn" onclick="showTab('overnight')">
+                <i class="fas fa-bed"></i> Overnight Stays
+            </button>
+            <button class="tab-btn" onclick="showTab('contact')">
+                <i class="fas fa-envelope"></i> Contact & Footer
+            </button>
         </div>
         
         <!-- HOME TAB -->
         <div id="home" class="tab-content active">
             <div class="section">
-                <h2><i class="fas fa-home"></i> Home Page Content</h2>
+                <h2><i class="fas fa-home"></i> Home Page</h2>
                 
                 <div class="form-group">
                     <label>Main Title:</label>
@@ -195,8 +350,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>About Me (ALL paragraphs - use line breaks for new paragraphs):</label>
-                    <textarea id="homeAbout" rows="20">This is my path. A path through lands, flavors, experiences, and feelings…
+                    <label>About Me (ALL text - use line breaks for paragraphs):</label>
+                    <textarea id="homeAbout" rows="25">This is my path. A path through lands, flavors, experiences, and feelings…
 At heart, I'm a nomad, and my soul's journey is one of exploration, tasting, creating, sensing, and connecting.
 
 If you're looking for classic travel blogs,
@@ -226,46 +381,47 @@ to a world longing for more authenticity.
 
 Each of us carries something unique.
 I simply offer a glimpse into mine.</textarea>
+                    <div class="hint">Use line breaks to separate paragraphs. They will appear as separate paragraphs on the website.</div>
                 </div>
             </div>
             
             <div class="section">
-                <h2><i class="fas fa-map-marker-alt"></i> Featured Destination Cards</h2>
+                <h2><i class="fas fa-map-marked-alt"></i> Featured Destination Cards</h2>
                 
-                <div class="card-grid">
+                <div class="cards-grid">
                     <div class="card-edit">
-                        <h3>Europe Card</h3>
+                        <h4>Europe Card</h4>
                         <div class="form-group">
                             <label>Title:</label>
-                            <input type="text" id="cardEuropeTitle" value="Europe">
+                            <input type="text" id="featuredEuropeTitle" value="Europe">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="cardEuropeDesc" rows="3">Roman Colosseum, Parisian streets and Alpine valleys – my European adventures.</textarea>
+                            <textarea id="featuredEuropeDesc" rows="4">Roman Colosseum, Parisian streets and Alpine valleys – my European adventures.</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Asia Card</h3>
+                        <h4>Asia Card</h4>
                         <div class="form-group">
                             <label>Title:</label>
-                            <input type="text" id="cardAsiaTitle" value="Asia">
+                            <input type="text" id="featuredAsiaTitle" value="Asia">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="cardAsiaDesc" rows="3">From Japanese cherry blossoms to Indian bazaars – every step tells a story.</textarea>
+                            <textarea id="featuredAsiaDesc" rows="4">From Japanese cherry blossoms to Indian bazaars – every step tells a story.</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>America Card</h3>
+                        <h4>America Card</h4>
                         <div class="form-group">
                             <label>Title:</label>
-                            <input type="text" id="cardAmericaTitle" value="America">
+                            <input type="text" id="featuredAmericaTitle" value="America">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="cardAmericaDesc" rows="3">Wild West, New York streets and Latin America – freedom on the road.</textarea>
+                            <textarea id="featuredAmericaDesc" rows="4">Wild West, New York streets and Latin America – freedom on the road.</textarea>
                         </div>
                     </div>
                 </div>
@@ -274,46 +430,46 @@ I simply offer a glimpse into mine.</textarea>
             <div class="section">
                 <h2><i class="fas fa-utensils"></i> World Cuisine Cards</h2>
                 
-                <div class="card-grid">
+                <div class="cards-grid">
                     <div class="card-edit">
-                        <h3>Western Cuisine</h3>
+                        <h4>Western Cuisine</h4>
                         <div class="form-group">
                             <label>Title:</label>
                             <input type="text" id="cuisineWestTitle" value="Western Cuisine">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="cuisineWestDesc" rows="3">Italian pasta, French pastries and Mediterranean flavors.</textarea>
+                            <textarea id="cuisineWestDesc" rows="4">Italian pasta, French pastries and Mediterranean flavors.</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Eastern Cuisine</h3>
+                        <h4>Eastern Cuisine</h4>
                         <div class="form-group">
                             <label>Title:</label>
                             <input type="text" id="cuisineEastTitle" value="Eastern Cuisine">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="cuisineEastDesc" rows="3">Japanese sushi, Thai curries and Vietnamese street food.</textarea>
+                            <textarea id="cuisineEastDesc" rows="4">Japanese sushi, Thai curries and Vietnamese street food.</textarea>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="section">
-                <h2><i class="fas fa-newspaper"></i> Recent Travel Stories on Home</h2>
+                <h2><i class="fas fa-newspaper"></i> Recent Travel Stories (Home Page)</h2>
                 
-                <div class="card-grid">
+                <div class="cards-grid">
                     <div class="card-edit">
-                        <h3>Story 1</h3>
+                        <h4>Story 1</h4>
                         <div class="form-group">
                             <label>Title:</label>
                             <input type="text" id="homeStory1Title" value="Falling in Love with Amsterdam">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="homeStory1Desc" rows="3">Bikes, canals and art at every turn – a magical experience.</textarea>
+                            <textarea id="homeStory1Desc" rows="4">Bikes, canals and art at every turn – a magical experience.</textarea>
                         </div>
                         <div class="form-group">
                             <label>Date:</label>
@@ -322,14 +478,14 @@ I simply offer a glimpse into mine.</textarea>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Story 2</h3>
+                        <h4>Story 2</h4>
                         <div class="form-group">
                             <label>Title:</label>
                             <input type="text" id="homeStory2Title" value="Train Through Sri Lanka">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="homeStory2Desc" rows="3">The most beautiful railway journey through green tea hills.</textarea>
+                            <textarea id="homeStory2Desc" rows="4">The most beautiful railway journey through green tea hills.</textarea>
                         </div>
                         <div class="form-group">
                             <label>Date:</label>
@@ -342,47 +498,48 @@ I simply offer a glimpse into mine.</textarea>
         
         <!-- DESTINATIONS TAB -->
         <div id="destinations" class="tab-content">
+            <!-- EUROPE -->
             <div class="section">
-                <h2><i class="fas fa-globe-europe"></i> Europe</h2>
+                <h2><i class="fas fa-landmark"></i> Europe</h2>
                 
-                <div class="card-grid">
+                <div class="cards-grid">
                     <div class="card-edit">
-                        <h3>Roman Colosseum</h3>
+                        <h4>Roman Colosseum</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destEurope1Desc" rows="4">Historic monument testifying to the power of ancient Rome.</textarea>
+                            <textarea id="europeColosseumDesc" rows="4">Historic monument testifying to the power of ancient Rome.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Interesting Facts (one per line):</label>
-                            <textarea id="destEurope1Facts" rows="4">Built in 80 AD
+                            <textarea id="europeColosseumFacts" rows="4">Built in 80 AD
 Location: Rome, Italy
 Could hold up to 50,000 spectators</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Parisian Streets</h3>
+                        <h4>Parisian Streets</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destEurope2Desc" rows="4">Magical atmosphere of the city of love with iconic landmarks.</textarea>
+                            <textarea id="europeParisDesc" rows="4">Magical atmosphere of the city of love with iconic landmarks.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Must-See (one per line):</label>
-                            <textarea id="destEurope2Facts" rows="4">Eiffel Tower
+                            <textarea id="europeParisFacts" rows="4">Eiffel Tower
 Notre-Dame
 Montmartre</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Alpine Valleys</h3>
+                        <h4>Alpine Valleys</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destEurope3Desc" rows="4">Natural beauty that takes every visitor's breath away.</textarea>
+                            <textarea id="europeAlpsDesc" rows="4">Natural beauty that takes every visitor's breath away.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Highlights (one per line):</label>
-                            <textarea id="destEurope3Facts" rows="4">Accessible from Switzerland, Austria, France
+                            <textarea id="europeAlpsFacts" rows="4">Accessible from Switzerland, Austria, France
 Perfect for hiking and skiing
 Picturesque villages</textarea>
                         </div>
@@ -390,47 +547,48 @@ Picturesque villages</textarea>
                 </div>
             </div>
             
+            <!-- ASIA -->
             <div class="section">
                 <h2><i class="fas fa-torii-gate"></i> Asia</h2>
                 
-                <div class="card-grid">
+                <div class="cards-grid">
                     <div class="card-edit">
-                        <h3>Japanese Cherry Blossoms</h3>
+                        <h4>Japanese Cherry Blossoms</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destAsia1Desc" rows="4">Magical sakura festivals in spring.</textarea>
+                            <textarea id="asiaCherryDesc" rows="4">Magical sakura festivals in spring.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Best Time to Visit (one per line):</label>
-                            <textarea id="destAsia1Facts" rows="4">Late March - early April
+                            <textarea id="asiaCherryFacts" rows="4">Late March - early April
 Best locations: Kyoto, Tokyo
 Hanami tradition</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Indian Bazaars</h3>
+                        <h4>Indian Bazaars</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destAsia2Desc" rows="4">Colorful mix of scents, colors and sounds.</textarea>
+                            <textarea id="asiaBazaarDesc" rows="4">Colorful mix of scents, colors and sounds.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Famous Markets (one per line):</label>
-                            <textarea id="destAsia2Facts" rows="4">Chandni Chowk, Delhi
+                            <textarea id="asiaBazaarFacts" rows="4">Chandni Chowk, Delhi
 Johari Bazaar, Jaipur
 Colaba Causeway, Mumbai</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Vietnamese Rice Fields</h3>
+                        <h4>Vietnamese Rice Fields</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destAsia3Desc" rows="4">Green terraced landscapes of northern Vietnam.</textarea>
+                            <textarea id="asiaVietnamDesc" rows="4">Green terraced landscapes of northern Vietnam.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Best Locations (one per line):</label>
-                            <textarea id="destAsia3Facts" rows="4">Sapa
+                            <textarea id="asiaVietnamFacts" rows="4">Sapa
 Mu Cang Chai
 Hoang Su Phi</textarea>
                         </div>
@@ -438,47 +596,48 @@ Hoang Su Phi</textarea>
                 </div>
             </div>
             
+            <!-- AMERICA -->
             <div class="section">
                 <h2><i class="fas fa-united-states"></i> America</h2>
                 
-                <div class="card-grid">
+                <div class="cards-grid">
                     <div class="card-edit">
-                        <h3>Wild West</h3>
+                        <h4>Wild West</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destAmerica1Desc" rows="4">Open plains and iconic landscapes of Arizona and Utah.</textarea>
+                            <textarea id="americaWestDesc" rows="4">Open plains and iconic landscapes of Arizona and Utah.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Landmarks (one per line):</label>
-                            <textarea id="destAmerica1Facts" rows="4">Grand Canyon
+                            <textarea id="americaWestFacts" rows="4">Grand Canyon
 Monument Valley
 Zion National Park</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>New York</h3>
+                        <h4>New York</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destAmerica2Desc" rows="4">The city that never sleeps, full of iconic landmarks.</textarea>
+                            <textarea id="americaNYDesc" rows="4">The city that never sleeps, full of iconic landmarks.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Must-Visit (one per line):</label>
-                            <textarea id="destAmerica2Facts" rows="4">Times Square
+                            <textarea id="americaNYFacts" rows="4">Times Square
 Central Park
 Statue of Liberty</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Latin America</h3>
+                        <h4>Latin America</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destAmerica3Desc" rows="4">Welcoming people, hot music and festive atmospheres.</textarea>
+                            <textarea id="americaLatinDesc" rows="4">Welcoming people, hot music and festive atmospheres.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Top Destinations (one per line):</label>
-                            <textarea id="destAmerica3Facts" rows="4">Machu Picchu, Peru
+                            <textarea id="americaLatinFacts" rows="4">Machu Picchu, Peru
 Rio de Janeiro, Brazil
 Cartagena, Colombia</textarea>
                         </div>
@@ -486,19 +645,20 @@ Cartagena, Colombia</textarea>
                 </div>
             </div>
             
+            <!-- AFRICA -->
             <div class="section">
                 <h2><i class="fas fa-globe-africa"></i> Africa</h2>
                 
-                <div class="card-grid">
+                <div class="cards-grid">
                     <div class="card-edit">
-                        <h3>Kenyan Wilderness</h3>
+                        <h4>Kenyan Wilderness</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destAfrica1Desc" rows="4">Natural habitat of numerous African animals.</textarea>
+                            <textarea id="africaKenyaDesc" rows="4">Natural habitat of numerous African animals.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Animals You Can See (one per line):</label>
-                            <textarea id="destAfrica1Facts" rows="4">Lions
+                            <textarea id="africaKenyaFacts" rows="4">Lions
 Elephants
 Giraffes
 Rhinos</textarea>
@@ -506,28 +666,28 @@ Rhinos</textarea>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Moroccan Markets</h3>
+                        <h4>Moroccan Markets</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destAfrica2Desc" rows="4">Colorful souks with traditional products.</textarea>
+                            <textarea id="africaMoroccoDesc" rows="4">Colorful souks with traditional products.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Best Markets (one per line):</label>
-                            <textarea id="destAfrica2Facts" rows="4">Jemaa el-Fnaa, Marrakech
+                            <textarea id="africaMoroccoFacts" rows="4">Jemaa el-Fnaa, Marrakech
 Souk Semmarine, Marrakech
 Medina, Fez</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Egyptian Deserts</h3>
+                        <h4>Egyptian Deserts</h4>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="destAfrica3Desc" rows="4">Mysterious beauty of the Sahara and pyramids.</textarea>
+                            <textarea id="africaEgyptDesc" rows="4">Mysterious beauty of the Sahara and pyramids.</textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="list-items">
                             <label>Landmarks (one per line):</label>
-                            <textarea id="destAfrica3Facts" rows="4">Great Pyramid of Giza
+                            <textarea id="africaEgyptFacts" rows="4">Great Pyramid of Giza
 Siwa Oasis
 White Desert</textarea>
                         </div>
@@ -535,20 +695,145 @@ White Desert</textarea>
                 </div>
             </div>
             
-            <!-- Oceania, Middle East, Maria at Home sections would continue similarly -->
-            <!-- Due to length, I'll show the pattern and you can add the rest -->
+            <!-- OCEANIA -->
+            <div class="section">
+                <h2><i class="fas fa-umbrella-beach"></i> Oceania</h2>
+                
+                <div class="cards-grid">
+                    <div class="card-edit">
+                        <h4>Australian Kangaroos</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="oceaniaKangarooDesc" rows="4">Iconic native animals of Australia.</textarea>
+                        </div>
+                        <div class="list-items">
+                            <label>Where to See Them (one per line):</label>
+                            <textarea id="oceaniaKangarooFacts" rows="4">Kangaroo Island
+Lone Pine Koala Sanctuary
+National parks</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>Great Barrier Reef</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="oceaniaReefDesc" rows="4">The world's largest coral reef system.</textarea>
+                        </div>
+                        <div class="list-items">
+                            <label>Activities (one per line):</label>
+                            <textarea id="oceaniaReefFacts" rows="4">Diving
+Snorkeling
+Scenic flights</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>Paradise Islands</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="oceaniaIslandsDesc" rows="4">White sand beaches and crystal clear water.</textarea>
+                        </div>
+                        <div class="list-items">
+                            <label>Best Islands (one per line):</label>
+                            <textarea id="oceaniaIslandsFacts" rows="4">Bora Bora, French Polynesia
+Fiji
+Palau</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
+            <!-- MIDDLE EAST -->
+            <div class="section">
+                <h2><i class="fas fa-mosque"></i> Middle East</h2>
+                
+                <div class="cards-grid">
+                    <div class="card-edit">
+                        <h4>Dubai's Modern Architecture</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="mideastDubaiDesc" rows="4">Futuristic skyscrapers and luxury lifestyle.</textarea>
+                        </div>
+                        <div class="list-items">
+                            <label>Must-See (one per line):</label>
+                            <textarea id="mideastDubaiFacts" rows="4">Burj Khalifa
+Burj Al Arab
+The Palm Jumeirah</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>Petra's Ancient City</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="mideastPetraDesc" rows="4">Historical site carved into rose-red rock.</textarea>
+                        </div>
+                        <div class="list-items">
+                            <label>Highlights (one per line):</label>
+                            <textarea id="mideastPetraFacts" rows="4">The Treasury
+The Monastery
+Siq Canyon</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>Egyptian Pyramids</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="mideastPyramidsDesc" rows="4">Mystical monuments of ancient civilization.</textarea>
+                        </div>
+                        <div class="list-items">
+                            <label>Interesting Facts (one per line):</label>
+                            <textarea id="mideastPyramidsFacts" rows="4">Great Pyramid of Giza is one of the Seven Wonders of the Ancient World
+Pyramids were built as tombs for pharaohs
+Over 100 pyramids have been discovered in Egypt</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MARIA AT HOME -->
+            <div class="section">
+                <h2><i class="fas fa-home-heart"></i> Maria At Home</h2>
+                
+                <div class="cards-grid">
+                    <div class="card-edit">
+                        <h4>My Garden</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="mariaGardenDesc" rows="4">Growing vegetables, herbs and flowers in my backyard.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>Cooking at Home</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="mariaCookingDesc" rows="4">Sharing my favorite recipes and cooking tips.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>Cozy Evenings</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="mariaCozyDesc" rows="4">Enjoying quiet evenings with a good book and a cup of tea.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- TRAVEL STORIES TAB -->
         <div id="stories" class="tab-content">
             <div class="section">
-                <h2><i class="fas fa-book-open"></i> Travel Stories</h2>
+                <h2><i class="fas fa-book"></i> Travel Stories (ALL 8 Stories)</h2>
                 
-                <div class="card-grid">
+                <div class="cards-grid">
                     <!-- Story 1 -->
                     <div class="card-edit">
-                        <h3>Story 1 - Amsterdam</h3>
+                        <h4>Story 1 - Amsterdam</h4>
                         <div class="form-group">
                             <label>Title:</label>
                             <input type="text" id="story1Title" value="Falling in Love with Amsterdam">
@@ -565,7 +850,7 @@ White Desert</textarea>
                     
                     <!-- Story 2 -->
                     <div class="card-edit">
-                        <h3>Story 2 - Sri Lanka</h3>
+                        <h4>Story 2 - Sri Lanka</h4>
                         <div class="form-group">
                             <label>Title:</label>
                             <input type="text" id="story2Title" value="Train Through Sri Lanka">
@@ -580,7 +865,107 @@ White Desert</textarea>
                         </div>
                     </div>
                     
-                    <!-- Add more stories similarly... -->
+                    <!-- Story 3 -->
+                    <div class="card-edit">
+                        <h4>Story 3 - Mexico</h4>
+                        <div class="form-group">
+                            <label>Title:</label>
+                            <input type="text" id="story3Title" value="Mornings in Mexico">
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="story3Desc" rows="4">Scent of tortillas, sounds of mariachi music and warmth of people.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Date:</label>
+                            <input type="text" id="story3Date" value="Published: January 10, 2023">
+                        </div>
+                    </div>
+                    
+                    <!-- Story 4 -->
+                    <div class="card-edit">
+                        <h4>Story 4 - Iceland</h4>
+                        <div class="form-group">
+                            <label>Title:</label>
+                            <input type="text" id="story4Title" value="Alone in Iceland">
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="story4Desc" rows="4">Glacial lagoons, geysers and nights full of northern lights.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Date:</label>
+                            <input type="text" id="story4Date" value="Published: December 5, 2022">
+                        </div>
+                    </div>
+                    
+                    <!-- Story 5 -->
+                    <div class="card-edit">
+                        <h4>Story 5 - Vietnam</h4>
+                        <div class="form-group">
+                            <label>Title:</label>
+                            <input type="text" id="story5Title" value="Vietnam by Bicycle">
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="story5Desc" rows="4">From Hanoi to Ho Chi Minh - journey through lively streets and rice fields.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Date:</label>
+                            <input type="text" id="story5Date" value="Published: November 20, 2022">
+                        </div>
+                    </div>
+                    
+                    <!-- Story 6 -->
+                    <div class="card-edit">
+                        <h4>Story 6 - Marrakech</h4>
+                        <div class="form-group">
+                            <label>Title:</label>
+                            <input type="text" id="story6Title" value="Magical Marrakech">
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="story6Desc" rows="4">Colorful souks, scent of spices and warm Arabic hospitality.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Date:</label>
+                            <input type="text" id="story6Date" value="Published: October 15, 2022">
+                        </div>
+                    </div>
+                    
+                    <!-- Story 7 -->
+                    <div class="card-edit">
+                        <h4>Story 7 - Salzburg</h4>
+                        <div class="form-group">
+                            <label>Title:</label>
+                            <input type="text" id="story7Title" value="Winter Fairytale in Salzburg">
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="story7Desc" rows="4">Christmas markets, Mozart's music and freshly snowed streets.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Date:</label>
+                            <input type="text" id="story7Date" value="Published: December 5, 2021">
+                        </div>
+                    </div>
+                    
+                    <!-- Story 8 -->
+                    <div class="card-edit">
+                        <h4>Story 8 - Trans-Siberian</h4>
+                        <div class="form-group">
+                            <label>Title:</label>
+                            <input type="text" id="story8Title" value="Trans-Siberian Railway Journey">
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="story8Desc" rows="4">Endless landscapes, interesting encounters and an amazing adventure.</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Date:</label>
+                            <input type="text" id="story8Date" value="Published: August 20, 2021">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -590,7 +975,7 @@ White Desert</textarea>
             <div class="section">
                 <h2><i class="fas fa-sunrise"></i> Sunrise Text</h2>
                 <div class="form-group">
-                    <textarea id="sunriseText" rows="10">Each sunrise is a new beginning.
+                    <textarea id="sunriseText" rows="12">Each sunrise is a new beginning.
 Not just of the day, but of me.
 
 When the sky gently glows, I don't just watch it—I breathe it in.
@@ -607,9 +992,47 @@ May they touch yours too.</textarea>
             </div>
             
             <div class="section">
+                <h2><i class="fas fa-images"></i> Sunrise Gallery</h2>
+                
+                <div class="cards-grid">
+                    <div class="card-edit">
+                        <h4>LANZAROTE BEACH (CANARY ISLANDS; SPAIN)</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunriseLanzaroteDesc" rows="4">On a quiet beach with volcanic rocks, the sun slowly rises. Warm hues light up the sand and the calm sea, creating a beautiful and peaceful morning scene.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>ISTANBUL (TURKEY)</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunriseIstanbulDesc" rows="4">The sky in shades of gray, blue and orange gently embraces the sea. People are already rushing to work, while the city awakens on soft light.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>CAPPADOCIA (TURKEY)</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunriseCappadociaDesc" rows="6">Golden white morning in Cappadocia. The sky fills with hundreds of balloons, slowly rising like gentle breaths of color caught in soft light. Stone chimneys stand tall, wrapped in morning mist that melts beneath the warm embrace of the first sun.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>DAWN-SOMEWHERE ABOVE THE CLOUDS</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunriseDawnDesc" rows="4">While all sleeps and night quietly lingers, somewhere in the distance, among mist and clouds, a sliver of light begins to appear. It gently heralds the arrival of the sun - the birth of a new day and with it, the promise of new hope.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
                 <h2><i class="fas fa-sunset"></i> Sunset Text</h2>
                 <div class="form-group">
-                    <textarea id="sunsetText" rows="10">I've seen many of them. Those fiery ones over the desert, softly pink over the ocean, dramatic in the mountains and quiet above city rooftops.
+                    <textarea id="sunsetText" rows="15">I've seen many of them. Those fiery ones over the desert, softly pink over the ocean, dramatic in the mountains and quiet above city rooftops.
 Each one caught me for a moment 
 and reminded me how beautiful it is when the day respectfully bows into the night.But the most beautiful sunset?
 It's on the terrace of my little house.
@@ -619,47 +1042,118 @@ Maybe because nothing disturbs me. Because there's nothing to catch, prove, or c
 I just sit. I just am. And the world goes to sleep.</textarea>
                 </div>
             </div>
+            
+            <div class="section">
+                <h2><i class="fas fa-images"></i> Sunset Gallery</h2>
+                
+                <div class="cards-grid">
+                    <div class="card-edit">
+                        <h4>NILE IN LUXOR (EGYPT)</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunsetNileDesc" rows="4">The Nile and the palm trees around it glow with the warm colors of the sunset. A moment of quiet and peace that fills you with energy.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>LAKE GARDA (ITALY)</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunsetGardaDesc" rows="4">The sky turns warm shades of orange, seagulls circle above the lake and the water gently laps the shore. A peaceful and magical evening.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>WADI RUM (JORDAN)</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunsetWadiDesc" rows="5">The sun slowly sets behind the sandy dunes of Wadi Rum, painting the desert in warm orange and yellow tones. The silence and vast sky create a feeling of freedom and peace. Every moment invites a deep breath and admiration of the raw nature.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>THULUSDHOO (MALDIVES)</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunsetThulusdhooDesc" rows="4">The sea is calm, gentle waves touch the sandy shore. The sky turns soft shades of grey and pink as the day fades into evening. A moment of tenderness and perfect peace.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>OIA, SANTORINI (GREECE)</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunsetSantoriniDesc" rows="4">A cross in the silence of sunset. Santorini glows in golden hues, the sky breathes with the sea and the heart pauses in the sacredness of the moment.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>KAMNIK (SLOVENIA)</h4>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <textarea id="sunsetKamnikDesc" rows="5">The sky burns with fiery hues.
+The color spreads gently.
+Warmth flows through the air.
+Silence holds the space.
+Everything is at peace.</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- OVERNIGHT STAYS TAB -->
         <div id="overnight" class="tab-content">
             <div class="section">
-                <h2><i class="fas fa-bed"></i> Overnight Stays</h2>
+                <h2><i class="fas fa-bed"></i> Overnight Stays Along The Way</h2>
+                <p class="section-description" style="color: #7d716a; margin-bottom: 20px;">Discover unique accommodations for your travels</p>
                 
-                <div class="card-grid">
+                <div class="cards-grid">
                     <div class="card-edit">
-                        <h3>Unique Stays</h3>
+                        <h4>Unique Stays</h4>
                         <div class="form-group">
                             <label>Title:</label>
-                            <input type="text" id="stay1Title" value="Unique Stays">
+                            <input type="text" id="stayUniqueTitle" value="Unique Stays">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="stay1Desc" rows="4">From treehouses to yurts, find the perfect place to rest.</textarea>
+                            <textarea id="stayUniqueDesc" rows="4">From treehouses to yurts, find the perfect place to rest.</textarea>
+                        </div>
+                        <div class="list-items">
+                            <label>Examples (one per line):</label>
+                            <textarea id="stayUniqueExamples" rows="4">Treehouse in Costa Rica
+Yurt in Mongolia
+Houseboat in Amsterdam</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Hotel Reviews</h3>
+                        <h4>Hotel Reviews</h4>
                         <div class="form-group">
                             <label>Title:</label>
-                            <input type="text" id="stay2Title" value="Hotel Reviews">
+                            <input type="text" id="stayReviewsTitle" value="Hotel Reviews">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="stay2Desc" rows="4">Read our reviews of the best hotels around the world.</textarea>
+                            <textarea id="stayReviewsDesc" rows="4">Read our reviews of the best hotels around the world.</textarea>
+                        </div>
+                        <div class="list-items">
+                            <label>Categories (one per line):</label>
+                            <textarea id="stayReviewsExamples" rows="4">Luxury hotels
+Budget-friendly options
+Unique boutique hotels</textarea>
                         </div>
                     </div>
                     
                     <div class="card-edit">
-                        <h3>Camping Adventures</h3>
+                        <h4>Camping Adventures</h4>
                         <div class="form-group">
                             <label>Title:</label>
-                            <input type="text" id="stay3Title" value="Camping Adventures">
+                            <input type="text" id="stayCampingTitle" value="Camping Adventures">
                         </div>
                         <div class="form-group">
                             <label>Description:</label>
-                            <textarea id="stay3Desc" rows="4">Explore the great outdoors with our camping guides.</textarea>
+                            <textarea id="stayCampingDesc" rows="4">Explore the great outdoors with our camping guides.</textarea>
                         </div>
                     </div>
                 </div>
@@ -671,57 +1165,75 @@ I just sit. I just am. And the world goes to sleep.</textarea>
             <div class="section">
                 <h2><i class="fas fa-envelope"></i> Contact Information</h2>
                 
-                <div class="form-group">
-                    <label>Email:</label>
-                    <input type="text" id="contactEmail" value="info@mytravelblog.com">
-                </div>
-                
-                <div class="form-group">
-                    <label>Phone (optional):</label>
-                    <input type="text" id="contactPhone" placeholder="+1234567890">
-                </div>
-                
-                <div class="form-group">
-                    <label>Instagram:</label>
-                    <input type="text" id="contactInstagram" value="@mytraveljourney">
-                </div>
-                
-                <div class="form-group">
-                    <label>Facebook:</label>
-                    <input type="text" id="contactFacebook" value="My Travel Journey">
-                </div>
-                
-                <div class="form-group">
-                    <label>Collaboration Text:</label>
-                    <textarea id="contactCollab" rows="4">If you'd like to collaborate or have any questions, please email me.</textarea>
+                <div class="cards-grid">
+                    <div class="card-edit">
+                        <h4>Contact Details</h4>
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="text" id="contactEmail" value="info@mytravelblog.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone (optional):</label>
+                            <input type="text" id="contactPhone" placeholder="+1234567890">
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>Collaboration</h4>
+                        <div class="form-group">
+                            <label>Text:</label>
+                            <textarea id="contactCollab" rows="5">If you'd like to collaborate or have any questions, please email me.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <h4>Social Media</h4>
+                        <div class="form-group">
+                            <label>Instagram:</label>
+                            <input type="text" id="contactInstagram" value="@mytraveljourney">
+                        </div>
+                        <div class="form-group">
+                            <label>Facebook:</label>
+                            <input type="text" id="contactFacebook" value="My Travel Journey">
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="section">
                 <h2><i class="fas fa-file-alt"></i> Footer</h2>
                 
-                <div class="form-group">
-                    <label>Copyright Text:</label>
-                    <input type="text" id="footerCopyright" value="© 2025 My Travel Journey | All Rights Reserved">
-                </div>
-                
-                <div class="form-group">
-                    <label>"Made By" Text:</label>
-                    <input type="text" id="footerMadeBy" value="-Made by UTW_Websites-">
+                <div class="cards-grid">
+                    <div class="card-edit">
+                        <div class="form-group">
+                            <label>Copyright Text:</label>
+                            <input type="text" id="footerCopyright" value="© 2025 My Travel Journey | All Rights Reserved">
+                        </div>
+                    </div>
+                    
+                    <div class="card-edit">
+                        <div class="form-group">
+                            <label>"Made By" Text:</label>
+                            <input type="text" id="footerMadeBy" value="-Made by UTW_Websites-">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div style="text-align: center; margin: 40px 0;">
-            <button class="btn" onclick="saveAllContent()" style="font-size: 18px; padding: 20px 40px;">
+        <div class="save-section">
+            <button class="btn btn-save" onclick="saveAllContent()">
                 <i class="fas fa-save"></i> SAVE ALL CONTENT
             </button>
+            <div class="hint" style="margin-top: 15px;">
+                After saving, open your blog with <code>?preview=1</code> to see changes immediately
+            </div>
         </div>
     </div>
     
     <script>
-        // Simple authentication check
-        const ADMIN_PASSWORD = 'travel2025'; // CHANGE THIS!
+        // Simple authentication check (using your existing admin-login.html)
+        const ADMIN_PASSWORD = 'travel2025'; // This should match admin-login.html
         
         function checkAuth() {
             const cookies = document.cookie.split(';');
@@ -752,6 +1264,9 @@ I just sit. I just am. And the world goes to sleep.</textarea>
             
             // Activate selected button
             event.target.classList.add('active');
+            
+            // Save scroll position
+            localStorage.setItem('lastTab', tabId);
         }
         
         // Load existing content
@@ -761,95 +1276,167 @@ I just sit. I just am. And the world goes to sleep.</textarea>
                 try {
                     const content = JSON.parse(saved);
                     
-                    // Home content
+                    // HOME CONTENT
                     if (content.home) {
                         document.getElementById('homeTitle').value = content.home.mainTitle || '';
                         document.getElementById('homeAbout').value = content.home.about || '';
                         
                         // Featured cards
-                        if (content.home.europeCard) {
-                            document.getElementById('cardEuropeTitle').value = content.home.europeCard.title || 'Europe';
-                            document.getElementById('cardEuropeDesc').value = content.home.europeCard.description || '';
-                        }
-                        if (content.home.asiaCard) {
-                            document.getElementById('cardAsiaTitle').value = content.home.asiaCard.title || 'Asia';
-                            document.getElementById('cardAsiaDesc').value = content.home.asiaCard.description || '';
-                        }
-                        if (content.home.americaCard) {
-                            document.getElementById('cardAmericaTitle').value = content.home.americaCard.title || 'America';
-                            document.getElementById('cardAmericaDesc').value = content.home.americaCard.description || '';
+                        if (content.home.featuredCards) {
+                            document.getElementById('featuredEuropeTitle').value = content.home.featuredCards.europe?.title || 'Europe';
+                            document.getElementById('featuredEuropeDesc').value = content.home.featuredCards.europe?.description || '';
+                            document.getElementById('featuredAsiaTitle').value = content.home.featuredCards.asia?.title || 'Asia';
+                            document.getElementById('featuredAsiaDesc').value = content.home.featuredCards.asia?.description || '';
+                            document.getElementById('featuredAmericaTitle').value = content.home.featuredCards.america?.title || 'America';
+                            document.getElementById('featuredAmericaDesc').value = content.home.featuredCards.america?.description || '';
                         }
                         
                         // Cuisine cards
-                        if (content.home.westernCuisine) {
-                            document.getElementById('cuisineWestTitle').value = content.home.westernCuisine.title || 'Western Cuisine';
-                            document.getElementById('cuisineWestDesc').value = content.home.westernCuisine.description || '';
-                        }
-                        if (content.home.easternCuisine) {
-                            document.getElementById('cuisineEastTitle').value = content.home.easternCuisine.title || 'Eastern Cuisine';
-                            document.getElementById('cuisineEastDesc').value = content.home.easternCuisine.description || '';
+                        if (content.home.cuisineCards) {
+                            document.getElementById('cuisineWestTitle').value = content.home.cuisineCards.western?.title || 'Western Cuisine';
+                            document.getElementById('cuisineWestDesc').value = content.home.cuisineCards.western?.description || '';
+                            document.getElementById('cuisineEastTitle').value = content.home.cuisineCards.eastern?.title || 'Eastern Cuisine';
+                            document.getElementById('cuisineEastDesc').value = content.home.cuisineCards.eastern?.description || '';
                         }
                         
                         // Home stories
-                        if (content.home.story1) {
-                            document.getElementById('homeStory1Title').value = content.home.story1.title || '';
-                            document.getElementById('homeStory1Desc').value = content.home.story1.description || '';
-                            document.getElementById('homeStory1Date').value = content.home.story1.date || '';
-                        }
-                        if (content.home.story2) {
-                            document.getElementById('homeStory2Title').value = content.home.story2.title || '';
-                            document.getElementById('homeStory2Desc').value = content.home.story2.description || '';
-                            document.getElementById('homeStory2Date').value = content.home.story2.date || '';
+                        if (content.home.recentStories) {
+                            document.getElementById('homeStory1Title').value = content.home.recentStories.story1?.title || '';
+                            document.getElementById('homeStory1Desc').value = content.home.recentStories.story1?.description || '';
+                            document.getElementById('homeStory1Date').value = content.home.recentStories.story1?.date || '';
+                            document.getElementById('homeStory2Title').value = content.home.recentStories.story2?.title || '';
+                            document.getElementById('homeStory2Desc').value = content.home.recentStories.story2?.description || '';
+                            document.getElementById('homeStory2Date').value = content.home.recentStories.story2?.date || '';
                         }
                     }
                     
-                    // Destinations (Europe example)
-                    if (content.destinations?.Europe) {
-                        document.getElementById('destEurope1Desc').value = content.destinations.Europe['Roman Colosseum']?.description || '';
-                        document.getElementById('destEurope1Facts').value = content.destinations.Europe['Roman Colosseum']?.points?.join('\n') || '';
-                        
-                        document.getElementById('destEurope2Desc').value = content.destinations.Europe['Parisian Streets']?.description || '';
-                        document.getElementById('destEurope2Facts').value = content.destinations.Europe['Parisian Streets']?.points?.join('\n') || '';
-                        
-                        document.getElementById('destEurope3Desc').value = content.destinations.Europe['Alpine Valleys']?.description || '';
-                        document.getElementById('destEurope3Facts').value = content.destinations.Europe['Alpine Valleys']?.points?.join('\n') || '';
+                    // DESTINATIONS - EUROPE
+                    if (content.destinations?.europe) {
+                        document.getElementById('europeColosseumDesc').value = content.destinations.europe['Roman Colosseum']?.description || '';
+                        document.getElementById('europeColosseumFacts').value = content.destinations.europe['Roman Colosseum']?.listItems?.join('\n') || '';
+                        document.getElementById('europeParisDesc').value = content.destinations.europe['Parisian Streets']?.description || '';
+                        document.getElementById('europeParisFacts').value = content.destinations.europe['Parisian Streets']?.listItems?.join('\n') || '';
+                        document.getElementById('europeAlpsDesc').value = content.destinations.europe['Alpine Valleys']?.description || '';
+                        document.getElementById('europeAlpsFacts').value = content.destinations.europe['Alpine Valleys']?.listItems?.join('\n') || '';
                     }
                     
-                    // Stories
-                    if (content.stories?.story1) {
-                        document.getElementById('story1Title').value = content.stories.story1.title || '';
-                        document.getElementById('story1Desc').value = content.stories.story1.description || '';
-                        document.getElementById('story1Date').value = content.stories.story1.date || '';
+                    // DESTINATIONS - ASIA
+                    if (content.destinations?.asia) {
+                        document.getElementById('asiaCherryDesc').value = content.destinations.asia['Japanese Cherry Blossoms']?.description || '';
+                        document.getElementById('asiaCherryFacts').value = content.destinations.asia['Japanese Cherry Blossoms']?.listItems?.join('\n') || '';
+                        document.getElementById('asiaBazaarDesc').value = content.destinations.asia['Indian Bazaars']?.description || '';
+                        document.getElementById('asiaBazaarFacts').value = content.destinations.asia['Indian Bazaars']?.listItems?.join('\n') || '';
+                        document.getElementById('asiaVietnamDesc').value = content.destinations.asia['Vietnamese Rice Fields']?.description || '';
+                        document.getElementById('asiaVietnamFacts').value = content.destinations.asia['Vietnamese Rice Fields']?.listItems?.join('\n') || '';
                     }
                     
-                    // Sunrise/Sunset
+                    // DESTINATIONS - AMERICA
+                    if (content.destinations?.america) {
+                        document.getElementById('americaWestDesc').value = content.destinations.america['Wild West']?.description || '';
+                        document.getElementById('americaWestFacts').value = content.destinations.america['Wild West']?.listItems?.join('\n') || '';
+                        document.getElementById('americaNYDesc').value = content.destinations.america['New York']?.description || '';
+                        document.getElementById('americaNYFacts').value = content.destinations.america['New York']?.listItems?.join('\n') || '';
+                        document.getElementById('americaLatinDesc').value = content.destinations.america['Latin America']?.description || '';
+                        document.getElementById('americaLatinFacts').value = content.destinations.america['Latin America']?.listItems?.join('\n') || '';
+                    }
+                    
+                    // DESTINATIONS - AFRICA
+                    if (content.destinations?.africa) {
+                        document.getElementById('africaKenyaDesc').value = content.destinations.africa['Kenyan Wilderness']?.description || '';
+                        document.getElementById('africaKenyaFacts').value = content.destinations.africa['Kenyan Wilderness']?.listItems?.join('\n') || '';
+                        document.getElementById('africaMoroccoDesc').value = content.destinations.africa['Moroccan Markets']?.description || '';
+                        document.getElementById('africaMoroccoFacts').value = content.destinations.africa['Moroccan Markets']?.listItems?.join('\n') || '';
+                        document.getElementById('africaEgyptDesc').value = content.destinations.africa['Egyptian Deserts']?.description || '';
+                        document.getElementById('africaEgyptFacts').value = content.destinations.africa['Egyptian Deserts']?.listItems?.join('\n') || '';
+                    }
+                    
+                    // DESTINATIONS - OCEANIA
+                    if (content.destinations?.oceania) {
+                        document.getElementById('oceaniaKangarooDesc').value = content.destinations.oceania['Australian Kangaroos']?.description || '';
+                        document.getElementById('oceaniaKangarooFacts').value = content.destinations.oceania['Australian Kangaroos']?.listItems?.join('\n') || '';
+                        document.getElementById('oceaniaReefDesc').value = content.destinations.oceania['Great Barrier Reef']?.description || '';
+                        document.getElementById('oceaniaReefFacts').value = content.destinations.oceania['Great Barrier Reef']?.listItems?.join('\n') || '';
+                        document.getElementById('oceaniaIslandsDesc').value = content.destinations.oceania['Paradise Islands']?.description || '';
+                        document.getElementById('oceaniaIslandsFacts').value = content.destinations.oceania['Paradise Islands']?.listItems?.join('\n') || '';
+                    }
+                    
+                    // DESTINATIONS - MIDDLE EAST
+                    if (content.destinations?.['Middle East']) {
+                        document.getElementById('mideastDubaiDesc').value = content.destinations['Middle East']['Dubai\'s Modern Architecture']?.description || '';
+                        document.getElementById('mideastDubaiFacts').value = content.destinations['Middle East']['Dubai\'s Modern Architecture']?.listItems?.join('\n') || '';
+                        document.getElementById('mideastPetraDesc').value = content.destinations['Middle East']['Petra\'s Ancient City']?.description || '';
+                        document.getElementById('mideastPetraFacts').value = content.destinations['Middle East']['Petra\'s Ancient City']?.listItems?.join('\n') || '';
+                        document.getElementById('mideastPyramidsDesc').value = content.destinations['Middle East']['Egyptian Pyramids']?.description || '';
+                        document.getElementById('mideastPyramidsFacts').value = content.destinations['Middle East']['Egyptian Pyramids']?.listItems?.join('\n') || '';
+                    }
+                    
+                    // DESTINATIONS - MARIA AT HOME
+                    if (content.destinations?.['maria at home']) {
+                        document.getElementById('mariaGardenDesc').value = content.destinations['maria at home']['My Garden']?.description || '';
+                        document.getElementById('mariaCookingDesc').value = content.destinations['maria at home']['Cooking at Home']?.description || '';
+                        document.getElementById('mariaCozyDesc').value = content.destinations['maria at home']['Cozy Evenings']?.description || '';
+                    }
+                    
+                    // TRAVEL STORIES
+                    if (content.stories) {
+                        for (let i = 1; i <= 8; i++) {
+                            const storyKey = `story${i}`;
+                            if (content.stories[storyKey]) {
+                                document.getElementById(`${storyKey}Title`).value = content.stories[storyKey].title || '';
+                                document.getElementById(`${storyKey}Desc`).value = content.stories[storyKey].description || '';
+                                document.getElementById(`${storyKey}Date`).value = content.stories[storyKey].date || '';
+                            }
+                        }
+                    }
+                    
+                    // SUNRISE/SUNSET
                     if (content.sunriseSunset) {
                         document.getElementById('sunriseText').value = content.sunriseSunset.sunriseText || '';
                         document.getElementById('sunsetText').value = content.sunriseSunset.sunsetText || '';
+                        
+                        // Sunrise gallery
+                        if (content.sunriseSunset.sunriseGallery) {
+                            document.getElementById('sunriseLanzaroteDesc').value = content.sunriseSunset.sunriseGallery.lanzarote?.description || '';
+                            document.getElementById('sunriseIstanbulDesc').value = content.sunriseSunset.sunriseGallery.istanbul?.description || '';
+                            document.getElementById('sunriseCappadociaDesc').value = content.sunriseSunset.sunriseGallery.cappadocia?.description || '';
+                            document.getElementById('sunriseDawnDesc').value = content.sunriseSunset.sunriseGallery.dawn?.description || '';
+                        }
+                        
+                        // Sunset gallery
+                        if (content.sunriseSunset.sunsetGallery) {
+                            document.getElementById('sunsetNileDesc').value = content.sunriseSunset.sunsetGallery.nile?.description || '';
+                            document.getElementById('sunsetGardaDesc').value = content.sunriseSunset.sunsetGallery.garda?.description || '';
+                            document.getElementById('sunsetWadiDesc').value = content.sunriseSunset.sunsetGallery.wadi?.description || '';
+                            document.getElementById('sunsetThulusdhooDesc').value = content.sunriseSunset.sunsetGallery.thulusdhoo?.description || '';
+                            document.getElementById('sunsetSantoriniDesc').value = content.sunriseSunset.sunsetGallery.santorini?.description || '';
+                            document.getElementById('sunsetKamnikDesc').value = content.sunriseSunset.sunsetGallery.kamnik?.description || '';
+                        }
                     }
                     
-                    // Overnight stays
+                    // OVERNIGHT STAYS
                     if (content.overnightStays) {
-                        document.getElementById('stay1Title').value = content.overnightStays.unique?.title || '';
-                        document.getElementById('stay1Desc').value = content.overnightStays.unique?.description || '';
+                        document.getElementById('stayUniqueTitle').value = content.overnightStays.unique?.title || '';
+                        document.getElementById('stayUniqueDesc').value = content.overnightStays.unique?.description || '';
+                        document.getElementById('stayUniqueExamples').value = content.overnightStays.unique?.listItems?.join('\n') || '';
                         
-                        document.getElementById('stay2Title').value = content.overnightStays.reviews?.title || '';
-                        document.getElementById('stay2Desc').value = content.overnightStays.reviews?.description || '';
+                        document.getElementById('stayReviewsTitle').value = content.overnightStays.reviews?.title || '';
+                        document.getElementById('stayReviewsDesc').value = content.overnightStays.reviews?.description || '';
+                        document.getElementById('stayReviewsExamples').value = content.overnightStays.reviews?.listItems?.join('\n') || '';
                         
-                        document.getElementById('stay3Title').value = content.overnightStays.camping?.title || '';
-                        document.getElementById('stay3Desc').value = content.overnightStays.camping?.description || '';
+                        document.getElementById('stayCampingTitle').value = content.overnightStays.camping?.title || '';
+                        document.getElementById('stayCampingDesc').value = content.overnightStays.camping?.description || '';
                     }
                     
-                    // Contact
+                    // CONTACT
                     if (content.contact) {
                         document.getElementById('contactEmail').value = content.contact.email || '';
                         document.getElementById('contactPhone').value = content.contact.phone || '';
+                        document.getElementById('contactCollab').value = content.contact.collaboration || '';
                         document.getElementById('contactInstagram').value = content.contact.instagram || '';
                         document.getElementById('contactFacebook').value = content.contact.facebook || '';
-                        document.getElementById('contactCollab').value = content.contact.collaboration || '';
                     }
                     
-                    // Footer
+                    // FOOTER
                     if (content.footer) {
                         document.getElementById('footerCopyright').value = content.footer.copyright || '';
                         document.getElementById('footerMadeBy').value = content.footer.madeBy || '';
@@ -861,111 +1448,276 @@ I just sit. I just am. And the world goes to sleep.</textarea>
                     console.warn('Could not load saved content:', e);
                     showStatus('⚠️ Could not load saved content', 'error');
                 }
+            } else {
+                showStatus('ℹ️ No saved content found. Edit and save to create new content.', 'success');
             }
         }
         
-        // Save all content
+        // Save ALL content
         function saveAllContent() {
             const content = {
                 home: {
                     mainTitle: document.getElementById('homeTitle').value,
                     about: document.getElementById('homeAbout').value,
-                    europeCard: {
-                        title: document.getElementById('cardEuropeTitle').value,
-                        description: document.getElementById('cardEuropeDesc').value
-                    },
-                    asiaCard: {
-                        title: document.getElementById('cardAsiaTitle').value,
-                        description: document.getElementById('cardAsiaDesc').value
-                    },
-                    americaCard: {
-                        title: document.getElementById('cardAmericaTitle').value,
-                        description: document.getElementById('cardAmericaDesc').value
-                    },
-                    westernCuisine: {
-                        title: document.getElementById('cuisineWestTitle').value,
-                        description: document.getElementById('cuisineWestDesc').value
-                    },
-                    easternCuisine: {
-                        title: document.getElementById('cuisineEastTitle').value,
-                        description: document.getElementById('cuisineEastDesc').value
-                    },
-                    story1: {
-                        title: document.getElementById('homeStory1Title').value,
-                        description: document.getElementById('homeStory1Desc').value,
-                        date: document.getElementById('homeStory1Date').value
-                    },
-                    story2: {
-                        title: document.getElementById('homeStory2Title').value,
-                        description: document.getElementById('homeStory2Desc').value,
-                        date: document.getElementById('homeStory2Date').value
-                    }
-                },
-                destinations: {
-                    Europe: {
-                        'Roman Colosseum': {
-                            description: document.getElementById('destEurope1Desc').value,
-                            points: document.getElementById('destEurope1Facts').value.split('\n').filter(p => p.trim())
+                    featuredCards: {
+                        europe: {
+                            title: document.getElementById('featuredEuropeTitle').value,
+                            description: document.getElementById('featuredEuropeDesc').value
                         },
-                        'Parisian Streets': {
-                            description: document.getElementById('destEurope2Desc').value,
-                            points: document.getElementById('destEurope2Facts').value.split('\n').filter(p => p.trim())
+                        asia: {
+                            title: document.getElementById('featuredAsiaTitle').value,
+                            description: document.getElementById('featuredAsiaDesc').value
                         },
-                        'Alpine Valleys': {
-                            description: document.getElementById('destEurope3Desc').value,
-                            points: document.getElementById('destEurope3Facts').value.split('\n').filter(p => p.trim())
+                        america: {
+                            title: document.getElementById('featuredAmericaTitle').value,
+                            description: document.getElementById('featuredAmericaDesc').value
+                        }
+                    },
+                    cuisineCards: {
+                        western: {
+                            title: document.getElementById('cuisineWestTitle').value,
+                            description: document.getElementById('cuisineWestDesc').value
+                        },
+                        eastern: {
+                            title: document.getElementById('cuisineEastTitle').value,
+                            description: document.getElementById('cuisineEastDesc').value
+                        }
+                    },
+                    recentStories: {
+                        story1: {
+                            title: document.getElementById('homeStory1Title').value,
+                            description: document.getElementById('homeStory1Desc').value,
+                            date: document.getElementById('homeStory1Date').value
+                        },
+                        story2: {
+                            title: document.getElementById('homeStory2Title').value,
+                            description: document.getElementById('homeStory2Desc').value,
+                            date: document.getElementById('homeStory2Date').value
                         }
                     }
-                    // Add more destinations similarly...
                 },
+                
+                destinations: {
+                    europe: {
+                        'Roman Colosseum': {
+                            description: document.getElementById('europeColosseumDesc').value,
+                            listItems: document.getElementById('europeColosseumFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Parisian Streets': {
+                            description: document.getElementById('europeParisDesc').value,
+                            listItems: document.getElementById('europeParisFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Alpine Valleys': {
+                            description: document.getElementById('europeAlpsDesc').value,
+                            listItems: document.getElementById('europeAlpsFacts').value.split('\n').filter(item => item.trim())
+                        }
+                    },
+                    asia: {
+                        'Japanese Cherry Blossoms': {
+                            description: document.getElementById('asiaCherryDesc').value,
+                            listItems: document.getElementById('asiaCherryFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Indian Bazaars': {
+                            description: document.getElementById('asiaBazaarDesc').value,
+                            listItems: document.getElementById('asiaBazaarFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Vietnamese Rice Fields': {
+                            description: document.getElementById('asiaVietnamDesc').value,
+                            listItems: document.getElementById('asiaVietnamFacts').value.split('\n').filter(item => item.trim())
+                        }
+                    },
+                    america: {
+                        'Wild West': {
+                            description: document.getElementById('americaWestDesc').value,
+                            listItems: document.getElementById('americaWestFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'New York': {
+                            description: document.getElementById('americaNYDesc').value,
+                            listItems: document.getElementById('americaNYFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Latin America': {
+                            description: document.getElementById('americaLatinDesc').value,
+                            listItems: document.getElementById('americaLatinFacts').value.split('\n').filter(item => item.trim())
+                        }
+                    },
+                    africa: {
+                        'Kenyan Wilderness': {
+                            description: document.getElementById('africaKenyaDesc').value,
+                            listItems: document.getElementById('africaKenyaFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Moroccan Markets': {
+                            description: document.getElementById('africaMoroccoDesc').value,
+                            listItems: document.getElementById('africaMoroccoFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Egyptian Deserts': {
+                            description: document.getElementById('africaEgyptDesc').value,
+                            listItems: document.getElementById('africaEgyptFacts').value.split('\n').filter(item => item.trim())
+                        }
+                    },
+                    oceania: {
+                        'Australian Kangaroos': {
+                            description: document.getElementById('oceaniaKangarooDesc').value,
+                            listItems: document.getElementById('oceaniaKangarooFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Great Barrier Reef': {
+                            description: document.getElementById('oceaniaReefDesc').value,
+                            listItems: document.getElementById('oceaniaReefFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Paradise Islands': {
+                            description: document.getElementById('oceaniaIslandsDesc').value,
+                            listItems: document.getElementById('oceaniaIslandsFacts').value.split('\n').filter(item => item.trim())
+                        }
+                    },
+                    'Middle East': {
+                        'Dubai\'s Modern Architecture': {
+                            description: document.getElementById('mideastDubaiDesc').value,
+                            listItems: document.getElementById('mideastDubaiFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Petra\'s Ancient City': {
+                            description: document.getElementById('mideastPetraDesc').value,
+                            listItems: document.getElementById('mideastPetraFacts').value.split('\n').filter(item => item.trim())
+                        },
+                        'Egyptian Pyramids': {
+                            description: document.getElementById('mideastPyramidsDesc').value,
+                            listItems: document.getElementById('mideastPyramidsFacts').value.split('\n').filter(item => item.trim())
+                        }
+                    },
+                    'maria at home': {
+                        'My Garden': {
+                            description: document.getElementById('mariaGardenDesc').value
+                        },
+                        'Cooking at Home': {
+                            description: document.getElementById('mariaCookingDesc').value
+                        },
+                        'Cozy Evenings': {
+                            description: document.getElementById('mariaCozyDesc').value
+                        }
+                    }
+                },
+                
                 stories: {
                     story1: {
                         title: document.getElementById('story1Title').value,
                         description: document.getElementById('story1Desc').value,
                         date: document.getElementById('story1Date').value
+                    },
+                    story2: {
+                        title: document.getElementById('story2Title').value,
+                        description: document.getElementById('story2Desc').value,
+                        date: document.getElementById('story2Date').value
+                    },
+                    story3: {
+                        title: document.getElementById('story3Title').value,
+                        description: document.getElementById('story3Desc').value,
+                        date: document.getElementById('story3Date').value
+                    },
+                    story4: {
+                        title: document.getElementById('story4Title').value,
+                        description: document.getElementById('story4Desc').value,
+                        date: document.getElementById('story4Date').value
+                    },
+                    story5: {
+                        title: document.getElementById('story5Title').value,
+                        description: document.getElementById('story5Desc').value,
+                        date: document.getElementById('story5Date').value
+                    },
+                    story6: {
+                        title: document.getElementById('story6Title').value,
+                        description: document.getElementById('story6Desc').value,
+                        date: document.getElementById('story6Date').value
+                    },
+                    story7: {
+                        title: document.getElementById('story7Title').value,
+                        description: document.getElementById('story7Desc').value,
+                        date: document.getElementById('story7Date').value
+                    },
+                    story8: {
+                        title: document.getElementById('story8Title').value,
+                        description: document.getElementById('story8Desc').value,
+                        date: document.getElementById('story8Date').value
                     }
-                    // Add more stories...
                 },
+                
                 sunriseSunset: {
                     sunriseText: document.getElementById('sunriseText').value,
-                    sunsetText: document.getElementById('sunsetText').value
-                },
-                overnightStays: {
-                    unique: {
-                        title: document.getElementById('stay1Title').value,
-                        description: document.getElementById('stay1Desc').value
+                    sunsetText: document.getElementById('sunsetText').value,
+                    sunriseGallery: {
+                        lanzarote: {
+                            description: document.getElementById('sunriseLanzaroteDesc').value
+                        },
+                        istanbul: {
+                            description: document.getElementById('sunriseIstanbulDesc').value
+                        },
+                        cappadocia: {
+                            description: document.getElementById('sunriseCappadociaDesc').value
+                        },
+                        dawn: {
+                            description: document.getElementById('sunriseDawnDesc').value
+                        }
                     },
-                    reviews: {
-                        title: document.getElementById('stay2Title').value,
-                        description: document.getElementById('stay2Desc').value
-                    },
-                    camping: {
-                        title: document.getElementById('stay3Title').value,
-                        description: document.getElementById('stay3Desc').value
+                    sunsetGallery: {
+                        nile: {
+                            description: document.getElementById('sunsetNileDesc').value
+                        },
+                        garda: {
+                            description: document.getElementById('sunsetGardaDesc').value
+                        },
+                        wadi: {
+                            description: document.getElementById('sunsetWadiDesc').value
+                        },
+                        thulusdhoo: {
+                            description: document.getElementById('sunsetThulusdhooDesc').value
+                        },
+                        santorini: {
+                            description: document.getElementById('sunsetSantoriniDesc').value
+                        },
+                        kamnik: {
+                            description: document.getElementById('sunsetKamnikDesc').value
+                        }
                     }
                 },
+                
+                overnightStays: {
+                    unique: {
+                        title: document.getElementById('stayUniqueTitle').value,
+                        description: document.getElementById('stayUniqueDesc').value,
+                        listItems: document.getElementById('stayUniqueExamples').value.split('\n').filter(item => item.trim())
+                    },
+                    reviews: {
+                        title: document.getElementById('stayReviewsTitle').value,
+                        description: document.getElementById('stayReviewsDesc').value,
+                        listItems: document.getElementById('stayReviewsExamples').value.split('\n').filter(item => item.trim())
+                    },
+                    camping: {
+                        title: document.getElementById('stayCampingTitle').value,
+                        description: document.getElementById('stayCampingDesc').value
+                    }
+                },
+                
                 contact: {
                     email: document.getElementById('contactEmail').value,
                     phone: document.getElementById('contactPhone').value,
+                    collaboration: document.getElementById('contactCollab').value,
                     instagram: document.getElementById('contactInstagram').value,
-                    facebook: document.getElementById('contactFacebook').value,
-                    collaboration: document.getElementById('contactCollab').value
+                    facebook: document.getElementById('contactFacebook').value
                 },
+                
                 footer: {
                     copyright: document.getElementById('footerCopyright').value,
                     madeBy: document.getElementById('footerMadeBy').value
                 },
+                
                 lastUpdated: new Date().toISOString()
             };
             
             // Save to localStorage
             localStorage.setItem('travel_blog_content', JSON.stringify(content, null, 2));
             
-            // Also save to live site key
+            // Also save to live site key (for the content-updater.js)
             localStorage.setItem('travel_blog_live_content', JSON.stringify(content));
             localStorage.setItem('travel_blog_last_update', Date.now().toString());
             
-            showStatus('✅ ALL content saved! Open your blog with ?preview=1 to see changes.', 'success');
+            showStatus('✅ ALL content saved successfully! Open your blog with ?preview=1 to see changes.', 'success');
         }
         
         function openPreview() {
@@ -991,6 +1743,19 @@ I just sit. I just am. And the world goes to sleep.</textarea>
         
         // Initialize
         if (checkAuth()) {
+            // Restore last active tab
+            const lastTab = localStorage.getItem('lastTab') || 'home';
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.onclick.toString().includes(lastTab)) {
+                    btn.classList.add('active');
+                }
+            });
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                if (tab.id === lastTab) {
+                    tab.classList.add('active');
+                }
+            });
+            
             loadContent();
         }
     </script>
