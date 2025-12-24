@@ -1,4 +1,4 @@
-// SIMPLE CONTENT UPDATER - Updates ALL content from localStorage
+// COMPLETE CONTENT UPDATER - Updates EVERYTHING from localStorage
 class ContentUpdater {
     constructor() {
         this.contentData = null;
@@ -21,6 +21,13 @@ class ContentUpdater {
         
         // Update ALL content on page
         this.updateAllContent();
+        
+        // Auto-check for updates in preview mode
+        if (isPreview) {
+            setInterval(() => {
+                this.checkForUpdates();
+            }, 5000);
+        }
         
         console.log('ContentUpdater: Ready');
     }
@@ -50,9 +57,42 @@ class ContentUpdater {
         return {
             home: {
                 mainTitle: document.querySelector('#home h2')?.textContent || 'Welcome to My Travel Blog',
-                about: document.querySelector('#home .card p')?.innerHTML || 'About me text...'
+                about: this.getAboutText(),
+                featuredCards: this.getFeaturedCards(),
+                cuisineCards: this.getCuisineCards(),
+                recentStories: this.getRecentStories()
             },
             lastUpdated: new Date().toISOString()
+        };
+    }
+    
+    getAboutText() {
+        const aboutCard = document.querySelector('#home .card');
+        if (!aboutCard) return '';
+        
+        const paragraphs = aboutCard.querySelectorAll('p');
+        let aboutText = '';
+        paragraphs.forEach(p => {
+            aboutText += p.innerHTML + '\n\n';
+        });
+        return aboutText.trim();
+    }
+    
+    getFeaturedCards() {
+        const cards = document.querySelectorAll('#home .grid .card');
+        return {
+            europe: {
+                title: cards[0]?.querySelector('h3')?.textContent || 'Europe',
+                description: cards[0]?.querySelector('p')?.textContent || ''
+            },
+            asia: {
+                title: cards[1]?.querySelector('h3')?.textContent || 'Asia',
+                description: cards[1]?.querySelector('p')?.textContent || ''
+            },
+            america: {
+                title: cards[2]?.querySelector('h3')?.textContent || 'America',
+                description: cards[2]?.querySelector('p')?.textContent || ''
+            }
         };
     }
     
@@ -65,7 +105,7 @@ class ContentUpdater {
         // Update ALL DESTINATIONS
         this.updateDestinations();
         
-        // Update TRAVEL STORIES
+        // Update ALL TRAVEL STORIES
         this.updateTravelStories();
         
         // Update SUNRISE & SUNSET
@@ -84,42 +124,47 @@ class ContentUpdater {
         // Main title
         this.updateText('#home h2', this.contentData.home?.mainTitle);
         
-        // About me text (all in one)
-        const aboutContainer = document.querySelector('#home .card');
-        if (aboutContainer && this.contentData.home?.about) {
-            aboutContainer.innerHTML = this.formatText(this.contentData.home.about);
+        // About me text (ALL in one)
+        if (this.contentData.home?.about) {
+            const aboutCard = document.querySelector('#home .card');
+            if (aboutCard) {
+                // Clear existing content
+                aboutCard.innerHTML = '<center><h3>About Me</h3></center>';
+                
+                // Add the paragraphs
+                const paragraphs = this.contentData.home.about.split('\n\n');
+                paragraphs.forEach(para => {
+                    if (para.trim()) {
+                        const p = document.createElement('p');
+                        p.innerHTML = this.formatText(para.trim());
+                        aboutCard.appendChild(p);
+                    }
+                });
+                
+                // Add signature image back
+                const signature = document.createElement('img');
+                signature.src = 'Slike/podpis (1).png';
+                signature.alt = 'Signature';
+                signature.style.cssText = 'width: 5rem; height: 5rem; margin-top: 1rem; margin-left:60%; position: relative;';
+                aboutCard.appendChild(signature);
+            }
         }
         
         // Featured destination cards
-        this.updateFeaturedCards();
+        this.updateElement('#home .grid .card:nth-child(1) h3', this.contentData.home?.featuredCards?.europe?.title);
+        this.updateElement('#home .grid .card:nth-child(1) p', this.contentData.home?.featuredCards?.europe?.description);
         
-        // World Cuisine cards
+        this.updateElement('#home .grid .card:nth-child(2) h3', this.contentData.home?.featuredCards?.asia?.title);
+        this.updateElement('#home .grid .card:nth-child(2) p', this.contentData.home?.featuredCards?.asia?.description);
+        
+        this.updateElement('#home .grid .card:nth-child(3) h3', this.contentData.home?.featuredCards?.america?.title);
+        this.updateElement('#home .grid .card:nth-child(3) p', this.contentData.home?.featuredCards?.america?.description);
+        
+        // Cuisine cards
         this.updateCuisineCards();
         
-        // Recent travel stories on home page
+        // Recent stories on home
         this.updateHomeStories();
-    }
-    
-    updateFeaturedCards() {
-        const cards = document.querySelectorAll('#home .grid .card');
-        
-        // Europe card
-        if (cards[0] && this.contentData.home?.europeCard) {
-            this.updateText(cards[0].querySelector('h3'), this.contentData.home.europeCard.title);
-            this.updateText(cards[0].querySelector('p'), this.contentData.home.europeCard.description);
-        }
-        
-        // Asia card
-        if (cards[1] && this.contentData.home?.asiaCard) {
-            this.updateText(cards[1].querySelector('h3'), this.contentData.home.asiaCard.title);
-            this.updateText(cards[1].querySelector('p'), this.contentData.home.asiaCard.description);
-        }
-        
-        // America card
-        if (cards[2] && this.contentData.home?.americaCard) {
-            this.updateText(cards[2].querySelector('h3'), this.contentData.home.americaCard.title);
-            this.updateText(cards[2].querySelector('p'), this.contentData.home.americaCard.description);
-        }
     }
     
     updateCuisineCards() {
@@ -135,16 +180,14 @@ class ContentUpdater {
         if (nextElement && nextElement.classList.contains('grid')) {
             const cards = nextElement.querySelectorAll('.card');
             
-            // Western cuisine card
-            if (cards[0] && this.contentData.home?.westernCuisine) {
-                this.updateText(cards[0].querySelector('h3'), this.contentData.home.westernCuisine.title);
-                this.updateText(cards[0].querySelector('p'), this.contentData.home.westernCuisine.description);
+            if (this.contentData.home?.cuisineCards?.western) {
+                this.updateElement(cards[0]?.querySelector('h3'), this.contentData.home.cuisineCards.western.title);
+                this.updateElement(cards[0]?.querySelector('p'), this.contentData.home.cuisineCards.western.description);
             }
             
-            // Eastern cuisine card
-            if (cards[1] && this.contentData.home?.easternCuisine) {
-                this.updateText(cards[1].querySelector('h3'), this.contentData.home.easternCuisine.title);
-                this.updateText(cards[1].querySelector('p'), this.contentData.home.easternCuisine.description);
+            if (this.contentData.home?.cuisineCards?.eastern) {
+                this.updateElement(cards[1]?.querySelector('h3'), this.contentData.home.cuisineCards.eastern.title);
+                this.updateElement(cards[1]?.querySelector('p'), this.contentData.home.cuisineCards.eastern.description);
             }
         }
     }
@@ -162,103 +205,94 @@ class ContentUpdater {
         if (nextElement && nextElement.classList.contains('grid')) {
             const cards = nextElement.querySelectorAll('.card');
             
-            // Story 1
-            if (cards[0] && this.contentData.home?.story1) {
-                this.updateText(cards[0].querySelector('h3'), this.contentData.home.story1.title);
-                this.updateText(cards[0].querySelector('p:nth-child(2)'), this.contentData.home.story1.description);
-                this.updateText(cards[0].querySelector('p:last-child'), this.contentData.home.story1.date);
+            if (this.contentData.home?.recentStories?.story1) {
+                this.updateElement(cards[0]?.querySelector('h3'), this.contentData.home.recentStories.story1.title);
+                this.updateElement(cards[0]?.querySelector('p:nth-child(2)'), this.contentData.home.recentStories.story1.description);
+                this.updateElement(cards[0]?.querySelector('p:last-child'), this.contentData.home.recentStories.story1.date);
             }
             
-            // Story 2
-            if (cards[1] && this.contentData.home?.story2) {
-                this.updateText(cards[1].querySelector('h3'), this.contentData.home.story2.title);
-                this.updateText(cards[1].querySelector('p:nth-child(2)'), this.contentData.home.story2.description);
-                this.updateText(cards[1].querySelector('p:last-child'), this.contentData.home.story2.date);
+            if (this.contentData.home?.recentStories?.story2) {
+                this.updateElement(cards[1]?.querySelector('h3'), this.contentData.home.recentStories.story2.title);
+                this.updateElement(cards[1]?.querySelector('p:nth-child(2)'), this.contentData.home.recentStories.story2.description);
+                this.updateElement(cards[1]?.querySelector('p:last-child'), this.contentData.home.recentStories.story2.date);
             }
         }
     }
     
     updateDestinations() {
         // EUROPE
-        this.updateDestinationSection('europe', 'Europe', [
+        this.updateDestinationSection('europe', [
             'Roman Colosseum',
-            'Parisian Streets',
+            'Parisian Streets', 
             'Alpine Valleys'
         ]);
         
         // ASIA
-        this.updateDestinationSection('asia', 'Asia', [
+        this.updateDestinationSection('asia', [
             'Japanese Cherry Blossoms',
             'Indian Bazaars',
             'Vietnamese Rice Fields'
         ]);
         
         // AMERICA
-        this.updateDestinationSection('america', 'America', [
+        this.updateDestinationSection('america', [
             'Wild West',
             'New York',
             'Latin America'
         ]);
         
         // AFRICA
-        this.updateDestinationSection('africa', 'Africa', [
+        this.updateDestinationSection('africa', [
             'Kenyan Wilderness',
             'Moroccan Markets',
             'Egyptian Deserts'
         ]);
         
         // OCEANIA
-        this.updateDestinationSection('oceania', 'Oceania', [
+        this.updateDestinationSection('oceania', [
             'Australian Kangaroos',
             'Great Barrier Reef',
             'Paradise Islands'
         ]);
         
         // MIDDLE EAST
-        this.updateDestinationSection('Middle East', 'Middle East', [
+        this.updateDestinationSection('Middle East', [
             'Dubai\'s Modern Architecture',
             'Petra\'s Ancient City',
             'Egyptian Pyramids'
         ]);
         
         // MARIA AT HOME
-        this.updateDestinationSection('maria at home', 'Maria At Home', [
+        this.updateDestinationSection('maria at home', [
             'My Garden',
             'Cooking at Home',
             'Cozy Evenings'
         ]);
     }
     
-    updateDestinationSection(sectionId, sectionName, cardTitles) {
+    updateDestinationSection(sectionId, cardTitles) {
         const section = document.getElementById(sectionId);
-        if (!section || !this.contentData.destinations?.[sectionName]) return;
+        if (!section || !this.contentData.destinations?.[sectionId]) return;
         
-        const destData = this.contentData.destinations[sectionName];
+        const destData = this.contentData.destinations[sectionId];
         const cards = section.querySelectorAll('.card');
         
-        // Update each card in the section
         cardTitles.forEach((title, index) => {
             if (cards[index] && destData[title]) {
                 // Update title
-                const titleElement = cards[index].querySelector('h3');
-                if (titleElement) {
-                    titleElement.textContent = title;
-                }
+                this.updateElement(cards[index].querySelector('h3'), title);
                 
                 // Update description
-                const descElement = cards[index].querySelector('p');
-                if (descElement && destData[title].description) {
-                    descElement.textContent = destData[title].description;
-                }
+                this.updateElement(cards[index].querySelector('p'), destData[title].description);
                 
-                // Update additional content (ul if exists)
-                const ulElement = cards[index].querySelector('ul');
-                if (ulElement && destData[title].points) {
-                    ulElement.innerHTML = '';
-                    destData[title].points.forEach(point => {
+                // Update list items if they exist
+                const ul = cards[index].querySelector('ul');
+                if (ul && destData[title].listItems) {
+                    ul.innerHTML = '';
+                    destData[title].listItems.forEach(item => {
                         const li = document.createElement('li');
-                        li.textContent = point;
-                        ulElement.appendChild(li);
+                        li.textContent = item;
+                        ul.appendChild(li);
                     });
                 }
             }
@@ -273,24 +307,15 @@ class ContentUpdater {
         if (!grid) return;
         
         const cards = grid.querySelectorAll('.card');
-        const storyKeys = Object.keys(this.contentData.stories);
+        const storyKeys = Object.keys(this.contentData.stories).sort();
         
-        // Update each story card
         storyKeys.forEach((key, index) => {
             if (cards[index] && this.contentData.stories[key]) {
                 const story = this.contentData.stories[key];
                 
-                // Update title
-                const title = cards[index].querySelector('h3');
-                if (title) title.textContent = story.title;
-                
-                // Update description
-                const desc = cards[index].querySelector('p:nth-child(2)');
-                if (desc) desc.textContent = story.description;
-                
-                // Update date
-                const date = cards[index].querySelector('p:last-child');
-                if (date) date.textContent = story.date;
+                this.updateElement(cards[index].querySelector('h3'), story.title);
+                this.updateElement(cards[index].querySelector('p:nth-child(2)'), story.description);
+                this.updateElement(cards[index].querySelector('p:last-child'), story.date);
             }
         });
     }
@@ -299,7 +324,7 @@ class ContentUpdater {
         const section = document.getElementById('sunset & sunrise');
         if (!section || !this.contentData.sunriseSunset) return;
         
-        // Update sunrise text
+        // Update sunrise main text
         const sunriseCard = section.querySelector('.card');
         if (sunriseCard && this.contentData.sunriseSunset.sunriseText) {
             const paragraph = sunriseCard.querySelector('p');
@@ -308,7 +333,7 @@ class ContentUpdater {
             }
         }
         
-        // Update sunset text (find second card)
+        // Update sunset main text (second card)
         const cards = section.querySelectorAll('.card');
         if (cards[1] && this.contentData.sunriseSunset.sunsetText) {
             const paragraph = cards[1].querySelector('p');
@@ -317,32 +342,38 @@ class ContentUpdater {
             }
         }
         
-        // Update sunrise gallery
-        this.updateGallery('sunrisePhotos');
+        // Update sunrise gallery cards
+        this.updateGalleryCards('LANZAROTE BEACH', this.contentData.sunriseSunset?.sunriseGallery?.lanzarote);
+        this.updateGalleryCards('ISTANBUL (TURKEY)', this.contentData.sunriseSunset?.sunriseGallery?.istanbul);
+        this.updateGalleryCards('CAPPADOCIA (TURKEY)', this.contentData.sunriseSunset?.sunriseGallery?.cappadocia);
+        this.updateGalleryCards('DAWN-SOMEWHERE ABOVE THE CLOUDS', this.contentData.sunriseSunset?.sunriseGallery?.dawn);
         
-        // Update sunset gallery
-        this.updateGallery('sunsetPhotos');
+        // Update sunset gallery cards
+        this.updateGalleryCards('NILE IN LUXOR (EGYPT)', this.contentData.sunriseSunset?.sunsetGallery?.nile);
+        this.updateGalleryCards('LAKE GARDA (ITALY)', this.contentData.sunriseSunset?.sunsetGallery?.garda);
+        this.updateGalleryCards('WADI RUM (JORDAN)', this.contentData.sunriseSunset?.sunsetGallery?.wadi);
+        this.updateGalleryCards('THULUSDHOO (MALDIVES)', this.contentData.sunriseSunset?.sunsetGallery?.thulusdhoo);
+        this.updateGalleryCards('OIA, SANTORINI (GREECE)', this.contentData.sunriseSunset?.sunsetGallery?.santorini);
+        this.updateGalleryCards('KAMNIK (SLOVENIA)', this.contentData.sunriseSunset?.sunsetGallery?.kamnik);
     }
     
-    updateGallery(galleryType) {
+    updateGalleryCards(title, data) {
+        if (!data) return;
+        
         const section = document.getElementById('sunset & sunrise');
-        if (!section || !this.contentData.sunriseSunset?.[galleryType]) return;
+        const allH3 = section.querySelectorAll('h3');
         
-        // Find all h3 elements in the section
-        const h3Elements = section.querySelectorAll('h3');
-        const galleryData = this.contentData.sunriseSunset[galleryType];
-        
-        // Update each h3 and its following p element
-        h3Elements.forEach(h3 => {
-            const title = h3.textContent.trim();
-            if (galleryData[title]) {
-                // Update title if needed (optional)
-                // h3.textContent = galleryData[title].title;
+        allH3.forEach(h3 => {
+            if (h3.textContent.trim() === title) {
+                // Update title if different
+                if (data.title && data.title !== title) {
+                    h3.textContent = data.title;
+                }
                 
                 // Update description
-                const pElement = h3.nextElementSibling;
-                if (pElement && pElement.tagName === 'P' && galleryData[title].description) {
-                    pElement.textContent = galleryData[title].description;
+                const nextP = h3.nextElementSibling;
+                if (nextP && nextP.tagName === 'P' && data.description) {
+                    nextP.textContent = data.description;
                 }
             }
         });
@@ -356,20 +387,42 @@ class ContentUpdater {
         
         // Unique Stays
         if (cards[0] && this.contentData.overnightStays.unique) {
-            this.updateText(cards[0].querySelector('h3'), this.contentData.overnightStays.unique.title);
-            this.updateText(cards[0].querySelector('p'), this.contentData.overnightStays.unique.description);
+            this.updateElement(cards[0].querySelector('h3'), this.contentData.overnightStays.unique.title);
+            this.updateElement(cards[0].querySelector('p'), this.contentData.overnightStays.unique.description);
+            
+            // Update list
+            const ul = cards[0].querySelector('ul');
+            if (ul && this.contentData.overnightStays.unique.listItems) {
+                ul.innerHTML = '';
+                this.contentData.overnightStays.unique.listItems.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    ul.appendChild(li);
+                });
+            }
         }
         
         // Hotel Reviews
         if (cards[1] && this.contentData.overnightStays.reviews) {
-            this.updateText(cards[1].querySelector('h3'), this.contentData.overnightStays.reviews.title);
-            this.updateText(cards[1].querySelector('p'), this.contentData.overnightStays.reviews.description);
+            this.updateElement(cards[1].querySelector('h3'), this.contentData.overnightStays.reviews.title);
+            this.updateElement(cards[1].querySelector('p'), this.contentData.overnightStays.reviews.description);
+            
+            // Update list
+            const ul = cards[1].querySelector('ul');
+            if (ul && this.contentData.overnightStays.reviews.listItems) {
+                ul.innerHTML = '';
+                this.contentData.overnightStays.reviews.listItems.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    ul.appendChild(li);
+                });
+            }
         }
         
         // Camping Adventures
         if (cards[2] && this.contentData.overnightStays.camping) {
-            this.updateText(cards[2].querySelector('h3'), this.contentData.overnightStays.camping.title);
-            this.updateText(cards[2].querySelector('p'), this.contentData.overnightStays.camping.description);
+            this.updateElement(cards[2].querySelector('h3'), this.contentData.overnightStays.camping.title);
+            this.updateElement(cards[2].querySelector('p'), this.contentData.overnightStays.camping.description);
         }
     }
     
@@ -381,46 +434,42 @@ class ContentUpdater {
         
         if (cards.length >= 3) {
             // Contact details card
-            const emailPara = cards[0].querySelector('p:nth-child(2)');
-            const phonePara = cards[0].querySelector('p:nth-child(3)');
-            if (emailPara) emailPara.textContent = `Email: ${this.contentData.contact.email}`;
-            if (phonePara && this.contentData.contact.phone) {
-                phonePara.textContent = `Phone: ${this.contentData.contact.phone}`;
-            }
+            this.updateElement(cards[0].querySelector('p:nth-child(2)'), `Email: ${this.contentData.contact.email || ''}`);
+            this.updateElement(cards[0].querySelector('p:nth-child(3)'), `Phone: ${this.contentData.contact.phone || ''}`);
             
             // Collaboration card
-            const collabPara = cards[1].querySelector('p');
-            if (collabPara) collabPara.textContent = this.contentData.contact.collaboration;
+            this.updateElement(cards[1].querySelector('p'), this.contentData.contact.collaboration || '');
             
             // Social media card
-            const instaPara = cards[2].querySelector('p:nth-child(2)');
-            const fbPara = cards[2].querySelector('p:nth-child(3)');
-            if (instaPara) instaPara.textContent = `Instagram: ${this.contentData.contact.instagram}`;
-            if (fbPara) fbPara.textContent = `Facebook: ${this.contentData.contact.facebook}`;
+            this.updateElement(cards[2].querySelector('p:nth-child(2)'), `Instagram: ${this.contentData.contact.instagram || ''}`);
+            this.updateElement(cards[2].querySelector('p:nth-child(3)'), `Facebook: ${this.contentData.contact.facebook || ''}`);
         }
         
         // Update footer
         const footer = document.querySelector('footer');
         if (footer && this.contentData.footer) {
-            const copyrightPara = footer.querySelector('p:nth-child(1)');
-            const madeByPara = footer.querySelector('h5');
-            
-            if (copyrightPara) copyrightPara.textContent = this.contentData.footer.copyright;
-            if (madeByPara) madeByPara.textContent = this.contentData.footer.madeBy;
+            this.updateElement('footer p:nth-child(1)', this.contentData.footer.copyright || '');
+            this.updateElement('footer h5', this.contentData.footer.madeBy || '');
+        }
+    }
+    
+    updateElement(selector, text) {
+        if (!text || text === 'undefined') return;
+        
+        let element;
+        if (typeof selector === 'string') {
+            element = document.querySelector(selector);
+        } else {
+            element = selector;
+        }
+        
+        if (element) {
+            element.textContent = text;
         }
     }
     
     updateText(selector, text) {
-        if (!text) return;
-        
-        if (typeof selector === 'string') {
-            const element = document.querySelector(selector);
-            if (element) {
-                element.textContent = text;
-            }
-        } else if (selector && selector.textContent !== undefined) {
-            selector.textContent = text;
-        }
+        this.updateElement(selector, text);
     }
     
     formatText(text) {
@@ -445,11 +494,6 @@ class ContentUpdater {
         `;
         previewBanner.textContent = '👁️ PREVIEW MODE - Live updates enabled';
         document.body.prepend(previewBanner);
-        
-        // Auto-check for updates every 5 seconds in preview mode
-        setInterval(() => {
-            this.checkForUpdates();
-        }, 5000);
     }
     
     checkForUpdates() {
@@ -459,7 +503,7 @@ class ContentUpdater {
         
         if (oldData !== newData) {
             this.updateAllContent();
-            console.log('Content updated on refresh');
+            console.log('Content auto-updated in preview mode');
         }
     }
 }
