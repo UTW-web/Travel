@@ -135,43 +135,19 @@ updateHomePage() {
     // Main title
     this.updateText('#home h2', this.contentData.home?.mainTitle);
     
-    // About me text - IMPROVED VERSION
-if (this.contentData.home?.about) {
-    const aboutCard = document.querySelector('#home .card');
-    if (aboutCard) {
-        // Get all paragraphs from the card
-        const paragraphs = aboutCard.querySelectorAll('p');
-        
-        // Clean the about text - remove extra spaces
-        let aboutText = this.contentData.home.about.trim();
-        
-        // Try different splitting methods
-        let aboutParagraphs;
-        
-        // Method 1: Split by double line breaks
-        aboutParagraphs = aboutText.split(/\n\s*\n/);
-        
-        // If that doesn't give enough paragraphs, try single line breaks
-        if (aboutParagraphs.length < paragraphs.length) {
-            aboutParagraphs = aboutText.split(/\n/);
-        }
-        
-        console.log('Splitting About Me text into', aboutParagraphs.length, 'paragraphs');
-        console.log('Found', paragraphs.length, 'paragraph elements to update');
-        
-        // Update each paragraph element
-        paragraphs.forEach((p, index) => {
-            if (aboutParagraphs[index]) {
-                const cleanText = aboutParagraphs[index].trim()
-                    .replace(/^\s+/, '') // Remove leading spaces
-                    .replace(/\s+$/, ''); // Remove trailing spaces
-                
-                p.innerHTML = this.formatText(cleanText);
-                console.log('Updated paragraph', index, 'with:', cleanText.substring(0, 50) + '...');
+    // About me text - SIMPLE VERSION
+    if (this.contentData.home?.about) {
+        const aboutCard = document.querySelector('#home .card');
+        if (aboutCard) {
+            // Find the paragraph element
+            const aboutParagraph = aboutCard.querySelector('p');
+            if (aboutParagraph) {
+                // Simply replace the innerHTML with formatted text
+                aboutParagraph.innerHTML = this.contentData.home.about.replace(/\n/g, '<br>');
+                console.log('Updated About Me text');
             }
-        });
+        }
     }
-}
     
     // Featured destination cards - FIXED: Select SECOND grid
     console.log('Looking for Featured Destinations grid...');
