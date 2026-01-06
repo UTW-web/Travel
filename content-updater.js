@@ -104,9 +104,37 @@ getAboutText() {
             }
         };
     }
+    updateDestinationSectionTitles() {
+    // Update main section titles
+    const sectionTitles = {
+        'europe': 'Europe',
+        'asia': 'Asia',
+        'america': 'America',
+        'africa': 'Africa',
+        'oceania': 'Oceania',
+        'Middle East': 'Middle East',
+        'maria at home': 'Maria At Home'
+    };
     
+    Object.keys(sectionTitles).forEach(sectionId => {
+        const titleElement = document.querySelector(`#${sectionId} .destination-title`);
+        if (titleElement) {
+            titleElement.textContent = sectionTitles[sectionId];
+        }
+    });
+}
     updateAllContent() {
         if (!this.contentData) return;
+        if (!this.contentData) return;
+    
+    // Update HOME PAGE
+    this.updateHomePage();
+    
+    // Update destination section titles
+    this.updateDestinationSectionTitles();
+    
+    // Update ALL DESTINATIONS
+    this.updateDestinations();
         
         // Update HOME PAGE
         this.updateHomePage();
