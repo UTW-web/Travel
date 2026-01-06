@@ -70,30 +70,19 @@ getAboutText() {
     const aboutCard = document.querySelector('#home .card');
     if (!aboutCard) return '';
     
-    // Find all paragraphs within the About Me card
-    // We need to be more specific - look for paragraphs that are direct children
-    const paragraphs = aboutCard.querySelectorAll('p');
+    // Find the first <p> tag in the card (where About Me text is)
+    const aboutParagraph = aboutCard.querySelector('p');
+    if (!aboutParagraph) return '';
     
-    if (paragraphs.length === 0) return '';
+    // Get the innerHTML which contains <br> tags
+    let aboutText = aboutParagraph.innerHTML;
     
-    let aboutText = '';
-    paragraphs.forEach((p, index) => {
-        // Get the text content, preserving line breaks
-        let text = p.innerHTML || p.textContent;
-        
-        // Replace <br> tags with actual line breaks
-        text = text.replace(/<br\s*\/?>/gi, '\n');
-        
-        // Clean up extra whitespace
-        text = text.trim();
-        
-        aboutText += text;
-        
-        // Add double line break between paragraphs (except after the last one)
-        if (index < paragraphs.length - 1) {
-            aboutText += '\n\n';
-        }
-    });
+    // Convert <br> tags to \n for storage in admin editor
+    aboutText = aboutText.replace(/<br\s*\/?>/gi, '\n');
+    
+    // Also handle any other HTML entities
+    aboutText = aboutText.replace(/&nbsp;/g, ' ');
+    aboutText = aboutText.replace(/&amp;/g, '&');
     
     return aboutText.trim();
 }
