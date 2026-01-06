@@ -349,34 +349,48 @@ updateHomePage() {
         ]);
     }
     
-    updateDestinationSection(sectionId, cardTitles) {
-        const section = document.getElementById(sectionId);
-        if (!section || !this.contentData.destinations?.[sectionId]) return;
-        
-        const destData = this.contentData.destinations[sectionId];
-        const cards = section.querySelectorAll('.card');
-        
-        cardTitles.forEach((title, index) => {
-            if (cards[index] && destData[title]) {
-                // Update title
-                this.updateElement(cards[index].querySelector('h3'), title);
-                
-                // Update description
-                this.updateElement(cards[index].querySelector('p'), destData[title].description);
-                
-                // Update list items if they exist
-                const ul = cards[index].querySelector('ul');
-                if (ul && destData[title].listItems) {
-                    ul.innerHTML = '';
-                    destData[title].listItems.forEach(item => {
-                        const li = document.createElement('li');
-                        li.textContent = item;
-                        ul.appendChild(li);
-                    });
-                }
+updateDestinationSection(sectionId, cardTitles) {
+    const section = document.getElementById(sectionId);
+    if (!section || !this.contentData.destinations?.[sectionId]) return;
+    
+    const destData = this.contentData.destinations[sectionId];
+    const cards = section.querySelectorAll('.card');
+    
+    cardTitles.forEach((cardName, index) => {
+        if (cards[index] && destData[cardName]) {
+            const cardData = destData[cardName];
+            
+            // Update the main title (h3)
+            const h3Element = cards[index].querySelector('h3');
+            if (h3Element && cardData.title) {
+                h3Element.textContent = cardData.title;
             }
-        });
-    }
+            
+            // Update the description (first p after h3)
+            const descriptionElement = cards[index].querySelector('p');
+            if (descriptionElement && cardData.description) {
+                descriptionElement.textContent = cardData.description;
+            }
+            
+            // Update the subtitle (h4) if it exists
+            const h4Element = cards[index].querySelector('h4');
+            if (h4Element && cardData.subtitle) {
+                h4Element.textContent = cardData.subtitle;
+            }
+            
+            // Update list items if they exist
+            const ul = cards[index].querySelector('ul');
+            if (ul && cardData.listItems) {
+                ul.innerHTML = '';
+                cardData.listItems.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    ul.appendChild(li);
+                });
+            }
+        }
+    });
+}
     
     updateTravelStories() {
         const section = document.getElementById('stories');
