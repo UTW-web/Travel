@@ -70,13 +70,28 @@ getAboutText() {
     const aboutCard = document.querySelector('#home .card');
     if (!aboutCard) return '';
     
+    // Find all paragraphs within the About Me card
+    // We need to be more specific - look for paragraphs that are direct children
     const paragraphs = aboutCard.querySelectorAll('p');
-    let aboutText = '';
     
+    if (paragraphs.length === 0) return '';
+    
+    let aboutText = '';
     paragraphs.forEach((p, index) => {
-        aboutText += p.innerHTML.replace(/<br>/g, '\n').trim();
+        // Get the text content, preserving line breaks
+        let text = p.innerHTML || p.textContent;
+        
+        // Replace <br> tags with actual line breaks
+        text = text.replace(/<br\s*\/?>/gi, '\n');
+        
+        // Clean up extra whitespace
+        text = text.trim();
+        
+        aboutText += text;
+        
+        // Add double line break between paragraphs (except after the last one)
         if (index < paragraphs.length - 1) {
-            aboutText += '\n\n'; // Add double line break between paragraphs
+            aboutText += '\n\n';
         }
     });
     
